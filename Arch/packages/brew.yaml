@@ -1,0 +1,18 @@
+packages:
+  - names:
+      - lazygit
+      - powerline-go
+      - nodenv
+      - neovim
+      - bitwarden-cli
+      - pre-commit
+      - pulumi
+      - awscli
+      - ocrmypdf
+      - goreleaser
+      - jq
+      - dasel
+      - packer
+      - tailscale
+    action: install
+    package_manager: brew

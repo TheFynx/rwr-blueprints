@@ -1,0 +1,14 @@
+blueprints:
+  format: yaml
+  location: .
+  git:
+    url: https://github.com/thefynx/rwr-blueprints.git
+    target: {{.user.home}}/git/thefynx/rwr-blueprints
+
+# Additional Package Managers to install
+packageManagers:
+  - name: brew
+    action: install
+  - name: cargo
+    action: install
+

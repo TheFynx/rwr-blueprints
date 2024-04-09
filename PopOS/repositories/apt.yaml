@@ -1,0 +1,62 @@
+repositories:
+  - name: brave-browser
+    package_manager: apt
+    action: add
+    url: https://brave-browser-apt-release.s3.brave.com/
+    arch: amd64
+    key_url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+    channel: stable
+    component: main
+
+  - name: docker
+    package_manager: apt
+    action: add
+    url: https://download.docker.com/linux/ubuntu
+    arch: amd64
+    key_url: https://download.docker.com/linux/ubuntu/gpg
+    channel: jammy
+    component: stable
+
+  - name: google-chrome
+    package_manager: apt
+    action: add
+    url: http://dl.google.com/linux/chrome/deb/
+    arch: amd64
+    key_url: https://dl.google.com/linux/linux_signing_key.pub
+    channel: stable
+    component: main
+
+  - name: tailscale
+    package_manager: apt
+    action: add
+    arch: amd64
+    url: https://pkgs.tailscale.com/stable/ubuntu/jammy.tailscale-keyring.list
+    key_url: https://pkgs.tailscale.com/stable/ubuntu/jammy.noarmor.gpg
+    channel: jammy
+    component: main
+
+  - name: vscode
+    package_manager: apt
+    action: add
+    url: https://packages.microsoft.com/repos/code
+    arch: amd64
+    key_url: https://packages.microsoft.com/keys/microsoft.asc
+    channel: stable
+    component: main
+
+  - name: dbeaver
+    package_manager: apt
+    action: add
+    arch: amd64
+    url: https://dbeaver.io/debs/dbeaver-ce
+    key_url: https://dbeaver.io/debs/dbeaver.gpg.key
+    channel: /
+
+  - name: hashicorp
+    package_manager: apt
+    action: add
+    arch: amd64
+    url: https://apt.releases.hashicorp.com
+    key_url: https://apt.releases.hashicorp.com/gpg
+    channel: jammy
+    component: main
