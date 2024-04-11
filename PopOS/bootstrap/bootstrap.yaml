@@ -1,0 +1,41 @@
+packages:
+  - name: git
+    action: install
+  - name: vim
+    action: install
+  - name: wget
+    action: install
+  - name: curl
+    action: install
+
+directories:
+  - name: {{.user.home}}/git/thefynx
+    action: create
+    owner: levi
+    group: levi
+  - name: {{.user.home}}/git/public
+    action: create
+    owner: levi
+    group: levi
+  - name: {{.user.home}}/git/fynxlabs
+    action: create
+    owner: levi
+    group: levi
+  - name: {{.user.home}}/.ssh
+    action: create
+    owner: levi
+    group: levi
+
+
+groups:
+  - name: docker
+    action: create
+
+users:
+  - name: john
+    action: update
+    password: "password"
+    groups:
+      - docker
+    shell: /bin/bash
+    home: /home/john

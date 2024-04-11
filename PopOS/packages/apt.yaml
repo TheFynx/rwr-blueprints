@@ -10,15 +10,12 @@ packages:
     package_manager: apt
 
   - names:
-      - curl
       - ca-certificates
       - gnupg
-      - wget
       - gpg
       - openssl
       - nala
       - vlc
-      - numlockx
       - coreutils
       - playerctl
       - apt-transport-https
@@ -48,14 +45,11 @@ packages:
       - docker-compose-plugin
       - containerd.io
       - docker-buildx-plugin
-      - slack
-      - zoom-us
       - nerdfonts
       - keybase-gui
       - brave
       - dbeaver
       - google-chrome
       - vscode
-      - powershell
     action: install
     package_manager: apt
