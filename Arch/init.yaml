@@ -1,7 +1,7 @@
 blueprints:
   format: yaml
   location: "."
-  templatesEnabled: true
+  templatesEnabled: false
   git:
     url: "https://github.com/thefynx/rwr-blueprints.git"
     target: "/home/levi/git/thefynx/rwr-blueprints"

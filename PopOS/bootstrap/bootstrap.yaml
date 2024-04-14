@@ -9,33 +9,19 @@ packages:
     action: install
 
 directories:
-  - name: {{.user.home}}/git/thefynx
+  - name: /home/levi/git/thefynx
     action: create
     owner: levi
     group: levi
-  - name: {{.user.home}}/git/public
+  - name: /home/levi/git/public
     action: create
     owner: levi
     group: levi
-  - name: {{.user.home}}/git/fynxlabs
+  - name: /home/levi/git/fynxlabs
     action: create
     owner: levi
     group: levi
-  - name: {{.user.home}}/.ssh
+  - name: /home/levi/.ssh
     action: create
     owner: levi
     group: levi
-
-
-groups:
-  - name: docker
-    action: create
-
-users:
-  - name: john
-    action: update
-    password: "password"
-    groups:
-      - docker
-    shell: /bin/bash
-    home: /home/john
