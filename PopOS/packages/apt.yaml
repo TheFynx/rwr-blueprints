@@ -45,11 +45,10 @@ packages:
       - docker-compose-plugin
       - containerd.io
       - docker-buildx-plugin
-      - nerdfonts
-      - keybase-gui
-      - brave
-      - dbeaver
-      - google-chrome
-      - vscode
+      - brave-browser
+      - dbeaver-ce
+      - google-chrome-stable
+      - code
+      - keybase
     action: install
     package_manager: apt

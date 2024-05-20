@@ -1,0 +1,24 @@
+files:
+  - names:
+      - .aliases
+      - .bashrc
+      - .exports
+      - .functions
+      - .gitconfig
+      - .gitignore
+      - .path
+      - .profile
+      - .wezterm.lua
+    action: copy
+    source: ./src/dotFiles/
+    target: ~/
+  - name: config
+    action: copy
+    source: src/ssh/
+    target: ~/.ssh/
+
+directories:
+  - name: .config
+    action: copy
+    source: ./src/
+    target: ~/

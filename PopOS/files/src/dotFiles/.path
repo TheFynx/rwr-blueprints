@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+if [ -d "/usr/share/bcc/tools" ]; then
+  export PATH=/usr/share/bcc/tools:${PATH}
+fi
+
+if [ -d "${HOME}/go/bin" ]; then
+  export PATH=${HOME}/go/bin:${PATH}
+fi
+
+if [ -d "/usr/local/bin" ]; then
+  export PATH=/usr/local/bin:${PATH}
+fi
+
+if [ -d "${HOME}/.cargo/bin" ]; then
+  export PATH=${HOME}/.cargo/bin:${PATH}
+fi
+
+if [ -d "/sbin" ]; then
+  export PATH="/sbin:${PATH}"
+fi
+
+if [ -d "/usr/sbin" ]; then
+  export PATH="/usr/sbin:${PATH}"
+fi
+
+if [ -d "$HOME/.pulumi/bin" ]; then
+  export PATH=$PATH:$HOME/.pulumi/bin
+fi
+
+if [ -d "/home/linuxbrew/.linuxbrew/bin/" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+if [ -d "$HOME/.nodenv" ]; then
+  PATH="$HOME/.nodenv/bin:$PATH"
+  eval "$(nodenv init -)"
+fi
+
+if [ -d "$HOME/.pyenv" ]; then
+  PATH="$HOME/.pyenv/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
+if [ -d "$HOME/.goenv" ]; then
+  PATH="$HOME/.goenv/bin:$PATH"
+  eval "$(goenv init -)"
+fi
+
+if [ -d "${HOME}/.local/bin" ]; then
+  export PATH=${HOME}/.local/bin:${PATH}
+fi
+
+if [ -d "${HOME}/.cargo/bin" ]; then
+  export PATH=${HOME}/.cargo/bin:${PATH}
+fi
+
+if [ -n "$(command -v mcfly)" ]; then
+  eval "$(mcfly init bash)"
+fi
+
+if [ -d "$HOME/.nix-profile/share/" ]; then
+  export XDG_DATA_DIRS="$HOME/.local/share/:$HOME/.nix-profile/share/:/usr/local/share:/usr/share"
+fi
+
+if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
+  # shellcheck disable=SC1091
+  . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+
+if [ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]; then
+  export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+fi

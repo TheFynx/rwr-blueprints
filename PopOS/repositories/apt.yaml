@@ -26,15 +26,6 @@ repositories:
     channel: stable
     component: main
 
-  - name: tailscale
-    package_manager: apt
-    action: add
-    arch: amd64
-    url: "https://pkgs.tailscale.com/stable/ubuntu"
-    key_url: "https://pkgs.tailscale.com/stable/ubuntu/jammy.noarmor.gpg"
-    channel: jammy
-    component: main
-
   - name: vscode
     package_manager: apt
     action: add
@@ -59,4 +50,13 @@ repositories:
     url: "https://apt.releases.hashicorp.com"
     key_url: "https://apt.releases.hashicorp.com/gpg"
     channel: jammy
+    component: main
+
+  - name: keybase
+    package_manager: apt
+    action: add
+    arch: amd64
+    url: "https://prerelease.keybase.io/deb"
+    key_url: "https://keybase.io/docs/server_security/code_signing_key.asc"
+    channel: stable
     component: main

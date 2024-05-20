@@ -1,0 +1,23 @@
+packages:
+  - name: git
+    action: install
+  - name: vim
+    action: install
+  - name: wget
+    action: install
+  - name: curl
+    action: install
+
+directories:
+  - name: /home/levi/git/thefynx
+    action: create
+    owner: levi
+    group: levi
+  - name: /home/levi/git/public
+    action: create
+    owner: levi
+    group: levi
+  - name: /home/levi/git/fynxlabs
+    action: create
+    owner: levi
+    group: levi
