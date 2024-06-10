@@ -1,6 +1,6 @@
 scripts:
-  - name: nerdFonts
-    source: files/nerd.sh
+  - name: nerd.sh
     action: run
     exec: self
+    source: files/
     elevated: false

@@ -28,8 +28,8 @@ if [ -d "{{ .User.home }}/.pulumi/bin" ]; then
   export PATH=$PATH:{{ .User.home }}/.pulumi/bin
 fi
 
-if [ -d "/.User.home/linuxbrew/.linuxbrew/bin/" ]; then
-  eval "$(/.User.home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [ -d "/home/linuxbrew/.linuxbrew/bin/" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 if [ -d "{{ .User.home }}/.nodenv" ]; then
@@ -48,11 +48,11 @@ if [ -d "{{ .User.home }}/.goenv" ]; then
 fi
 
 if [ -d "{{ .User.home }}/.local/bin" ]; then
-  export PATH={{ .User.home }}/.local/bin:${PATH}
+  export PATH="{{ .User.home }}/.local/bin:${PATH}"
 fi
 
 if [ -d "{{ .User.home }}/.cargo/bin" ]; then
-  export PATH={{ .User.home }}/.cargo/bin:${PATH}
+  export PATH="{{ .User.home }}/.cargo/bin:${PATH}"
 fi
 
 if [ -n "$(command -v mcfly)" ]; then
