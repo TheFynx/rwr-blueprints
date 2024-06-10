@@ -6,7 +6,6 @@ files:
       - .functions
       - .gitconfig
       - .gitignore
-      - .path
       - .profile
       - .wezterm.lua
     action: copy

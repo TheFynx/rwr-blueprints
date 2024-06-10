@@ -1,0 +1,6 @@
+scripts:
+  - name: nerdFonts
+    source: files/nerd.sh
+    action: run
+    exec: self
+    elevated: false

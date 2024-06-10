@@ -1,0 +1,13 @@
+template:
+  - name: .path
+    action: create
+    source: files/path.bash
+    target: ~/.path
+  - name: .gitconfig
+    action: create
+    source: files/.gitconfig
+    target: ~/.gitconfig
+    variables:
+      gitEmail: "levi@fynx.me"
+      gitName: "Levi Smith"
+      signingKey: "9C9A099512CE70F14DCAC9DA4B45931850933D0E"

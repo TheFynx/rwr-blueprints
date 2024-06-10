@@ -1,14 +1,14 @@
 [user]
-email = levithegeek@gmail.com
-name = Levi Smith
-signingkey = 9C9A099512CE70F14DCAC9DA4B45931850933D0E
+email = {{ .UserDefined.gitEmail }}
+name = {{ .UserDefined.gitName }}
+signingkey = {{ .UserDefined.signingKey }}
 [include]
-path = /home/levi/.config/delta/theme.gitconfig
+path = {{ .User.home }}/.config/delta/theme.gitconfig
 [core]
 editor = nvim
 autocrlf = input
 whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-excludesfile = /home/levi/.gitignore
+excludesfile = {{ .User.home }}/.gitignore
 pager = delta
 [interactive]
 diffFilter = delta --color-only
@@ -25,8 +25,6 @@ colorMoved = default
 colorMovedWS = allow-indentation-change
 [delta]
 features = fynx
-# features = chameleon
-# features = gruvmax-fang
 [difftool]
 prompt = false
 [difftool "difftastic"]
@@ -34,7 +32,7 @@ cmd = difft "$LOCAL" "$REMOTE"
 [pager]
 difftool = true
 [push]
-	autoSetupRemote = true
+autoSetupRemote = true
 [alias]
 dft = difftool
 dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
@@ -45,4 +43,4 @@ sort = -committerdate
 [tag]
 sort = taggerdate
 [pull]
-	ff = only
+ff = only

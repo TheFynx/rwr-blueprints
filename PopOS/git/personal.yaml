@@ -1,0 +1,6 @@
+git:
+  - name: rwr-blueprints
+    action: clone
+    url: https://github.com/TheFynx/rwr-blueprints.git
+    path: /home/levi/git/thefynx/rwr-blueprints
+    private: false
