@@ -3,7 +3,6 @@ files:
       - .aliases
       - .exports
       - .functions
-      - .gitconfig
       - .gitignore
       - .profile
     action: copy
