@@ -3,6 +3,10 @@ template:
     action: create
     source: files/path.bash
     target: ~/.path
+  - name: .bashrc
+    action: create
+    source: files/.bashrc
+    target: ~/.bashrc
   - name: .gitconfig
     action: create
     source: files/.gitconfig
@@ -10,4 +14,3 @@ template:
     variables:
       gitEmail: "levi@fynx.me"
       gitName: "Levi Smith"
-      signingKey: "9C9A099512CE70F14DCAC9DA4B45931850933D0E"

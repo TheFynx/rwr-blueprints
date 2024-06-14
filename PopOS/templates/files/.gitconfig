@@ -1,7 +1,6 @@
 [user]
 email = {{ .UserDefined.gitEmail }}
 name = {{ .UserDefined.gitName }}
-signingkey = {{ .UserDefined.signingKey }}
 [include]
 path = {{ .User.home }}/.config/delta/theme.gitconfig
 [core]

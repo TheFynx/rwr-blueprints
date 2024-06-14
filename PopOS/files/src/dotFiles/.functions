@@ -140,9 +140,3 @@ git-check() {
   # Return to the original working directory
   cd "$current_dir" || return
 }
-
-bw-sync() {
-  BW_SESSION=$(bw unlock --raw)
-  export BW_SESSION
-  bw sync -f
-}

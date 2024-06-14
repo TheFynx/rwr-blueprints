@@ -35,7 +35,7 @@ export MCFLY_KEY_SCHEME=vim
 export MCFLY_RESULTS_SORT=LAST_RUN
 export MCFLY_FUZZY=2
 export MCFLY_PROMPT="❯"
-export MCFLY_HISTORY="/home/levi/.bash_history"
+export MCFLY_HISTORY="{{ .User.home }}/.bash_history"
 
 export PROMPT_COMMAND="history -a; history -n"
 

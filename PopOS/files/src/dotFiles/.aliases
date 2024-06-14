@@ -108,5 +108,3 @@ alias cleanup='topgrade -c'
 
 # Continue download
 alias wget="wget -c"
-
-alias aws-login='aws sso login --sso-session jumpcloud'

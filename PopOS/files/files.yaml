@@ -1,13 +1,11 @@
 files:
   - names:
       - .aliases
-      - .bashrc
       - .exports
       - .functions
       - .gitconfig
       - .gitignore
       - .profile
-      - .wezterm.lua
     action: copy
     source: ./src/dotFiles/
     target: ~/
