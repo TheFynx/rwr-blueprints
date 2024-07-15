@@ -12,6 +12,15 @@ files:
     action: copy
     source: src/ssh/
     target: ~/.ssh/
+  - name: Alacritty.desktop
+    action: copy
+    source: desktop/Alacritty.desktop
+    target: /usr/share/applications/
+  - name: Alacritty.svg
+    action: copy
+    source: desktop/Alacritty.svg
+    target: /usr/share/pixmaps/
+
 
 directories:
   - name: .config
