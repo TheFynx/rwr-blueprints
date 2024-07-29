@@ -1,10 +1,9 @@
 blueprints:
   format: yaml
   location: '.'
-  templatesEnabled: false
   git:
     url: "https://github.com/thefynx/rwr-blueprints.git"
-    target: "/home/levi/git/thefynx/rwr-blueprints"
+    target: "{{ .User.home }}/git/thefynx/rwr-blueprints"
 packageManagers:
   - name: brew
     action: install

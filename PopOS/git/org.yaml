@@ -2,5 +2,5 @@ git:
   - name: rwr
     action: clone
     url: https://github.com/FynxLabs/rwr.git
-    path: /home/levi/git/fynxlabs/rwr
+    path: {{ .User.home }}/git/fynxlabs/rwr
     private: false

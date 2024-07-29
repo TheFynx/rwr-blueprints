@@ -7,19 +7,19 @@ builtin_box_drawing = true
 
 ## Normal font family.
 [font.normal]
-family = "BlexMono Nerd Font"
+family = "SauceCodePro NF"
 
 ## If the family is not specified, it will fall back to the value specified for the normal font.
 [font.bold]
-family = "BlexMono Nerd Font"
+family = "SauceCodePro NF"
 
 ## If the family is not specified, it will fall back to the value specified for the normal font.
 [font.italic]
-family = "BlexMono Nerd Font"
+family = "SauceCodePro NF"
 
 ## If the family is not specified, it will fall back to the value specified for the normal font.
 [font.bold_italic]
-family = "BlexMono Nerd Font"
+family = "SauceCodePro NF"
 
 ## Offset is the extra space around each character.
 ## 'y' can be thought of as modifying the line spacing, and 'x' as modifying the letter spacing.

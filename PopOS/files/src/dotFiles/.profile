@@ -13,8 +13,8 @@
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
   # include .bashrc if it exists
-  if [ -f "$HOME/.bashrc" ]; then
+  if [ -f "{{ .User.home }}/.bashrc" ]; then
     # shellcheck disable=SC1091
-    . "$HOME/.bashrc"
+    . "{{ .User.home }}/.bashrc"
   fi
 fi

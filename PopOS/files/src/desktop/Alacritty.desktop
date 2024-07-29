@@ -15,4 +15,4 @@ Actions=New;
 
 [Desktop Action New]
 Name=New Terminal
-Exec=alacritty
+Exec={{ .User.home }}/.cargo/bin/alacritty

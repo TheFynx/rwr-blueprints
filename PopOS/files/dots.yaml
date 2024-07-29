@@ -1,0 +1,29 @@
+templates:
+  - name: .path
+    action: create
+    source: src/
+    target: {{ .User.home }}/
+  - name: .bashrc
+    action: create
+    source: src/
+    target: {{ .User.home }}/
+  - name: .profile
+    action: copy
+    source: src/
+    target: {{ .User.home }}/
+  - name: .gitconfig
+    action: create
+    source: src/
+    target: {{ .User.home }}/
+    variables:
+      gitEmail: "levi@fynx.me"
+      gitName: "Levi Smith"
+  - name: config
+    action: copy
+    source: src/ssh/
+    target: {{ .User.home }}/.ssh/
+  - name: Alacritty.desktop
+    action: copy
+    source: src/desktop/
+    target: {{ .User.home }}/.local/share/applications/
+    elevated: true

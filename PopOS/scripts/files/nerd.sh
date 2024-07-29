@@ -11,10 +11,4 @@ cd nerd-fonts
 # Install all patched fonts
 ./install.sh
 
-# Install a single font (e.g., Hack)
-# ./install.sh Hack
-
-# Install multiple fonts (e.g., FiraCode and Hack)
-# ./install.sh FiraCode Hack
-
 cd -
