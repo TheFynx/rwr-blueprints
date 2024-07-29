@@ -1,18 +1,49 @@
 packages:
   - names:
+      - docker
+      - docker-compose
+      - podman
+    action: install
+    package_manager: brew
+
+  - names:
+      - gnupg
+      - openssl
+      - vlc
+      - coreutils
+      - graphviz
+      - git
+      - tree
+      - unzip
+      - unrar
+      - zip
+      - rsync
+      - p7zip
+      - shfmt
+      - python
+      - cmake
+      - pkg-config
+      - freetype
+      - fontconfig
+      - gimp
       - lazygit
       - powerline-go
       - nodenv
       - neovim
-      - bitwarden-cli
-      - pre-commit
-      - pulumi
       - awscli
-      - ocrmypdf
       - goreleaser
       - jq
       - dasel
       - packer
-      - tailscale
     action: install
     package_manager: brew
+
+  - names:
+      - visual-studio-code
+      - google-chrome
+      - brave-browser
+      - dbeaver-community
+      - docker
+    action: install
+    package_manager: brew
+    args: "--cask"

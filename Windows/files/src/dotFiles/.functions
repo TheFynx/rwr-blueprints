@@ -1,0 +1,142 @@
+#!/usr/bin/env bash
+
+# Function to clean up Docker containers and images
+
+dclean() {
+    if ! command -v docker &> /dev/null; then
+        echo "Docker is not installed or not in PATH"
+        return 1
+    fi
+
+    case "$1" in
+        "")
+            echo "Stopping and removing unused containers and images..."
+            docker stop $(docker ps -a -q) 2>/dev/null
+            docker rm $(docker ps -a -q) 2>/dev/null
+            docker rmi $(docker images -f "dangling=true" -q) 2>/dev/null
+            ;;
+        "all")
+            echo "Stopping and removing all containers and images..."
+            docker stop $(docker ps -a -q) 2>/dev/null
+            docker rm $(docker ps -a -q) 2>/dev/null
+            docker rmi $(docker images -q) 2>/dev/null
+            ;;
+        "fire")
+            echo "Stopping and removing all containers and images..."
+            docker stop $(docker ps -a -q) 2>/dev/null
+            docker rm $(docker ps -a -q) 2>/dev/null
+            docker rmi $(docker images -q) 2>/dev/null
+            docker system prune -a --force --volumes
+            ;;
+        *)
+            echo "Invalid argument: $1"
+            echo "Usage: dclean [all|fire]"
+            return 1
+            ;;
+    esac
+}
+
+# Determine size of a file or total size of a directory
+fs() {
+  if du -b /dev/null >/dev/null 2>&1; then
+    local arg=-sbh
+  else
+    local arg=-sh
+  fi
+  if [[ -n "$*" ]]; then
+    du $arg -- "$@"
+  else
+    du $arg .[^.]* ./*
+  fi
+}
+
+# Run `dig` and display the most useful info
+digga() {
+  dig +nocmd "$1" any +multiline +noall +answer
+}
+
+# Get colors in manual pages
+man() {
+  env \
+    LESS_TERMCAP_mb="$(printf "\e[1;31m")" \
+    LESS_TERMCAP_md="$(printf "\e[1;31m")" \
+    LESS_TERMCAP_me="$(printf "\e[0m")" \
+    LESS_TERMCAP_se="$(printf "\e[0m")" \
+    LESS_TERMCAP_so="$(printf "\e[1;44;33m")" \
+    LESS_TERMCAP_ue="$(printf "\e[0m")" \
+    LESS_TERMCAP_us="$(printf "\e[1;32m")" \
+    man "$@"
+}
+
+# Check if uri is up
+isup() {
+  local uri=$1
+
+  if curl -s --head --request GET "$uri" | grep "200 OK" >/dev/null; then
+    notify-send --urgency=critical "$uri is down"
+  else
+    notify-send --urgency=low "$uri is up"
+  fi
+}
+
+git-check() {
+  # Check if the base folder argument is provided
+  if [ $# -ne 1 ]; then
+    echo "Usage: git_check <base_folder>"
+    return 1
+  fi
+
+  BASE_FOLDER="$1"
+
+  # Check if the base folder exists
+  if [ ! -d "$BASE_FOLDER" ]; then
+    echo "Error: '$BASE_FOLDER' is not a valid folder."
+    return 1
+  fi
+
+  # Color variables
+  GREEN='\033[0;32m'
+  CYAN='\033[0;36m'
+  YELLOW='\033[1;33m'
+  RESET='\033[0m'
+
+  # Function to check Git repository status
+  check_repo() {
+    local repo_path="$1"
+
+    echo -e "${CYAN}Repository: $repo_path${RESET}"
+    (
+      cd "$repo_path" || return
+      echo -e "${YELLOW}Branches not pushed:${RESET}"
+      git branch --no-merged
+
+      echo -e "${YELLOW}Local changes:${RESET}"
+      git status -uno
+    )
+    echo
+  }
+
+  # Recursive function to search for Git repositories
+  search_repos() {
+    local current_folder="$1"
+
+    # Iterate over each item in the current folder
+    for item in "$current_folder"/*; do
+      if [ -d "$item/.git" ]; then
+        check_repo "$item"
+      elif [ -d "$item" ]; then
+        search_repos "$item"
+      fi
+    done
+  }
+
+  # Store the current working directory
+  local current_dir
+  current_dir=$(pwd)
+
+  # Start searching for Git repositories
+  search_repos "$BASE_FOLDER"
+
+  # Return to the original working directory
+  cd "$current_dir" || return
+}

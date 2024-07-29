@@ -1,0 +1,35 @@
+packages:
+  - name: git
+    action: install
+  - name: vim
+    action: install
+  - name: wget
+    action: install
+  - name: curl
+    action: install
+
+directories:
+  - name: {{ .User.home }}/git/thefynx
+    action: create
+    owner: levi
+    group: levi
+  - name: {{ .User.home }}/git/public
+    action: create
+    owner: levi
+    group: levi
+  - name: {{ .User.home }}/git/fynxlabs
+    action: create
+    owner: levi
+    group: levi
+  - name: {{ .User.home }}/.ssh
+    action: create
+    owner: levi
+    group: levi
+
+ssh_keys:
+  - name: git
+    type: ed25519
+    path: {{ .User.home }}/.ssh/
+    comment: "levi@fynx.me"
+    no_passphrase: true
+    copy_to_github: true

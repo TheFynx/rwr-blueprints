@@ -1,0 +1,45 @@
+[user]
+email = {{ .UserDefined.gitEmail }}
+name = {{ .UserDefined.gitName }}
+[include]
+path = {{ .User.home }}/.config/delta/theme.gitconfig
+[core]
+editor = nvim
+autocrlf = input
+whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+excludesfile = {{ .User.home }}/.gitignore
+pager = delta
+[interactive]
+diffFilter = delta --color-only
+[credential]
+helper = cache
+[commit]
+gpgsign = true
+[merge]
+conflictstyle = diff3
+[diff]
+tool = difftastic
+algorithm = histogram
+colorMoved = default
+colorMovedWS = allow-indentation-change
+[delta]
+features = fynx
+[difftool]
+prompt = false
+[difftool "difftastic"]
+cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+difftool = true
+[push]
+autoSetupRemote = true
+[alias]
+dft = difftool
+dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
+[blame]
+ignoreRevsFile = .git-blame-ignore-revs
+[branch]
+sort = -committerdate
+[tag]
+sort = taggerdate
+[pull]
+ff = only

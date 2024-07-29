@@ -1,0 +1,18 @@
+packages:
+  - names:
+      - docker-desktop
+      - git
+      - vim
+      - wget
+      - curl
+      - vlc
+      - 7zip
+      - googlechrome
+      - vscode
+      - python
+      - cmake
+      - graphviz
+      - rsync
+      - gimp
+    action: install
+    package_manager: chocolatey
