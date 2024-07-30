@@ -46,4 +46,5 @@ packages:
       - docker
     action: install
     package_manager: brew
-    args: "--cask"
+    args:
+      - "--cask"
