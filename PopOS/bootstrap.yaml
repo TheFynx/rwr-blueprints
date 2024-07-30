@@ -11,20 +11,20 @@ packages:
 directories:
   - name: {{ .User.home }}/git/thefynx
     action: create
-    owner: levi
-    group: levi
+    owner: {{ .User.username }}
+    group: {{ .User.username }}
   - name: {{ .User.home }}/git/public
     action: create
-    owner: levi
-    group: levi
+    owner: {{ .User.username }}
+    group: {{ .User.username }}
   - name: {{ .User.home }}/git/fynxlabs
     action: create
-    owner: levi
-    group: levi
+    owner: {{ .User.username }}
+    group: {{ .User.username }}
   - name: {{ .User.home }}/.ssh
     action: create
-    owner: levi
-    group: levi
+    owner: {{ .User.username }}
+    group: {{ .User.username }}
 
 ssh_keys:
   - name: git
