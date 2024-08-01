@@ -56,5 +56,6 @@ packages:
       - libfontconfig1-dev
       - libxcb-xfixes0-dev
       - libxkbcommon-dev
+      - google-cloud-cli
     action: install
     package_manager: apt

@@ -60,3 +60,12 @@ repositories:
     key_url: "https://keybase.io/docs/server_security/code_signing_key.asc"
     channel: stable
     component: main
+
+  - name: gcloud
+    package_manager: apt
+    action: add
+    arch: amd64
+    url: "https://packages.cloud.google.com/apt"
+    key_url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    channel: cloud-sdk
+    component: main
