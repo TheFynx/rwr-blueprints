@@ -8,7 +8,7 @@ templates:
     source: ./src/dotFiles/
     target: {{ .User.home }}/
   - name: .profile
-    action: copy
+    action: create
     source: ./src/dotFiles/
     target: {{ .User.home }}/
   - name: .gitconfig
@@ -18,12 +18,12 @@ templates:
     variables:
       gitEmail: "levi@fynx.me"
       gitName: "Levi Smith"
-  - name: config
-    action: copy
-    source: ./src/ssh/
-    target: {{ .User.home }}/.ssh/
   - name: Alacritty.desktop
-    action: copy
+    action: create
     source: ./src/desktop/
     target: {{ .User.home }}/.local/share/applications/
     elevated: true
+  - name: config
+    action: create
+    source: ./src/ssh/
+    target: {{ .User.home }}/.ssh/
