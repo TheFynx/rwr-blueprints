@@ -9,5 +9,6 @@ packages:
       - jq
       - dasel
       - packer
+      - pyenv
     action: install
     package_manager: brew

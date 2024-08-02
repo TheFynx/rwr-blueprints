@@ -9,3 +9,5 @@ packageManagers:
     action: install
   - name: cargo
     action: install
+  - name: gnome-extensions
+    action: install
