@@ -1,12 +1,20 @@
 packages:
-  - name: git
+  - names:
+    - git
+    - vim
+    - wget
+    - curl
     action: install
-  - name: vim
-    action: install
-  - name: wget
-    action: install
-  - name: curl
-    action: install
+    package_manager: apt
+  - names:
+      - docker.io
+      - docker-doc
+      - docker-compose
+      - podman-docker
+      - runc
+      - containerd
+    action: remove
+    package_manager: apt
 
 directories:
   - name: {{ .User.home }}/git/thefynx

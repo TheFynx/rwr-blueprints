@@ -1,15 +1,5 @@
 packages:
   - names:
-      - docker.io
-      - docker-doc
-      - docker-compose
-      - podman-docker
-      - runc
-      - containerd
-    action: remove
-    package_manager: apt
-
-  - names:
       - ca-certificates
       - gnupg
       - gpg

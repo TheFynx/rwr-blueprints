@@ -1,12 +1,12 @@
 fonts:
   - names:
       - Hack
-      - SauceCodePro
+      - SourceCodePro
       - FiraCode
       - SpaceMono
       - Iosevka
       - IosevkaTerm
-      - FireMono
+      - FiraMono
       - ComicShannsMono
     action: install
     provider: nerd

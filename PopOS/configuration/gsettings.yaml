@@ -1,0 +1,257 @@
+configurations:
+  - name: Set Eddy settings
+    tool: gsettings
+    action: set
+    schema: com.github.donadigo.eddy
+    settings:
+      mime-types:
+        - application/vnd.debian.binary-package
+        - application/x-deb
+      window-x: 0
+      window-y: 32
+
+  - name: Set System76 HiDPI settings
+    tool: gsettings
+    action: set
+    schema: com.system76.hidpi
+    settings:
+      enable: false
+      mode: hidpi
+
+  - name: Set GNOME desktop background settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.background
+    settings:
+      color-shading-type: solid
+      primary-color: "#000000000000"
+      secondary-color: "#000000000000"
+
+  - name: Set GNOME desktop input sources
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.input-sources
+    settings:
+      current: 0
+      per-window: false
+      sources: "[('xkb', 'us')]"
+
+  - name: Set GNOME desktop interface settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.interface
+    settings:
+      color-scheme: prefer-dark
+      show-battery-percentage: true
+
+  - name: Set GNOME desktop media handling
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.media-handling
+    settings:
+      autorun-never: true
+      autorun-x-content-ignore:
+        - x-content/audio-cdda
+        - x-content/video-dvd
+        - x-content/audio-player
+      autorun-x-content-open-folder:
+        - x-content/image-dcf
+      autorun-x-content-start-app:
+        - x-content/unix-software
+        - x-content/ostree-repository
+
+  - name: Set GNOME desktop peripherals keyboard settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.peripherals.keyboard
+    settings:
+      numlock-state: true
+
+  - name: Set GNOME desktop peripherals touchpad settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.peripherals.touchpad
+    settings:
+      two-finger-scrolling-enabled: true
+
+  - name: Set GNOME desktop privacy settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.privacy
+    settings:
+      report-technical-problems: false
+
+  - name: Set GNOME desktop session settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.session
+    settings:
+      idle-delay: 900
+
+  - name: Set GNOME desktop window manager keybindings
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.wm.keybindings
+    settings:
+      activate-window-menu: ['<Primary>Home']
+      move-to-workspace-1: ['<Primary><Shift><Alt>Home', '<Primary><Shift><Alt>exclam']
+      move-to-workspace-2: ['<Primary><Shift><Alt>at']
+      move-to-workspace-3: ['<Primary><Shift><Alt>numbersign']
+      move-to-workspace-4: ['<Primary><Shift><Alt>dollar']
+      move-to-workspace-down: ['<Primary><Shift><Alt>Down']
+      move-to-workspace-last: ['<Primary><Shift><Alt>End']
+      move-to-workspace-up: ['<Primary><Shift><Alt>Up']
+      switch-applications: ['<Alt>Tab']
+      switch-applications-backward: ['<Shift><Alt>Tab']
+      switch-to-workspace-1: ['<Primary><Alt>Home', '<Primary><Alt>KP_1']
+      switch-to-workspace-2: ['<Primary><Alt>KP_2']
+      switch-to-workspace-3: ['<Primary><Alt>KP_3']
+      switch-to-workspace-4: ['<Primary><Alt>KP_4']
+      switch-to-workspace-down: ['<Primary><Alt>Down']
+      switch-to-workspace-up: ['<Primary><Alt>Up']
+
+  - name: Set GNOME desktop window manager preferences
+    tool: gsettings
+    action: set
+    schema: org.gnome.desktop.wm.preferences
+    settings:
+      button-layout: appmenu:minimize,maximize,close
+
+  - name: Set GNOME Evolution Data Server settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.evolution-data-server
+    settings:
+      migrated: true
+      network-monitor-gio-name: ""
+
+  - name: Set GNOME Gedit plugins settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.gedit.plugins
+    settings:
+      active-plugins:
+        - filebrowser
+        - spell
+        - docinfo
+        - openlinks
+        - modelines
+        - sort
+
+  - name: Set GNOME Gedit file browser plugin settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.gedit.plugins.filebrowser
+    settings:
+      root: file:///
+      tree-view: true
+      virtual-root: file:///media/levi/ExtDrive/Backups/Desktop
+
+  - name: Set GNOME Gedit preferences UI settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.gedit.preferences.ui
+    settings:
+      show-tabs-mode: auto
+
+  - name: Set GNOME Mutter settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.mutter
+    settings:
+      edge-tiling: true
+      experimental-features:
+        - x11-randr-fractional-scaling
+      overlay-key: Super_L
+
+  - name: Set GNOME Mutter keybindings
+    tool: gsettings
+    action: set
+    schema: org.gnome.mutter.keybindings
+    settings:
+      toggle-tiled-left: ['<Super>Left']
+      toggle-tiled-right: ['<Super>Right']
+
+  - name: Set GNOME Nautilus preferences
+    tool: gsettings
+    action: set
+    schema: org.gnome.nautilus.preferences
+    settings:
+      default-folder-viewer: icon-view
+      search-filter-time-type: last_modified
+
+  - name: Set GNOME Nautilus window state
+    tool: gsettings
+    action: set
+    schema: org.gnome.nautilus.window-state
+    settings:
+      initial-size: "(959, 789)"
+      maximized: false
+
+  - name: Set GNOME Power Manager settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.power-manager
+    settings:
+      info-history-type: charge
+      info-last-device: /org/freedesktop/UPower/devices/mouse_hidpp_battery_0
+      info-stats-type: discharge-accuracy
+
+  - name: Set GNOME settings daemon media keys
+    tool: gsettings
+    action: set
+    schema: org.gnome.settings-daemon.plugins.media-keys
+    settings:
+      calculator: ['Calculator']
+      custom-keybindings: ['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+      next: ['AudioNext']
+      play: ['AudioPlay']
+      previous: ['AudioPrev']
+      screensaver: ['<Primary><Alt>l']
+      terminal: []
+      volume-down: ['AudioLowerVolume']
+      volume-mute: ['AudioMute']
+      volume-up: ['AudioRaiseVolume']
+
+  - name: Set custom keybinding for Alacritty
+    tool: gsettings
+    action: set
+    schema: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/
+    settings:
+      name: Alacritty
+      command: /home/levi/.cargo/bin/alacritty
+      binding: '<Super>t'
+
+  - name: Set GNOME settings daemon power settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.settings-daemon.plugins.power
+    settings:
+      sleep-inactive-ac-timeout: 1800
+      sleep-inactive-ac-type: nothing
+      sleep-inactive-battery-timeout: 1500
+      sleep-inactive-battery-type: suspend
+
+  - name: Set GNOME Shell settings
+    tool: gsettings
+    action: set
+    schema: org.gnome.shell
+    settings:
+      disable-user-extensions: false
+      disabled-extensions:
+        - cosmic-dock@system76.com
+      enabled-extensions:
+        - ding@rastersoft.com
+        - pop-cosmic@system76.com
+        - pop-shell@system76.com
+        - system76-power@system76.com
+        - ubuntu-appindicators@ubuntu.com
+        - popx11gestures@system76.com
+        - cosmic-workspaces@system76.com
+        - arcmenu@arcmenu.com
+        - sound-output-device-chooser@kgshank.net
+        - openweather-extension@jenslody.de
+        - dash-to-panel@jderose9.github.com
+      favorite-apps:
+        - org.gnome.Nautilus.desktop
+        - brave-browser.desktop
