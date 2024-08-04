@@ -1,6 +1,6 @@
 git:
   - name: rwr-blueprints
     action: clone
-    url: https://github.com/TheFynx/rwr-blueprints.git
+    url: git@github.com:TheFynx/rwr-blueprints.git
     path: {{ .User.home }}/git/thefynx/rwr-blueprints
     private: false
