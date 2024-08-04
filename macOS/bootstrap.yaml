@@ -1,32 +1,27 @@
 packages:
   - names:
     - git
-    - vim
     - wget
     - curl
+    - openssh
     action: install
 
 directories:
   - name: {{ .User.home }}/git/thefynx
     action: create
     owner: levi
-    group: levi
   - name: {{ .User.home }}/git/public
     action: create
     owner: levi
-    group: levi
   - name: {{ .User.home }}/git/fynxlabs
     action: create
     owner: levi
-    group: levi
   - name: {{ .User.home }}/git/phc
     action: create
     owner: levi
-    group: levi
   - name: {{ .User.home }}/.ssh
     action: create
     owner: levi
-    group: levi
 
 ssh_keys:
   - name: git
