@@ -1,0 +1,77 @@
+scripts:
+  # Commands that require sudo
+  - name: Disable local Time Machine backups
+    action: run
+    elevated: true
+    content: |
+      #!/bin/bash
+      hash tmutil &> /dev/null && sudo tmutil disablelocal
+
+  - name: Set the timezone
+    action: run
+    elevated: true
+    content: |
+      #!/bin/bash
+      sudo systemsetup -settimezone "America/Oklahoma"
+
+  - name: Set restart on freeze
+    action: run
+    elevated: true
+    content: |
+      #!/bin/bash
+      sudo systemsetup -setrestartfreeze on
+
+  - name: Set display sleep time
+    action: run
+    elevated: true
+    content: |
+      #!/bin/bash
+      sudo pmset -a displaysleep 30
+
+  - name: Disable sleep on AC power
+    action: run
+    elevated: true
+    content: |
+      #!/bin/bash
+      sudo pmset -c sleep 0
+
+  - name: Set sleep time on battery
+    action: run
+    elevated: true
+    content: |
+      #!/bin/bash
+      sudo pmset -b sleep 5
+
+  - name: Set standby delay
+    action: run
+    elevated: true
+    content: |
+      #!/bin/bash
+      sudo pmset -a standbydelay 86400
+
+  - name: Disable computer sleep
+    action: run
+    elevated: true
+    content: |
+      #!/bin/bash
+      sudo systemsetup -setcomputersleep off
+
+  - name: Set hibernate mode
+    action: run
+    elevated: true
+    content: |
+      #!/bin/bash
+      sudo pmset -a hibernatemode 0
+
+  # Commands that don't require sudo
+  - name: Show the ~/Library folder
+    action: run
+    content: |
+      #!/bin/bash
+      chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library 2>/dev/null
+
+  - name: Expand File Info panes
+    action: run
+    content: |
+      #!/bin/bash
+      defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
