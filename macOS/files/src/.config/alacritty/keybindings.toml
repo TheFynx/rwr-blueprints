@@ -1,0 +1,26 @@
+[keyboard]
+
+bindings = [
+    { key = "V", mods = "Command|Shift", action = "Paste" },
+    { key = "C", mods = "Command|Shift", action = "Copy" },
+    { key = "C", mods = "Command", mode = "Vi|~Search", action = "ClearSelection" },
+    { key = "Q", mods = "Command", action = "Quit" },
+    { key = "W", mods = "Command", action = "Quit" },
+    { key = "L", mods = "Command", chars = "\u000c" },
+    { key = "Home", chars = "\u001bOH", mode = "AppCursor" },
+    { key = "Home", chars = "\u001b[H", mode = "~AppCursor" },
+    { key = "End", chars = "\u001bOF", mode = "AppCursor" },
+    { key = "End", chars = "\u001b[F", mode = "~AppCursor" },
+    { key = "Key0", mods = "Command", action = "ResetFontSize" },
+    { key = "Equals", mods = "Command", action = "IncreaseFontSize" },
+    { key = "Minus", mods = "Command", action = "DecreaseFontSize" },
+    { key = "K", mods = "Command", mode = "~Vi|~Search", action = "ClearHistory" },
+    { key = "Key0", mods = "Command", action = "ResetFontSize" },
+    { key = "Equals", mods = "Command", action = "IncreaseFontSize" },
+    { key = "Plus", mods = "Command", action = "IncreaseFontSize" },
+    { key = "NumpadAdd", mods = "Command", action = "IncreaseFontSize" },
+    { key = "Minus", mods = "Command", action = "DecreaseFontSize" },
+    { key = "NumpadSubtract", mods = "Command", action = "DecreaseFontSize" },
+    { key = "C", mods = "Command", chars = "\u0003" }, # Be ctrl + c Proper after stupid OSX modifier swap
+    { key = "D", mods = "Command", chars = "\u0004" }, # Be ctrl + d Proper after stupid OSX modifier swap
+]

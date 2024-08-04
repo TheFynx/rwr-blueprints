@@ -23,6 +23,14 @@
 *.tar
 *.zip
 
+# Editor Files #
+################
+*.vscode/*
+.vscode/*
+**/.vscode
+**/.vscode/
+**/.vscode/*
+
 # Logs and databases #
 ######################
 *.log

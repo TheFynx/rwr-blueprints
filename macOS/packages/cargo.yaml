@@ -16,6 +16,5 @@ packages:
       - procs
       - just
       - dua-cli
-      - alacritty
     action: install
     package_manager: cargo

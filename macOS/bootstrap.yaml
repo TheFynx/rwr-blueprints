@@ -1,11 +1,9 @@
 packages:
-  - name: git
-    action: install
-  - name: vim
-    action: install
-  - name: wget
-    action: install
-  - name: curl
+  - names:
+    - git
+    - vim
+    - wget
+    - curl
     action: install
 
 directories:
@@ -18,6 +16,10 @@ directories:
     owner: levi
     group: levi
   - name: {{ .User.home }}/git/fynxlabs
+    action: create
+    owner: levi
+    group: levi
+  - name: {{ .User.home }}/git/phc
     action: create
     owner: levi
     group: levi

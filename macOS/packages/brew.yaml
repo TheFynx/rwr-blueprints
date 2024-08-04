@@ -1,12 +1,5 @@
 packages:
   - names:
-      - docker
-      - docker-compose
-      - podman
-    action: install
-    package_manager: brew
-
-  - names:
       - gnupg
       - openssl
       - vlc
@@ -17,10 +10,12 @@ packages:
       - unzip
       - unrar
       - zip
+      - docker
+      - docker-compose
+      - podman
       - rsync
       - p7zip
       - shfmt
-      - python
       - cmake
       - pkg-config
       - freetype
@@ -29,21 +24,48 @@ packages:
       - lazygit
       - powerline-go
       - nodenv
+      - pyenv
       - neovim
-      - awscli
       - goreleaser
       - jq
       - dasel
-      - packer
+      - bash
+      - watch
+      - wget
+      - binutils
+      - diffutils
+      - ed
+      - findutils
+      - gawk
+      - gnu-indent
+      - gnu-sed
+      - gnu-tar
+      - gnu-which
+      - grep
+      - gzip
+      - screen
+      - less
+      - rsync
+      - libressl
+      - difftastic
+      - git-delta
+      - tenv
     action: install
     package_manager: brew
 
   - names:
       - visual-studio-code
+      - zed
       - google-chrome
       - brave-browser
       - dbeaver-community
-      - docker
+      - alacritty
+      - alfred
+      - space-capsule
+      - rectangle-pro
+      - alt-tab
+      - keybase
+      - karabiner-elements
     action: install
     package_manager: brew
     args:

@@ -1,6 +1,7 @@
 [user]
 email = {{ .UserDefined.gitEmail }}
 name = {{ .UserDefined.gitName }}
+signingkey = {{ .UserDefined.signingKey }}
 [include]
 path = {{ .User.home }}/.config/delta/theme.gitconfig
 [core]
@@ -15,6 +16,8 @@ diffFilter = delta --color-only
 helper = cache
 [commit]
 gpgsign = true
+[gpg]
+program = /opt/homebrew/bin/gpg
 [merge]
 conflictstyle = diff3
 [diff]
