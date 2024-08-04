@@ -8,7 +8,6 @@ packages:
       - git
       - tree
       - unzip
-      - unrar
       - zip
       - docker
       - docker-compose

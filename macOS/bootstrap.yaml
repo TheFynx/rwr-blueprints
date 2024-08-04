@@ -5,6 +5,7 @@ packages:
     - curl
     - openssh
     action: install
+    package_manager: brew
 
 directories:
   - name: {{ .User.home }}/git/thefynx
