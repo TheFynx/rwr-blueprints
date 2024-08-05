@@ -10,19 +10,19 @@ packages:
 directories:
   - name: {{ .User.home }}/git/thefynx
     action: create
-    owner: levi
+    owner: {{ .User.username }}
   - name: {{ .User.home }}/git/public
     action: create
-    owner: levi
+    owner: {{ .User.username }}
   - name: {{ .User.home }}/git/fynxlabs
     action: create
-    owner: levi
+    owner: {{ .User.username }}
   - name: {{ .User.home }}/git/phc
     action: create
-    owner: levi
+    owner: {{ .User.username }}
   - name: {{ .User.home }}/.ssh
     action: create
-    owner: levi
+    owner: {{ .User.username }}
 
 ssh_keys:
   - name: git

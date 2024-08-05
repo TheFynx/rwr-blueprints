@@ -1,0 +1,4 @@
+services:
+  - name: com.clamav.scan
+    action: enable
+    elevated: true

@@ -49,6 +49,9 @@ packages:
       - difftastic
       - git-delta
       - tenv
+      - clamav
+      - tailscale
+      - go
     action: install
     package_manager: brew
 
@@ -65,6 +68,8 @@ packages:
       - alt-tab
       - keybase
       - karabiner-elements
+      - 1password
+      - slack
     action: install
     package_manager: brew
     args:

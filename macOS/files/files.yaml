@@ -1,3 +1,35 @@
+directories:
+  - name: .config
+    action: copy
+    owner: {{ .User.username }}
+    group: admin
+    source: ./src/
+    target: {{ .User.home }}/
+    elevated: true
+  - name: clamav
+    action: create
+    owner: {{ .User.username }}
+    group: admin
+    target: /usr/local/var/log/
+    elevated: true
+  - name: clamav
+    action: create
+    owner: {{ .User.username }}
+    group: admin
+    target: /usr/local/var/run/
+    elevated: true
+  - name: clamav
+    action: create
+    owner: {{ .User.username }}
+    group: admin
+    target: /usr/local/var/lib/
+    elevated: true
+  - name: clamav
+    action: create
+    owner: {{ .User.username }}
+    group: admin
+    target: /usr/local/etc/
+    elevated: true
 files:
   - names:
       - .aliases
@@ -7,9 +39,46 @@ files:
     action: copy
     source: ./src/dotFiles/
     target: {{ .User.home }}/
-
-directories:
-  - name: .config
+  - names:
+      - freshclam.conf
+      - clamd.conf
     action: copy
-    source: ./src/
+    source: ./src/clamav/
+    target: /opt/homebrew/etc/clamav/
+    elevated: true
+  - names:
+    - com.clamav.scan.plist
+    - com.clamav.freshclam.daily.plist
+    action: copy
+    owner: root
+    group: wheel
+    mode: 644
+    source: ./src/clamav/
+    target: /Library/LaunchAgents/
+    elevated: true
+templates:
+  - name: .path
+    action: create
+    source: ./src/dotFiles/
     target: {{ .User.home }}/
+  - name: .bashrc
+    action: create
+    source: ./src/dotFiles/
+    target: {{ .User.home }}/
+  - name: .profile
+    action: copy
+    source: ./src/dotFiles/
+    target: {{ .User.home }}/
+  - name: .gitconfig
+    action: create
+    source: ./src/dotFiles/
+    target: {{ .User.home }}/
+    variables:
+      gitEmail: "levi@fynx.me"
+      gitName: "Levi Smith"
+      signingKey: "8BF6E0074D7B228F9AF2BC76235C8EE4DF4F8767"
+  - name: config
+    action: copy
+    source: ./src/ssh/
+    target: {{ .User.home }}/.ssh/
+
