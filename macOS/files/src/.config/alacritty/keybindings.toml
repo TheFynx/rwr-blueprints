@@ -1,5 +1,8 @@
 [keyboard]
 
+# Command is actuall Control, this is fixes to work with https://github.com/raxigan/pcfy-my-mac karabiner updates
+# I do not install all of pcfy, I have just copied the karabiner files and made some modifications
+
 bindings = [
     { key = "V", mods = "Command|Shift", action = "Paste" },
     { key = "C", mods = "Command|Shift", action = "Copy" },
@@ -21,6 +24,7 @@ bindings = [
     { key = "NumpadAdd", mods = "Command", action = "IncreaseFontSize" },
     { key = "Minus", mods = "Command", action = "DecreaseFontSize" },
     { key = "NumpadSubtract", mods = "Command", action = "DecreaseFontSize" },
-    { key = "C", mods = "Command", chars = "\u0003" }, # Be ctrl + c Proper after stupid OSX modifier swap
-    { key = "D", mods = "Command", chars = "\u0004" }, # Be ctrl + d Proper after stupid OSX modifier swap
+    { key = "C", mods = "Command", chars = "\u0003" },
+    { key = "D", mods = "Command", chars = "\u0004" },
+    { key = "R", mods = "Command", chars = "\u0012" },
 ]

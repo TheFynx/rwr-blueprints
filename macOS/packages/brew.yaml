@@ -82,6 +82,7 @@ packages:
       - karabiner-elements
       - 1password
       - slack
+      - git-credential-manager
     action: install
     package_manager: brew
     args:
