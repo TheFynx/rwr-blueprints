@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# ClamAV On-Access Scanning Script
+
+# Configuration
+CLAMDSCAN_QUARANTINE="/opt/Quarantine"
+CLAMDSCANONACCESS_LOG="/usr/local/var/log/clamav/clamdscanonaccess.log"
+CLAMD_CONF="/opt/homebrew/etc/clamav/clamd.conf"
+
+# Create necessary directories
+mkdir -p "$CLAMDSCAN_QUARANTINE"
+mkdir -p "$(dirname "$CLAMDSCANONACCESS_LOG")"
+
+# Get user home directories
+USER_HOMEDIRS=($(dscl . -list /Users HomeDirectory | awk '$2 ~ /^\/Users\// {print $2}'))
+USER_DOWNLOADSDIRS=("${USER_HOMEDIRS[@]/%//Downloads}")
+USER_DESKTOPDIRS=("${USER_HOMEDIRS[@]/%//Desktop}")
+
+# Log start of the script
+echo "Launch daemon org.clamav.clamdscanonaccess started on $(date) ..." >> "$CLAMDSCANONACCESS_LOG"
+echo "Watched directories:" >> "$CLAMDSCANONACCESS_LOG"
+printf "\t%s\n" "${USER_DOWNLOADSDIRS[@]}" "${USER_DESKTOPDIRS[@]}" >> "$CLAMDSCANONACCESS_LOG"
+
+# Function to perform scan
+perform_scan() {
+    local event="$1"
+    echo "Scanning $event on $(date)..." >> "$CLAMDSCANONACCESS_LOG"
+
+    if pgrep -u _clamav clamd > /dev/null; then
+        nice -n 5 /opt/homebrew/bin/clamdscan --multiscan --quiet --fdpass --move="$CLAMDSCAN_QUARANTINE" --log="$CLAMDSCANONACCESS_LOG" "$event"
+    else
+        nice -n 5 /opt/homebrew/bin/clamscan --infected --quiet --move="$CLAMDSCAN_QUARANTINE" --log="$CLAMDSCANONACCESS_LOG" "$event"
+    fi
+
+    if [ $? -eq 0 ]; then
+        echo "Done scanning $event on $(date)." >> "$CLAMDSCANONACCESS_LOG"
+    else
+        echo "Scan of $event exited with error code $? on $(date)." >> "$CLAMDSCANONACCESS_LOG"
+    fi
+}
+
+# Use fswatch to monitor directories and trigger scans
+/opt/homebrew/bin/fswatch -0 -l 3 -e '/.DS_Store$' -r "${USER_DOWNLOADSDIRS[@]}" "${USER_DESKTOPDIRS[@]}" |
+    while IFS= read -r -d '' event; do
+        perform_scan "$event"
+    done

@@ -43,18 +43,33 @@ files:
       - freshclam.conf
       - clamd.conf
     action: copy
-    source: ./src/clamav/
+    source: ./src/clamav/config/
     target: /opt/homebrew/etc/clamav/
     elevated: true
-  - names:
-    - com.clamav.scan.plist
-    - com.clamav.freshclam.daily.plist
+  - name: net.clamav.scan.plist
     action: copy
     owner: root
     group: wheel
     mode: 644
-    source: ./src/clamav/
+    source: ./src/clamav/agents/
     target: /Library/LaunchAgents/
+    elevated: true
+  - names:
+    - net.clamav.freshclam.daily.plist
+    - net.clamav.clamd.plist
+    - net.clamav.clamdscanonaccess.plist
+    action: copy
+    owner: root
+    group: wheel
+    mode: 644
+    source: ./src/clamav/daemons/
+    target: /Library/LaunchDaemons/
+    elevated: true
+  - name: clamav-on-access
+    action: copy
+    source: ./src/clamav/onaccess/
+    target: /usr/local/bin/
+    mode: 755
     elevated: true
 templates:
   - name: .path

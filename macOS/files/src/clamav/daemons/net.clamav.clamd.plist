@@ -8,6 +8,7 @@
     <array>
         <string>/opt/homebrew/sbin/clamd</string>
         <string>--foreground</string>
+        <string>--config-file=/opt/homebrew/etc/clamav/clamd.conf</string>
     </array>
     <key>KeepAlive</key>
     <true/>
@@ -17,5 +18,11 @@
     <string>/usr/local/var/log/clamav/clamd.err</string>
     <key>StandardOutPath</key>
     <string>/usr/local/var/log/clamav/clamd.log</string>
+    <key>UserName</key>
+    <string>_clamav</string>
+    <key>GroupName</key>
+    <string>_clamav</string>
+    <key>ProcessType</key>
+    <string>Background</string>
 </dict>
 </plist>

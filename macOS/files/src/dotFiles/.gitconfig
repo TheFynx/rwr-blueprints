@@ -45,4 +45,6 @@ sort = -committerdate
 [tag]
 sort = taggerdate
 [pull]
-ff = only
+rebase = true
+[init]
+templateDir =  {{ .User.home }}/.git-template

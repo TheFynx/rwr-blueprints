@@ -389,13 +389,13 @@ configurations:
     value: false
 
   # Trackpad, mouse, keyboard, Bluetooth accessories, and input
-  - name: Increase sound quality for Bluetooth headphones/headsets
-    tool: macos_defaults
-    action: set
-    domain: com.apple.BluetoothAudioAgent
-    key: "Apple Bitpool Min (editable)"
-    kind: int
-    value: 40
+  # - name: Increase sound quality for Bluetooth headphones/headsets
+  #   tool: macos_defaults
+  #   action: set
+  #   domain: com.apple.BluetoothAudioAgent
+  #   key: "Apple Bitpool Min (editable)"
+  #   kind: int
+  #   value: 40
 
   - name: Enable tap to click for trackpad
     tool: macos_defaults
@@ -445,14 +445,6 @@ configurations:
     key: AppleFontSmoothing
     kind: int
     value: 1
-
-  - name: Enable HiDPI display modes
-    tool: macos_defaults
-    action: set
-    domain: /Library/Preferences/com.apple.windowserver
-    key: DisplayResolutionEnabled
-    kind: bool
-    value: true
 
   # Photos
   - name: Prevent Photos from opening automatically when devices are plugged in

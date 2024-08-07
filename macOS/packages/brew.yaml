@@ -52,6 +52,19 @@ packages:
       - clamav
       - tailscale
       - go
+      - age
+      - argocd
+      - gh
+      - gnupg
+      - helm
+      - helmfile
+      - ipcalc
+      - shellcheck
+      - sops
+      - yq
+      - pre-commit
+      - commitizen
+      - krew
     action: install
     package_manager: brew
 
@@ -63,7 +76,6 @@ packages:
       - dbeaver-community
       - alacritty
       - alfred
-      - space-capsule
       - rectangle
       - alt-tab
       - keybase
