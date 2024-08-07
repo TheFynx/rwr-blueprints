@@ -10,6 +10,16 @@ alias gc="git commit -v "
 alias gsc='git commit -v -S -a -m'
 alias gsa='git commit -v -S -a --amend -m'
 
+# Standard Commitizen commit - Signed
+alias gcz="git cz -s"
+
+# Signed Commitizen commit (all changes, staged and unstaged)
+alias gscz="git cz -S -a"
+
+# Signed Commitizen commit (all changes, staged and unstaged - ammended)
+alias gscza="git cz -S -a --ammend"
+
+
 # Enable color support of ls and also add handy aliases
 if [ -x "/usr/bin/dircolors" ]; then
   if test -r ~/.dircolors; then

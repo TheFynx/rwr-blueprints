@@ -65,6 +65,9 @@ packages:
       - pre-commit
       - commitizen
       - krew
+      - k9s
+      - kubectl-argo-rollouts
+      - ktail
     action: install
     package_manager: brew
 
@@ -83,6 +86,7 @@ packages:
       - 1password
       - slack
       - git-credential-manager
+      - google-cloud-sdk
     action: install
     package_manager: brew
     args:

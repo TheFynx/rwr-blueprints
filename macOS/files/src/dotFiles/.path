@@ -136,10 +136,6 @@ if [ -d "/opt/homebrew/opt/grep/libexec/gnubin" ]; then
   export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 fi
 
-if [ -f '/opt/google-cloud-sdk/path.bash.inc' ]; then
-  . '/opt/google-cloud-sdk/path.bash.inc'
-fi
-
-if [ -f '/opt/google-cloud-sdk/completion.bash.inc' ]; then
-  . '/opt/google-cloud-sdk/completion.bash.inc'
+if [ -d "{{ .User.home }}/.krew" ]; then
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi

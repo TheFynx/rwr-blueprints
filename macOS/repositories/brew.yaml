@@ -1,0 +1,9 @@
+repositories:
+  - name: argo_repo
+    package_manager: brew
+    action: add
+    url: argoproj/tap
+  - name: atombender_repo
+    package_manager: brew
+    action: add
+    url: atombender/ktail
