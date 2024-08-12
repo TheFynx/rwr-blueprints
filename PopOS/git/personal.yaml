@@ -4,3 +4,8 @@ git:
     url: git@github.com:TheFynx/rwr-blueprints.git
     path: {{ .User.home }}/git/thefynx/rwr-blueprints
     private: false
+  - name: nvim
+    action: clone
+    url: https://github.com/AstroNvim/template
+    path: {{ .User.home }}/.config/nvim
+    private: false

@@ -1,17 +1,11 @@
+## CLI Tools/Experience
 packages:
   - names:
       - gnupg
       - openssl
-      - vlc
-      - coreutils
       - graphviz
-      - git
-      - tree
       - unzip
       - zip
-      - docker
-      - docker-compose
-      - podman
       - rsync
       - p7zip
       - shfmt
@@ -19,20 +13,27 @@ packages:
       - pkg-config
       - freetype
       - fontconfig
-      - gimp
-      - lazygit
       - powerline-go
-      - nodenv
-      - pyenv
-      - neovim
-      - goreleaser
-      - jq
-      - dasel
+      - go
+      - libressl
+    action: install
+    package_manager: brew
+
+  ## Virtualization/Containers
+  - names:
+      - utm
+    action: install
+    package_manager: brew
+
+  ## macOS is dumb - Install GNU/Linux superior tools
+  - names:
+      - tree
       - bash
       - watch
       - wget
       - binutils
       - diffutils
+      - coreutils
       - ed
       - findutils
       - gawk
@@ -42,20 +43,16 @@ packages:
       - gnu-which
       - grep
       - gzip
-      - screen
       - less
       - rsync
-      - libressl
-      - difftastic
-      - git-delta
-      - tenv
-      - clamav
-      - tailscale
-      - go
+    action: install
+    package_manager: brew
+
+  ## Work Items
+  - names:
       - age
       - argocd
       - gh
-      - gnupg
       - helm
       - helmfile
       - ipcalc
@@ -68,25 +65,70 @@ packages:
       - k9s
       - kubectl-argo-rollouts
       - ktail
+      - clamav
+      - tailscale
+    action: install
+    package_manager: brew
+
+  - names:
+      - 1password
+      - slack
+      - git-credential-manager
+      - google-cloud-sdk
+    action: install
+    package_manager: brew
+    args:
+      - "--cask"
+
+  ## AstroNVIM
+  - names:
+      - gdu
+      - ripgrep
+      - lazygit
+      - neovim
+    action: install
+    package_manager: brew
+
+  ## Development Tools
+  - names:
+      - nodenv
+      - pyenv
+      - tenv
+      - goreleaser
+      - jq
+      - dasel
+      - difftastic
+      - git-delta
+      - git
     action: install
     package_manager: brew
 
   - names:
       - visual-studio-code
       - zed
+      - dbeaver-community
+      - bruno
+    action: install
+    package_manager: brew
+    args:
+      - "--cask"
+
+  ## Apps
+  - names:
+      - vlc
+      - gimp
+    action: install
+    package_manager: brew
+
+  - names:
       - google-chrome
       - brave-browser
-      - dbeaver-community
       - alacritty
       - alfred
       - rectangle
       - alt-tab
       - keybase
       - karabiner-elements
-      - 1password
-      - slack
-      - git-credential-manager
-      - google-cloud-sdk
     action: install
     package_manager: brew
     args:

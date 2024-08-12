@@ -1,32 +1,32 @@
 directories:
   - name: .config
     action: copy
-    owner: {{ .User.username }}
+    owner: { { .User.username } }
     group: admin
     source: ./src/
-    target: {{ .User.home }}/
+    target: "{{ .User.home }}/"
     elevated: true
   - name: clamav
     action: create
-    owner: {{ .User.username }}
+    owner: { { .User.username } }
     group: admin
     target: /usr/local/var/log/
     elevated: true
   - name: clamav
     action: create
-    owner: {{ .User.username }}
+    owner: { { .User.username } }
     group: admin
     target: /usr/local/var/run/
     elevated: true
   - name: clamav
     action: create
-    owner: {{ .User.username }}
+    owner: { { .User.username } }
     group: admin
     target: /usr/local/var/lib/
     elevated: true
   - name: clamav
     action: create
-    owner: {{ .User.username }}
+    owner: { { .User.username } }
     group: admin
     target: /usr/local/etc/
     elevated: true
@@ -38,7 +38,7 @@ files:
       - .gitignore
     action: copy
     source: ./src/dotFiles/
-    target: {{ .User.home }}/
+    target: "{{ .User.home }}/"
   - names:
       - freshclam.conf
       - clamd.conf
@@ -55,9 +55,9 @@ files:
     target: /Library/LaunchAgents/
     elevated: true
   - names:
-    - net.clamav.freshclam.daily.plist
-    - net.clamav.clamd.plist
-    - net.clamav.clamdscanonaccess.plist
+      - net.clamav.freshclam.daily.plist
+      - net.clamav.clamd.plist
+      - net.clamav.clamdscanonaccess.plist
     action: copy
     owner: root
     group: wheel
@@ -75,25 +75,24 @@ templates:
   - name: .path
     action: create
     source: ./src/dotFiles/
-    target: {{ .User.home }}/
+    target: "{{ .User.home }}/"
   - name: .bashrc
     action: create
     source: ./src/dotFiles/
-    target: {{ .User.home }}/
+    target: "{{ .User.home }}/"
   - name: .profile
-    action: copy
+    action: create
     source: ./src/dotFiles/
-    target: {{ .User.home }}/
+    target: "{{ .User.home }}/"
   - name: .gitconfig
     action: create
     source: ./src/dotFiles/
-    target: {{ .User.home }}/
+    target: "{{ .User.home }}/"
     variables:
       gitEmail: "levi@fynx.me"
       gitName: "Levi Smith"
       signingKey: "8BF6E0074D7B228F9AF2BC76235C8EE4DF4F8767"
   - name: config
-    action: copy
+    action: create
     source: ./src/ssh/
-    target: {{ .User.home }}/.ssh/
-
+    target: "{{ .User.home }}/.ssh/"

@@ -136,7 +136,7 @@ configurations:
     domain: com.apple.dock
     key: autohide-delay
     kind: float
-    value: 0
+    value: 0.5
 
   - name: Remove the animation when hiding/showing the Dock
     tool: macos_defaults
