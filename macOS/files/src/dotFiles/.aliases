@@ -11,13 +11,13 @@ alias gsc='git commit -v -S -a -m'
 alias gsa='git commit -v -S -a --amend -m'
 
 # Standard Commitizen commit - Signed
-alias gcz="git cz -s"
+alias gcz="git cz commit -- -s"
 
 # Signed Commitizen commit (all changes, staged and unstaged)
-alias gscz="git cz -S -a"
+alias gscz="git cz commit -- -s -a"
 
 # Signed Commitizen commit (all changes, staged and unstaged - ammended)
-alias gscza="git cz -S -a --ammend"
+alias gscza="git cz commit -- -s -a --ammend"
 
 
 # Enable color support of ls and also add handy aliases

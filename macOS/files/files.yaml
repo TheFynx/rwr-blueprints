@@ -6,30 +6,30 @@ directories:
     source: ./src/
     target: "{{ .User.home }}/"
     elevated: true
-  - name: clamav
-    action: create
-    owner: { { .User.username } }
-    group: admin
-    target: /usr/local/var/log/
-    elevated: true
-  - name: clamav
-    action: create
-    owner: { { .User.username } }
-    group: admin
-    target: /usr/local/var/run/
-    elevated: true
-  - name: clamav
-    action: create
-    owner: { { .User.username } }
-    group: admin
-    target: /usr/local/var/lib/
-    elevated: true
-  - name: clamav
-    action: create
-    owner: { { .User.username } }
-    group: admin
-    target: /usr/local/etc/
-    elevated: true
+  # - name: clamav
+  #   action: create
+  #   owner: { { .User.username } }
+  #   group: admin
+  #   target: /usr/local/var/log/
+  #   elevated: true
+  # - name: clamav
+  #   action: create
+  #   owner: { { .User.username } }
+  #   group: admin
+  #   target: /usr/local/var/run/
+  #   elevated: true
+  # - name: clamav
+  #   action: create
+  #   owner: { { .User.username } }
+  #   group: admin
+  #   target: /usr/local/var/lib/
+  #   elevated: true
+  # - name: clamav
+  #   action: create
+  #   owner: { { .User.username } }
+  #   group: admin
+  #   target: /usr/local/etc/
+  #   elevated: true
 files:
   - names:
       - .aliases
@@ -39,38 +39,38 @@ files:
     action: copy
     source: ./src/dotFiles/
     target: "{{ .User.home }}/"
-  - names:
-      - freshclam.conf
-      - clamd.conf
-    action: copy
-    source: ./src/clamav/config/
-    target: /opt/homebrew/etc/clamav/
-    elevated: true
-  - name: net.clamav.scan.plist
-    action: copy
-    owner: root
-    group: wheel
-    mode: 644
-    source: ./src/clamav/agents/
-    target: /Library/LaunchAgents/
-    elevated: true
-  - names:
-      - net.clamav.freshclam.daily.plist
-      - net.clamav.clamd.plist
-      - net.clamav.clamdscanonaccess.plist
-    action: copy
-    owner: root
-    group: wheel
-    mode: 644
-    source: ./src/clamav/daemons/
-    target: /Library/LaunchDaemons/
-    elevated: true
-  - name: clamav-on-access
-    action: copy
-    source: ./src/clamav/onaccess/
-    target: /usr/local/bin/
-    mode: 755
-    elevated: true
+  # - names:
+  #     - freshclam.conf
+  #     - clamd.conf
+  #   action: copy
+  #   source: ./src/clamav/config/
+  #   target: /opt/homebrew/etc/clamav/
+  #   elevated: true
+  # - name: net.clamav.scan.plist
+  #   action: copy
+  #   owner: root
+  #   group: wheel
+  #   mode: 644
+  #   source: ./src/clamav/agents/
+  #   target: /Library/LaunchAgents/
+  #   elevated: true
+  # - names:
+  #     - net.clamav.freshclam.daily.plist
+  #     - net.clamav.clamd.plist
+  #     - net.clamav.clamdscanonaccess.plist
+  #   action: copy
+  #   owner: root
+  #   group: wheel
+  #   mode: 644
+  #   source: ./src/clamav/daemons/
+  #   target: /Library/LaunchDaemons/
+  #   elevated: true
+  # - name: clamav-on-access
+  #   action: copy
+  #   source: ./src/clamav/onaccess/
+  #   target: /usr/local/bin/
+  #   mode: 755
+  #   elevated: true
 templates:
   - name: .path
     action: create

@@ -1,37 +1,63 @@
 #!/bin/bash
 
+set -x  # Enable debugging
+
 # ClamAV On-Access Scanning Script
 
 # Configuration
 CLAMDSCAN_QUARANTINE="/opt/Quarantine"
 CLAMDSCANONACCESS_LOG="/usr/local/var/log/clamav/clamdscanonaccess.log"
 CLAMD_CONF="/opt/homebrew/etc/clamav/clamd.conf"
+MAX_LOG_SIZE=$((50*1024*1024))  # 50MB
 
 # Create necessary directories
 mkdir -p "$CLAMDSCAN_QUARANTINE"
 mkdir -p "$(dirname "$CLAMDSCANONACCESS_LOG")"
 
+# Function to rotate log
+rotate_log() {
+    if [ -f "$CLAMDSCANONACCESS_LOG" ]; then
+        local size=$(wc -c < "$CLAMDSCANONACCESS_LOG")
+        if [ "$size" -gt $MAX_LOG_SIZE ]; then
+            mv "$CLAMDSCANONACCESS_LOG" "${CLAMDSCANONACCESS_LOG}.1"
+            touch "$CLAMDSCANONACCESS_LOG"
+            chmod 644 "$CLAMDSCANONACCESS_LOG"
+        fi
+    fi
+}
+
 # Get user home directories
-USER_HOMEDIRS=($(dscl . -list /Users HomeDirectory | awk '$2 ~ /^\/Users\// {print $2}'))
+USER_HOMEDIRS=()
+while IFS=: read -r username _ uid _ _ homedir _; do
+    if [ "$uid" -ge 500 ] && [ "$homedir" != "/var/empty" ] && [[ "$homedir" == /Users/* ]]; then
+        USER_HOMEDIRS+=("$homedir")
+    fi
+done < <(getent passwd)
+
 USER_DOWNLOADSDIRS=("${USER_HOMEDIRS[@]/%//Downloads}")
 USER_DESKTOPDIRS=("${USER_HOMEDIRS[@]/%//Desktop}")
 
+# Debug output
+echo "Debug: USER_HOMEDIRS=${USER_HOMEDIRS[*]}" >> "$CLAMDSCANONACCESS_LOG"
+echo "Debug: USER_DOWNLOADSDIRS=${USER_DOWNLOADSDIRS[*]}" >> "$CLAMDSCANONACCESS_LOG"
+echo "Debug: USER_DESKTOPDIRS=${USER_DESKTOPDIRS[*]}" >> "$CLAMDSCANONACCESS_LOG"
+
 # Log start of the script
-echo "Launch daemon org.clamav.clamdscanonaccess started on $(date) ..." >> "$CLAMDSCANONACCESS_LOG"
+rotate_log
+echo "Launch daemon net.clamav.clamdscanonaccess started on $(date) ..." >> "$CLAMDSCANONACCESS_LOG"
 echo "Watched directories:" >> "$CLAMDSCANONACCESS_LOG"
 printf "\t%s\n" "${USER_DOWNLOADSDIRS[@]}" "${USER_DESKTOPDIRS[@]}" >> "$CLAMDSCANONACCESS_LOG"
 
 # Function to perform scan
 perform_scan() {
     local event="$1"
+    rotate_log
     echo "Scanning $event on $(date)..." >> "$CLAMDSCANONACCESS_LOG"
-
     if pgrep -u _clamav clamd > /dev/null; then
         nice -n 5 /opt/homebrew/bin/clamdscan --multiscan --quiet --fdpass --move="$CLAMDSCAN_QUARANTINE" --log="$CLAMDSCANONACCESS_LOG" "$event"
     else
         nice -n 5 /opt/homebrew/bin/clamscan --infected --quiet --move="$CLAMDSCAN_QUARANTINE" --log="$CLAMDSCANONACCESS_LOG" "$event"
     fi
-
     if [ $? -eq 0 ]; then
         echo "Done scanning $event on $(date)." >> "$CLAMDSCANONACCESS_LOG"
     else
@@ -40,7 +66,16 @@ perform_scan() {
 }
 
 # Use fswatch to monitor directories and trigger scans
-/opt/homebrew/bin/fswatch -0 -l 3 -e '/.DS_Store$' -r "${USER_DOWNLOADSDIRS[@]}" "${USER_DESKTOPDIRS[@]}" |
-    while IFS= read -r -d '' event; do
-        perform_scan "$event"
-    done
+if command -v /opt/homebrew/bin/fswatch &> /dev/null; then
+    echo "Starting fswatch..." >> "$CLAMDSCANONACCESS_LOG"
+    echo "Watching directories: ${USER_DOWNLOADSDIRS[*]} ${USER_DESKTOPDIRS[*]}" >> "$CLAMDSCANONACCESS_LOG"
+    /opt/homebrew/bin/fswatch -0 -l 3 -e '/.DS_Store$' -r "${USER_DOWNLOADSDIRS[@]}" "${USER_DESKTOPDIRS[@]}" |
+        while IFS= read -r -d '' event; do
+            perform_scan "$event"
+        done
+else
+    echo "Error: fswatch not found. Please install it using Homebrew." >> "$CLAMDSCANONACCESS_LOG"
+    exit 1
+fi
+
+echo "Script ended unexpectedly." >> "$CLAMDSCANONACCESS_LOG"

@@ -139,3 +139,7 @@ fi
 if [ -d "{{ .User.home }}/.krew" ]; then
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
+
+if command -v tenv >/dev/null; then
+  export PATH=$(tenv update-path)
+fi
