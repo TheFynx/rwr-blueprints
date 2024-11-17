@@ -18,6 +18,7 @@ templates:
     variables:
       gitEmail: "levi@fynx.me"
       gitName: "Levi Smith"
+      signingKey: "8BF6E0074D7B228F9AF2BC76235C8EE4DF4F8767"
   - name: config
     action: copy
     source: ./src/ssh/

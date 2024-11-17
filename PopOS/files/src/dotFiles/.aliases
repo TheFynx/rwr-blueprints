@@ -61,6 +61,9 @@ if [ -n "$(command -v eza)" ]; then
 
   # Tree view three levels deep
   alias t3="ls -Ta -L 3"
+
+  # Tree view four levels deep
+  alias t4="ls -Ta -L 4"
 else
   # Detect which `ls` flavor is in use
   if ls --color >/dev/null 2>&1; then # GNU `ls`

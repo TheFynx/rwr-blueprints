@@ -140,3 +140,43 @@ git-check() {
   # Return to the original working directory
   cd "$current_dir" || return
 }
+
+copy_repo_contents() {
+  if [ -z "$1" ]; then
+    echo "Usage: copy_directory_contents <directory_path>"
+    return 1
+  fi
+
+  directory_path="$1"
+  output_file="repo_contents.txt"
+
+  # Copy .go files
+  find "$directory_path" -name '*.go' -exec cat {} \; >> "$output_file"
+  echo -e "\n---\n" >> "$output_file"
+
+  # Copy .adoc files
+  find "$directory_path" -name '*.adoc' -exec cat {} \; >> "$output_file"
+  echo -e "\n---\n" >> "$output_file"
+
+  # Copy .goreleaser.yaml
+  if [ -f "$directory_path/.goreleaser.yaml" ]; then
+    cat "$directory_path/.goreleaser.yaml" >> "$output_file"
+    echo -e "\n---\n" >> "$output_file"
+  fi
+
+  # Copy cmd directory
+  if [ -d "$directory_path/cmd" ]; then
+    echo "# cmd" >> "$output_file"
+    tar cf - "$directory_path/cmd" | tar xf - -C / >> "$output_file"
+    echo -e "\n---\n" >> "$output_file"
+  fi
+
+  # Copy internal directory
+  if [ -d "$directory_path/internal" ]; then
+    echo "# internal" >> "$output_file"
+    tar cf - "$directory_path/internal" | tar xf - -C / >> "$output_file"
+    echo -e "\n---\n" >> "$output_file"
+  fi
+
+  echo "Directory contents saved to: $output_file"
+}

@@ -18,3 +18,7 @@ directories:
     action: copy
     source: ./src/
     target: {{ .User.home }}/
+  - name: Wallpapers
+    action: copy
+    source: ./src/
+    target: {{ .User.home }}/Pictures/

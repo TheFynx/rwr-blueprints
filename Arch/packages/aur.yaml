@@ -1,0 +1,11 @@
+packages:
+  - names:
+      - powerline-go-bin
+      - goreleaser-bin
+      - dasel-bin
+      - visual-studio-code-bin
+      - brave-bin
+      - keybase-gui
+      - nvm
+    action: install
+    package_manager: pacman
