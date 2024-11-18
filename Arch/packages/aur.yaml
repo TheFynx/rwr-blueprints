@@ -8,4 +8,4 @@ packages:
       - keybase-gui
       - nvm
     action: install
-    package_manager: pacman
+    package_manager: paru
