@@ -26,7 +26,6 @@ packages:
       - fontconfig
       - libxcb
       - libxkbcommon
-      - ttf-unifont
       # Applications
       - vlc
       - gimp

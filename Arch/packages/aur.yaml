@@ -7,5 +7,6 @@ packages:
       - brave-bin
       - keybase-bin
       - nvm
+      - ttf-unifont
     action: install
     package_manager: paru
