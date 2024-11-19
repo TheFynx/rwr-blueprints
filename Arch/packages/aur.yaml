@@ -5,7 +5,7 @@ packages:
       - dasel-bin
       - visual-studio-code-bin
       - brave-bin
-      - keybase-gui
+      - keybase-bin
       - nvm
     action: install
     package_manager: paru
