@@ -1,0 +1,5 @@
+users:
+  - name: levi
+    action: modify
+    add_groups:
+      - docker

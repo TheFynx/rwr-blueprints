@@ -1,0 +1,10 @@
+files:
+  - names:
+      - .aliases
+      - .exports
+      - .functions
+      - .gitignore
+    action: copy
+    source: ./src/dotFiles/
+    target: {{ .User.home }}/
+

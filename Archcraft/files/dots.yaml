@@ -1,0 +1,25 @@
+templates:
+  - name: .path
+    action: create
+    source: ./src/dotFiles/
+    target: {{ .User.home }}/
+  - name: .bashrc
+    action: create
+    source: ./src/dotFiles/
+    target: {{ .User.home }}/
+  - name: .profile
+    action: copy
+    source: ./src/dotFiles/
+    target: {{ .User.home }}/
+  - name: .gitconfig
+    action: create
+    source: ./src/dotFiles/
+    target: {{ .User.home }}/
+    variables:
+      gitEmail: "levi@fynx.me"
+      gitName: "Levi Smith"
+      signingKey: "8BF6E0074D7B228F9AF2BC76235C8EE4DF4F8767"
+  - name: config
+    action: copy
+    source: ./src/ssh/
+    target: {{ .User.home }}/.ssh/

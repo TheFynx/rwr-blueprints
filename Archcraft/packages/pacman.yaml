@@ -1,0 +1,50 @@
+packages:
+  - names:
+      # System utilities and base development tools
+      - base-devel
+      - ca-certificates
+      - gnupg
+      - gpg
+      - openssl
+      - graphviz
+      - coreutils
+      - git
+      - tree
+      - unzip
+      - unrar
+      - zip
+      - psensor
+      - xclip
+      - rsync
+      - gzip
+      - p7zip
+      - bzip2
+      - cmake
+      - pkg-config
+      # Libraries and development dependencies
+      - freetype2
+      - fontconfig
+      - libxcb
+      - libxkbcommon
+      # Applications
+      - vlc
+      - gimp
+      - steam
+      - docker
+      - docker-compose
+      - docker-buildx
+      - brave-browser
+      - dbeaver
+      # Additional tools
+      - playerctl
+      - pavucontrol
+      - shfmt
+      - lazygit
+      - neovim
+      - jq
+      - pyenv
+      - go
+      # Fonts
+      - nerd-fonts
+    action: install
+    package_manager: pacman

@@ -1,0 +1,5 @@
+packages:
+  - names:
+      - nodenv
+    action: install
+    package_manager: brew
