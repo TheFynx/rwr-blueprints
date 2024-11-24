@@ -9,5 +9,5 @@ packageManagers:
     action: install
   - name: cargo
     action: install
-  - name: yay
+  - name: paru
     action: install
