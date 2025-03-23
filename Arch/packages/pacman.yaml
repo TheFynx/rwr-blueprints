@@ -4,7 +4,6 @@ packages:
       - base-devel
       - ca-certificates
       - gnupg
-      - gpg
       - openssl
       - graphviz
       - coreutils
