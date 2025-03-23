@@ -23,8 +23,3 @@ templates:
     action: copy
     source: ./src/ssh/
     target: {{ .User.home }}/.ssh/
-  - name: Alacritty.desktop
-    action: copy
-    source: ./src/desktop/
-    target: {{ .User.home }}/.local/share/applications/
-    elevated: true
