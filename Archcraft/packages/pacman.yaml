@@ -21,6 +21,20 @@ packages:
       - bzip2
       - cmake
       - pkg-config
+      - dua-cli
+      - diskonaut
+      - dust
+      - difftastic
+      - xh
+      - procs
+      - mise
+      - jwt-cli
+      - mcfly
+      - bandwhich
+      - bat
+      - bottom
+      - eza
+      - ghostty
       # Libraries and development dependencies
       - freetype2
       - fontconfig

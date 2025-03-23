@@ -1,13 +1,11 @@
 blueprints:
   format: yaml
-  location: '.'
+  location: "."
   git:
     url: "https://github.com/thefynx/rwr-blueprints.git"
     target: "{{ .User.home }}/git/thefynx/rwr-blueprints"
 packageManagers:
-  - name: brew
+  - name: paru
     action: install
   - name: cargo
-    action: install
-  - name: yay
     action: install

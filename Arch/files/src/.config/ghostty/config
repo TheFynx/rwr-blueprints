@@ -1,0 +1,127 @@
+# --- Window Settings ---
+# Opacity (Ghostty uses background-opacity)
+background-opacity = 0.9
+
+# No direct equivalent for blur, dynamic_padding, dynamic_title or decorations_theme_variant
+
+# Padding (window-padding-x and window-padding-y)
+window-padding-x = 12
+window-padding-y = 12
+
+# --- Scrolling ---
+# Scrollback history (scrollback-limit, in bytes. Need to estimate based on character size)
+# Assuming a character is roughly 2 bytes, 10000 lines * 80 cols * 2 bytes/char = ~1.6MB
+scrollback-limit = 1600000
+
+# Mouse Scroll Multiplier
+mouse-scroll-multiplier = 3
+
+# --- Selection ---
+# Save to clipboard (copy-on-select)
+copy-on-select = clipboard
+
+# --- Cursor ---
+# Cursor thickness (adjust-cursor-thickness)
+adjust-cursor-thickness = 15%
+
+# Cursor Style (cursor-style)
+cursor-style = block
+
+# Cursor Blinking
+cursor-style-blink = true
+
+# --- Font ---
+# Font Size (font-size)
+font-size = 12
+
+# Font Family (font-family)
+font-family = "SauceCodePro NF"
+font-family-bold = "SauceCodePro NF"
+font-family-italic = "SauceCodePro NF"
+font-family-bold-italic = "SauceCodePro NF"
+
+# --- Colors ---
+# Background (background)
+background = 1E2128
+
+# Foreground (foreground)
+foreground = ABB2BF
+
+# Normal Colors (palette)
+palette = 0=32363D
+palette = 1=E06B74
+palette = 2=98C379
+palette = 3=E5C07A
+palette = 4=62AEEF
+palette = 5=C778DD
+palette = 6=55B6C2
+palette = 7=ABB2BF
+
+# Bright Colors (palette)
+palette = 8=50545B
+palette = 9=EA757E
+palette = 10=A2CD83
+palette = 11=EFCA84
+palette = 12=6CB8F9
+palette = 13=D282E7
+palette = 14=5FC0CC
+palette = 15=B5BCC9
+
+# --- Keybindings ---
+# Note: Ghostty uses different action names and modifier aliases.
+
+# Paste (ctrl+shift+v)
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Copy (ctrl+shift+c)
+keybind = ctrl+shift+c=copy_to_clipboard
+
+# Clear Selection (ctrl+c in Vi mode or when a search is active)
+#  This is a bit trickier; Ghostty doesn't have modes like Alacritty.
+#  You might need to adjust this based on your specific needs.
+#  A performable keybind might be desired here, but the action to check for a selection does not exist
+
+# This will prevent copying, but won't clear selection
+keybind = ctrl+c=ignore
+
+# Quit (ctrl+q or ctrl+w)
+keybind = ctrl+q=quit
+keybind = ctrl+w=quit
+
+# Clear Screen (ctrl+l)
+keybind = ctrl+l=clear_screen
+
+# Home (app cursor mode)
+keybind = home=csi:1~
+keybind = shift+home=csi:H
+
+# End (app cursor mode)
+keybind = end=csi:4~
+keybind = shift+end=csi:F
+
+# Reset Font Size (ctrl+0)
+keybind = ctrl+zero=reset_font_size
+
+# Increase Font Size (ctrl+= or ctrl++)
+#keybind = ctrl+equal=increase_font_size
+#keybind = ctrl+plus=increase_font_size
+#keybind = ctrl+kp_add=increase_font_size
+
+# Decrease Font Size (ctrl+- or ctrl+_)
+#keybind = ctrl+minus=decrease_font_size
+#keybind = ctrl+kp_subtract=decrease_font_size
+
+# Send Ctrl+C (ctrl+c)
+keybind = ctrl+c=text:\x03
+
+# Send Ctrl+D (ctrl+d)
+keybind = ctrl+d=text:\x04
+
+# Send Ctrl+R (ctrl+r)
+keybind = ctrl+r=text:\x12
+
+# --- Hints ---
+# No direct equivalent for hints, but links are supported and can be enabled
+link-url = true
+
+

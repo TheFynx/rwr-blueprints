@@ -7,6 +7,10 @@ packages:
       - brave-bin
       - keybase-bin
       - nvm
+      - nodenv
       - ttf-unifont
+      - funzzy
+      - hoard
+      - topgrade
     action: install
     package_manager: paru

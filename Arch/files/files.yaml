@@ -7,11 +7,6 @@ files:
     action: copy
     source: ./src/dotFiles/
     target: {{ .User.home }}/
-  - name: Alacritty.svg
-    action: copy
-    source: ./src/desktop/
-    target: /usr/share/pixmaps/
-    elevated: true
 
 directories:
   - name: .config
