@@ -1,0 +1,42 @@
+packages:
+  - names:
+    - git
+    - vim
+    - wget
+    - curl
+    action: install
+    package_manager: dnf
+  - names:
+      - docker
+      - docker-compose
+      - podman-docker
+      - runc
+      - containerd
+    action: remove
+    package_manager: dnf
+
+directories:
+  - name: {{ .User.home }}/git/thefynx
+    action: create
+    owner: {{ .User.username }}
+    group: {{ .User.username }}
+  - name: {{ .User.home }}/git/public
+    action: create
+    owner: {{ .User.username }}
+    group: {{ .User.username }}
+  - name: {{ .User.home }}/git/fynxlabs
+    action: create
+    owner: {{ .User.username }}
+    group: {{ .User.username }}
+  - name: {{ .User.home }}/.ssh
+    action: create
+    owner: {{ .User.username }}
+    group: {{ .User.username }}
+
+ssh_keys:
+  - name: git
+    type: ed25519
+    path: {{ .User.home }}/.ssh/
+    comment: "levi@fynx.me"
+    no_passphrase: true
+    copy_to_github: true

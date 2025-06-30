@@ -1,0 +1,24 @@
+files:
+  - names:
+      - .aliases
+      - .exports
+      - .functions
+      - .gitignore
+    action: copy
+    source: ./src/dotFiles/
+    target: {{ .User.home }}/
+  - name: Alacritty.svg
+    action: copy
+    source: ./src/desktop/
+    target: /usr/share/pixmaps/
+    elevated: true
+
+directories:
+  - name: .config
+    action: copy
+    source: ./src/
+    target: {{ .User.home }}/
+  - name: Wallpapers
+    action: copy
+    source: ./src/
+    target: {{ .User.home }}/Pictures/

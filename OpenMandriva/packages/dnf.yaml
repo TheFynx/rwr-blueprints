@@ -1,0 +1,49 @@
+packages:
+  - names:
+      # System utilities and base development tools
+      - ca-certificates
+      - gnupg2
+      - openssl
+      - lib64openssl-devel
+      - make
+      - cmake
+      - lib64freetype6-devel
+      - lib64fontconfig-devel
+      - lib64xcb-devel
+      - lib64xkbcommon-devel
+      - gcc-c++
+      - graphviz
+      - git
+      - tree
+      - unzip
+      - unrar
+      - zip
+      - xclip
+      - rsync
+      - lm_sensors
+      - gzip
+      - p7zip
+      - bzip2
+      - python3-requests
+      - python3-pip
+      - pkgconfig
+      - vlc
+      - gimp
+      - pavucontrol
+      - playerctl
+      # Development tools
+      - docker
+      - docker-compose
+      # Browsers and applications
+      - brave-browser
+      - google-chrome-stable
+      - code
+      - keybase
+      # Gaming
+      - steam
+      # Rust tools that may be available via DNF
+      - bat
+      - eza
+      - bottom
+    action: install
+    package_manager: dnf

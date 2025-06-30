@@ -1,0 +1,14 @@
+packages:
+  - names:
+      - lazygit
+      - powerline-go
+      - nodenv
+      - neovim
+      - awscli
+      - goreleaser
+      - jq
+      - dasel
+      - packer
+      - pyenv
+    action: install
+    package_manager: brew

@@ -1,0 +1,6 @@
+# scripts:
+#   - name: nerd.sh
+#     action: run
+#     exec: self
+#     source: files/
+#     elevated: false
