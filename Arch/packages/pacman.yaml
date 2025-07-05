@@ -58,5 +58,8 @@ packages:
       - go
       # Fonts
       - nerd-fonts
+      # Terminal
+      - ghostty
+      - ghostty-shell-integration
     action: install
     package_manager: pacman

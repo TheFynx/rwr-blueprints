@@ -35,13 +35,12 @@ export MCFLY_KEY_SCHEME=vim
 export MCFLY_RESULTS_SORT=LAST_RUN
 export MCFLY_FUZZY=2
 export MCFLY_PROMPT="❯"
-export MCFLY_HISTORY="{{ .User.home }}/.bash_history"
+export MCFLY_HISTORY="/home/levi/.bash_history"
 
 export PROMPT_COMMAND="history -a; history -n"
-
-xset -dpms
 
 # Update the PS1 prompt if powerline-go is available and not in a Linux terminal
 if [ "$TERM" != "linux" ] && [ "$(command -v powerline-go)" ]; then
   PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
+

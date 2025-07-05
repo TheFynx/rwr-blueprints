@@ -5,7 +5,5 @@ blueprints:
     url: "https://github.com/thefynx/rwr-blueprints.git"
     target: "{{ .User.home }}/git/thefynx/rwr-blueprints"
 packageManagers:
-  - name: cargo
-    action: install
   - name: paru
     action: install

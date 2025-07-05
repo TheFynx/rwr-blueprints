@@ -1,14 +1,14 @@
 packages:
-  - name: base-devel
+  - names:
+      - base-devel
+      - git
+      - gnupg
+      - github-clie
+      - wget
+      - curl
+      - neovim
     action: install
-  - name: git
-    action: install
-  - name: vim
-    action: install
-  - name: wget
-    action: install
-  - name: curl
-    action: install
+    package_manager: pacman
 
 directories:
   - name: {{ .User.home }}/git/thefynx
@@ -35,3 +35,9 @@ ssh_keys:
     comment: "levi@fynx.me"
     no_passphrase: true
     copy_to_github: true
+  - name: batocera
+    type: ed25519
+    path: {{ .User.home }}/.ssh/
+    comment: "levi@fynx.me"
+    no_passphrase: true
+    copy_to_github: false
