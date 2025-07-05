@@ -1,5 +1,12 @@
 packages:
   - names:
+      - firefox
+      - alacritty
+    action: remove
+    package_manager: pacman
+
+packages:
+  - names:
       # System utilities and base development tools
       - base-devel
       - ca-certificates
