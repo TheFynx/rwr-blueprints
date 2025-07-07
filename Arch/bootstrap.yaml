@@ -3,7 +3,7 @@ packages:
       - base-devel
       - git
       - gnupg
-      - github-clie
+      - github-cli
       - wget
       - curl
       - neovim
