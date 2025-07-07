@@ -4,8 +4,6 @@ packages:
       - alacritty
     action: remove
     package_manager: pacman
-
-packages:
   - names:
       # System utilities and base development tools
       - base-devel
