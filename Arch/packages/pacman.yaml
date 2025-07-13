@@ -13,6 +13,8 @@ packages:
       - graphviz
       - coreutils
       - git
+      - github-cli
+      - git-delta
       - tree
       - unzip
       - unrar
@@ -21,7 +23,7 @@ packages:
       - xclip
       - rsync
       - gzip
-      - p7zip
+      - 7zip
       - bzip2
       - cmake
       - pkg-config
@@ -38,11 +40,17 @@ packages:
       - bat
       - bottom
       - eza
+      - tldr
       # Libraries and development dependencies
       - freetype2
       - fontconfig
       - libxcb
       - libxkbcommon
+      # Gaming and Graphics
+      - lib32-vulkan-radeon
+      - vulkan-mesa-layers
+      - mesa-utils
+      - gameconqueror
       # Applications
       - vlc
       - gimp
@@ -50,8 +58,14 @@ packages:
       - docker
       - docker-compose
       - docker-buildx
-      - brave-browser
       - dbeaver
+      - handbrake
+      # System and Network tools
+      - tailscale
+      - radeontop
+      - ntfs-3g
+      # AI/ML tools
+      - ollama-rocm
       # Additional tools
       - playerctl
       - pavucontrol
@@ -63,6 +77,10 @@ packages:
       - go
       # Fonts
       - nerd-fonts
+      - ttf-dejavu
+      - ttf-liberation
+      - noto-fonts
+      - noto-fonts-emoji
       # Terminal
       - ghostty
       - ghostty-shell-integration

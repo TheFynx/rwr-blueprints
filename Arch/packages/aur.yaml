@@ -6,11 +6,16 @@ packages:
       - visual-studio-code-bin
       - brave-bin
       - keybase-bin
-      - nvm
       - nodenv
       - ttf-unifont
       - funzzy
-      - hoard
       - topgrade
+      - balena-etcher
+      - gosec
+      - protontricks
+      - protonup-qt-bin
+      - opencl-amd
+      - r8126-dkms
+      - nsis
     action: install
     package_manager: paru
