@@ -17,5 +17,6 @@ packages:
       - opencl-amd
       - r8126-dkms
       - nsis
+      - uno-calculator-bin
     action: install
     package_manager: paru

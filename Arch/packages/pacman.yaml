@@ -46,10 +46,17 @@ packages:
       - fontconfig
       - libxcb
       - libxkbcommon
+      - webkit2gtk-4.1
+      - lib32-glibc
       # Gaming and Graphics
       - lib32-vulkan-radeon
+      - lib32-vulkan-icd-loader
+      - vulkan-icd-loader
       - vulkan-mesa-layers
+      - lib32-mesa
+      - vulkan-radeon
       - mesa-utils
+      - lib32-mpg123
       - gameconqueror
       # Applications
       - vlc
