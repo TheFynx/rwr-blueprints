@@ -4,91 +4,26 @@ packages:
       - alacritty
     action: remove
     package_manager: pacman
+  # Import common base packages shared with Archcraft
+  # See: Common/packages/arch/base-pacman.yaml
+  - import: ../../Common/packages/arch/base-pacman.yaml
+  # Import desktop-specific packages (gaming, graphics, etc.)
+  # See: Common/packages/arch/desktop-laptop.yaml
+  - import: ../../Common/packages/arch/desktop-laptop.yaml
+    profile: desktop
+  # Arch-specific packages not in Archcraft
   - names:
-      # System utilities and base development tools
-      - base-devel
-      - ca-certificates
-      - gnupg
-      - openssl
-      - graphviz
-      - coreutils
-      - git
       - github-cli
       - git-delta
-      - tree
-      - unzip
-      - unrar
-      - zip
-      - psensor
-      - xclip
-      - rsync
-      - gzip
       - 7zip
-      - bzip2
-      - cmake
-      - pkg-config
-      - dua-cli
-      - diskonaut
-      - dust
-      - difftastic
-      - xh
-      - procs
-      - mise
-      - jwt-cli
-      - mcfly
-      - bandwhich
-      - bat
-      - bottom
-      - eza
       - tldr
-      # Libraries and development dependencies
-      - freetype2
-      - fontconfig
-      - libxcb
-      - libxkbcommon
-      - webkit2gtk-4.1
-      - lib32-glibc
-      # Gaming and Graphics
-      - lib32-vulkan-radeon
-      - lib32-vulkan-icd-loader
-      - vulkan-icd-loader
-      - vulkan-mesa-layers
-      - lib32-mesa
-      - vulkan-radeon
-      - mesa-utils
-      - lib32-mpg123
-      - gameconqueror
-      # Applications
-      - vlc
-      - gimp
-      - steam
-      - docker
-      - docker-compose
-      - docker-buildx
-      - dbeaver
-      - handbrake
-      # System and Network tools
+      - gnome-disk-utility
       - tailscale
-      - radeontop
-      - ntfs-3g
-      # AI/ML tools
-      - ollama-rocm
-      # Additional tools
-      - playerctl
-      - pavucontrol
-      - shfmt
-      - lazygit
-      - neovim
-      - jq
-      - pyenv
-      - go
-      # Fonts
-      - nerd-fonts
+      - dagger
       - ttf-dejavu
       - ttf-liberation
       - noto-fonts
       - noto-fonts-emoji
-      # Terminal
       - ghostty
       - ghostty-shell-integration
     action: install

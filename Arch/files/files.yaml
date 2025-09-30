@@ -5,7 +5,7 @@ files:
       - .functions
       - .gitignore
     action: copy
-    source: ./src/dotFiles/
+    source: ../../Common/linux-dotfiles/
     target: {{ .User.home }}/
 
 directories:
@@ -15,5 +15,5 @@ directories:
     target: {{ .User.home }}/
   # - name: Wallpapers
   #   action: copy
-  #   source: ./src/
+  #   source: ../../Common/wallpapers/
   #   target: {{ .User.home }}/Pictures/

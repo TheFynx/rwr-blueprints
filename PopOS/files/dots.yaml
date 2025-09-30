@@ -1,19 +1,19 @@
 templates:
   - name: .path
     action: create
-    source: ./src/dotFiles/
+    source: ../../Common/linux-dotfiles/
     target: {{ .User.home }}/
   - name: .bashrc
     action: create
-    source: ./src/dotFiles/
+    source: ../../Common/linux-dotfiles/
     target: {{ .User.home }}/
   - name: .profile
     action: create
-    source: ./src/dotFiles/
+    source: ../../Common/linux-dotfiles/
     target: {{ .User.home }}/
   - name: .gitconfig
     action: create
-    source: ./src/dotFiles/
+    source: ../../Common/linux-dotfiles/
     target: {{ .User.home }}/
     variables:
       gitEmail: "levi@fynx.me"
@@ -26,5 +26,5 @@ templates:
     elevated: true
   - name: config
     action: create
-    source: ./src/ssh/
+    source: ../../Common/ssh/
     target: {{ .User.home }}/.ssh/

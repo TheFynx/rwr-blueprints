@@ -5,6 +5,5 @@ files:
       - .functions
       - .gitignore
     action: copy
-    source: ./src/dotFiles/
+    source: ../../Common/linux-dotfiles/
     target: {{ .User.home }}/
-

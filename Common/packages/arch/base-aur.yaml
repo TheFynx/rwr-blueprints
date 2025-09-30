@@ -1,0 +1,14 @@
+packages:
+  - names:
+      - powerline-go-bin
+      - goreleaser-bin
+      - dasel-bin
+      - visual-studio-code-bin
+      - brave-bin
+      - keybase-bin
+      - nodenv
+      - ttf-unifont
+      - funzzy
+      - topgrade
+    action: install
+    package_manager: paru

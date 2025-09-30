@@ -1,15 +1,11 @@
 packages:
+  # Import common base AUR packages shared with Archcraft
+  # See: Common/packages/arch/base-aur.yaml
+  - import: ../../Common/packages/arch/base-aur.yaml
+  # Arch-specific AUR packages not in Archcraft
   - names:
-      - powerline-go-bin
-      - goreleaser-bin
-      - dasel-bin
-      - visual-studio-code-bin
-      - brave-bin
-      - keybase-bin
-      - nodenv
-      - ttf-unifont
-      - funzzy
-      - topgrade
+      - nvm
+      - hoard
       - balena-etcher
       - gosec
       - protontricks

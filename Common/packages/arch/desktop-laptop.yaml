@@ -1,0 +1,55 @@
+# Profile-based package configuration for desktop vs laptop
+# Use profiles to handle hardware-specific differences
+
+profiles:
+  desktop:
+    packages:
+      - names:
+          # Gaming and Graphics (Desktop specific)
+          - lib32-vulkan-radeon
+          - lib32-vulkan-icd-loader
+          - vulkan-icd-loader
+          - vulkan-mesa-layers
+          - lib32-mesa
+          - vulkan-radeon
+          - mesa-utils
+          - lib32-mpg123
+          - gameconqueror
+          - xdotool
+          - yad
+          - xorg-xwininfo
+          # Desktop-specific libraries
+          - webkit2gtk-4.1
+          - lib32-glibc
+          # Desktop utilities
+          - handbrake
+          - transmission-remote-gtk
+          - radeontop
+          - ntfs-3g
+          # AI/ML tools (desktop workstation)
+          - ollama-rocm
+        action: install
+        package_manager: pacman
+      - names:
+          # Desktop-specific AUR packages
+          - protontricks
+          - protonup-qt-bin
+          - opencl-amd
+          - r8126-dkms
+          - nsis
+          - uno-calculator-bin
+          - balena-etcher
+          - gosec
+        action: install
+        package_manager: paru
+
+  laptop:
+    packages:
+      - names:
+          # Laptop-specific power management and utilities
+          - tlp
+          - powertop
+          # Lightweight alternatives or laptop-specific tools
+          # Add laptop-specific packages here as needed
+        action: install
+        package_manager: pacman

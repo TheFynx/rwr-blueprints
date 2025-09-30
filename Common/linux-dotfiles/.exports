@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Make nvim the default editor
+EDITOR="$(which nvim)"
+export EDITOR
+export TERM="xterm-256color"
+
+# Enable case-insensitive globbing
+shopt -s nocaseglob
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell
+
+# Enable Bash 4 features when possible
+for option in autocd globstar; do
+  shopt -s "$option" 2>/dev/null
+done
+
+# Configure HSTR
+export HSTR_CONFIG=hicolor
+shopt -s histappend
+export HISTCONTROL=ignoreboth:erasedups
+export HISTFILESIZE=50000000
+export HISTSIZE=${HISTFILESIZE}
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+
+# Customize less (pager for viewing text files)
+# shellcheck disable=SC2154
+export LESS_TERMCAP_md="${yellow}"
+
+# Default action for todo.txt
+export TODOTXT_DEFAULT_ACTION=ls
+
+# Allow untrusted Docker images
+export DOCKER_CONTENT_TRUST=0
+
+# Pulumi and AWS SDK configuration
+export AWS_SDK_LOAD_CONFIG=1
+export PULUMI_SKIP_UPDATE_CHECK=1
