@@ -2,6 +2,7 @@ packages:
   - names:
       - firefox
       - alacritty
+      - node-lts-jod
     action: remove
     package_manager: pacman
   # Import common base packages shared with Archcraft
