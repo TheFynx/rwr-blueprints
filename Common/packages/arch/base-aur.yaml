@@ -10,5 +10,13 @@ packages:
       - ttf-unifont
       - funzzy
       - topgrade
+      - protontricks
+      - protonup-qt-bin
+      - r8126-dkms
+      - nsis
+      - uno-calculator-bin
+      - transmission-remote-gtk
+      - ntfs-3g
+      - gosec
     action: install
     package_manager: paru

@@ -23,25 +23,13 @@ profiles:
           - lib32-glibc
           # Desktop utilities
           - handbrake
-          - transmission-remote-gtk
           - radeontop
-          - ntfs-3g
+          - amdgpu_top
           # AI/ML tools (desktop workstation)
           - ollama-rocm
+          - opencl-amd
         action: install
         package_manager: pacman
-      - names:
-          # Desktop-specific AUR packages
-          - protontricks
-          - protonup-qt-bin
-          - opencl-amd
-          - r8126-dkms
-          - nsis
-          - uno-calculator-bin
-          - balena-etcher
-          - gosec
-        action: install
-        package_manager: paru
 
   laptop:
     packages:
