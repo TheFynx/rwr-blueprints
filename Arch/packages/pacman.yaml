@@ -27,5 +27,7 @@ packages:
       - noto-fonts-emoji
       - ghostty
       - ghostty-shell-integration
+      - mediainfo
+      - amf-headers
     action: install
     package_manager: pacman

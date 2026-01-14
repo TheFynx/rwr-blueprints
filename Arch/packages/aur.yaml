@@ -12,5 +12,11 @@ packages:
       - r8126-dkms
       - nsis
       - uno-calculator-bin
+      - amdgpu_top
+      - bambustudio-appimage
+      - openaudible-bin
+      - pince
+      - handbrake-full
+      - keybase-bin
     action: install
     package_manager: paru
