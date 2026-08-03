@@ -1,7 +1,0 @@
-configurations:
-  - name: popos_dconf
-    tool: dconf
-    action: load
-    elevated: false
-    run_once: true
-    file: ./src/popos.ini

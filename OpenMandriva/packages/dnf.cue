@@ -1,0 +1,50 @@
+{
+	"packages": [
+		{
+			"action": "install",
+			"names": [
+				"ca-certificates",
+				"gnupg2",
+				"openssl",
+				"lib64openssl-devel",
+				"make",
+				"cmake",
+				"lib64freetype6-devel",
+				"lib64fontconfig-devel",
+				"lib64xcb-devel",
+				"lib64xkbcommon-devel",
+				"gcc-c++",
+				"graphviz",
+				"git",
+				"tree",
+				"unzip",
+				"unrar",
+				"zip",
+				"xclip",
+				"rsync",
+				"lm_sensors",
+				"gzip",
+				"p7zip",
+				"bzip2",
+				"python3-requests",
+				"python3-pip",
+				"pkgconfig",
+				"vlc",
+				"gimp",
+				"pavucontrol",
+				"playerctl",
+				"docker",
+				"docker-compose",
+				"brave-browser",
+				"google-chrome-stable",
+				"code",
+				"keybase",
+				"steam",
+				"bat",
+				"eza",
+				"bottom"
+			],
+			"package_manager": "dnf"
+		}
+	]
+}
