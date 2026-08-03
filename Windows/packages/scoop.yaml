@@ -1,8 +1,0 @@
-packages:
-  - names:
-      - hub
-      - neovim
-      - ripgrep
-      - fd
-    action: install
-    package_manager: scoop

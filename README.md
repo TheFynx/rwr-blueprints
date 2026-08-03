@@ -4,23 +4,36 @@ My personal system configuration blueprints for [RWR](https://github.com/fynxlab
 
 ## Structure
 
+Everything is CUE. One `manifest.cue` at the root lists a configuration per
+machine shape; `rwr` picks the right one from the detected OS/distro.
+
 ```bash
 rwr-blueprints/
-├── Arch/              # Arch Linux configs
-├── Archcraft/         # Archcraft configs
-├── Common/            # Shared dotfiles and packages
-├── macOS/             # macOS configs
-├── OpenMandriva/      # OpenMandriva configs
-├── PopOS/             # Pop!_OS configs
-└── Windows/           # Windows/WSL configs
+├── manifest.cue       # configuration per machine, matched on OS/distro
+├── Common/            # shared across machines: git checkouts, users, Arch package bases
+├── Arch/              # Arch workstation
+├── Archcraft/         # Archcraft laptop
+├── macOS/             # macOS
+├── OpenMandriva/      # OpenMandriva
+├── PopOS/             # Pop!_OS
+└── Windows/           # Windows
 ```
+
+Shared things live once in `Common/` and are pulled in per machine with
+`import` entries. Payload files (dotfiles, app configs) sit under each
+tree's `files/src/` and are not blueprints.
 
 ## Usage
 
 ```bash
-cd <system-directory>
-rwr apply bootstrap.yaml
-rwr apply files/dots.yaml
+# On any machine: point rwr at the repo, the manifest picks the tree.
+rwr all --init-file https://github.com/TheFynx/rwr-blueprints
+
+# Force a specific configuration:
+rwr all --init-file https://github.com/TheFynx/rwr-blueprints --config-name archcraft
+
+# Check a tree without applying:
+rwr validate --blueprints Arch
 ```
 
 ## GPG Key Setup

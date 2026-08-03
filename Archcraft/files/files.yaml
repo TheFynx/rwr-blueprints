@@ -1,9 +1,0 @@
-files:
-  - names:
-      - .aliases
-      - .exports
-      - .functions
-      - .gitignore
-    action: copy
-    source: ../../Common/linux-dotfiles/
-    target: {{ .User.home }}/

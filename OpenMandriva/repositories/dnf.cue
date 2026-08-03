@@ -1,0 +1,44 @@
+{
+	"repositories": [
+		{
+			"action": "add",
+			"key_url": "https://brave-browser-rpm-release.s3.brave.com/brave-core.asc",
+			"name": "brave-browser",
+			"package_manager": "dnf",
+			"url": "https://brave-browser-rpm-release.s3.brave.com/x86_64/"
+		},
+		{
+			"action": "add",
+			"key_url": "https://download.docker.com/linux/fedora/gpg",
+			"name": "docker",
+			"package_manager": "dnf",
+			"url": "https://download.docker.com/linux/fedora/docker-ce.repo"
+		},
+		{
+			"action": "add",
+			"key_url": "https://dl.google.com/linux/linux_signing_key.pub",
+			"name": "google-chrome",
+			"package_manager": "dnf",
+			"url": "https://dl.google.com/linux/chrome/rpm/stable/x86_64"
+		},
+		{
+			"action": "add",
+			"key_url": "https://packages.microsoft.com/keys/microsoft.asc",
+			"name": "vscode",
+			"package_manager": "dnf",
+			"url": "https://packages.microsoft.com/yumrepos/vscode"
+		},
+		{
+			"action": "add",
+			"name": "rpmfusion-free",
+			"package_manager": "dnf",
+			"url": "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
+		},
+		{
+			"action": "add",
+			"name": "rpmfusion-nonfree",
+			"package_manager": "dnf",
+			"url": "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+		}
+	]
+}
