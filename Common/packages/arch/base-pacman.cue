@@ -39,7 +39,7 @@
 				"fontconfig",
 				"libxcb",
 				"libxkbcommon",
-				"vlc",
+				"mpv",
 				"gimp",
 				"steam",
 				"docker",

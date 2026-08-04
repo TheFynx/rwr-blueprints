@@ -10,7 +10,7 @@
 				"nvm",
 				"hoard"
 			],
-			"package_manager": "paru"
+			"package_manager": "yay"
 		}
 	]
 }

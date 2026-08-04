@@ -20,9 +20,15 @@
 				"openaudible-bin",
 				"pince",
 				"handbrake-full",
-				"keybase-bin"
+				"keybase-bin",
+				"claude-code",
+				"claude-desktop-bin",
+				"opencode",
+				"zcode-bin",
+				"shelly",
+				"appimagelauncher"
 			],
-			"package_manager": "paru"
+			"package_manager": "yay"
 		}
 	]
 }
