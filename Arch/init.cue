@@ -10,7 +10,7 @@
 	"packageManagers": [
 		{
 			"action": "install",
-			"name": "paru"
+			"name": "yay"
 		}
 	]
 }

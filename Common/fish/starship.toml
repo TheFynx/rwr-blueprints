@@ -1,0 +1,278 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Switch the whole bar by changing this line:
+# light:  mocha_storm | mocha_ember | mocha_forest | mocha_mauve
+# darker: mocha_abyss (storm) | mocha_ember_dark | mocha_forest_dark | mocha_mauve_dark
+palette = 'mocha_storm'
+
+format = """
+[░▒▓](color_cap)\
+$os\
+[](fg:color_cap bg:color_dir_bg)\
+${custom.directory}\
+[](fg:color_dir_bg bg:color_git_bg)\
+$git_branch\
+$git_status\
+[](fg:color_git_bg bg:color_ctx_bg)\
+$nodejs\
+$zig\
+$golang\
+$rust\
+$docker_context\
+$terraform\
+$pulumi\
+$mise\
+[](fg:color_ctx_bg bg:color_tail_bg)\
+$status\
+$time\
+[ ](fg:color_tail_bg)\
+\n$character"""
+
+[os]
+disabled = false
+style = "bg:color_cap fg:color_cap_fg"
+format = "[ $symbol ]($style)"
+[os.symbols]
+AIX = " "
+AlmaLinux = " "
+Alpaquita = " "
+Alpine = " "
+ALTLinux = " "
+Amazon = " "
+Android = " "
+AOSC = " "
+Arch = " "
+Artix = " "
+Bluefin = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Elementary = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = " "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = " "
+InstantOS = " "
+Ios = "󰀷 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = " "
+OpenCloudOS = " "
+openEuler = " "
+openSUSE = " "
+OracleLinux = "󰺡 "
+PikaOS = " "
+Pop = " "
+Raspbian = " "
+Redhat = "󱄛 "
+RedHatEnterprise = "󱄛 "
+Redox = "󰀘 "
+RockyLinux = " "
+Solus = " "
+SUSE = " "
+Ubuntu = " "
+Ultramarine = " "
+Unknown = " "
+Uos = " "
+Void = " "
+Windows = "󰍲 "
+Zorin = " "
+
+[custom.directory]
+command = '''r=$(git rev-parse --show-toplevel 2>/dev/null); if [ -n "$r" ]; then printf '%s/%s%s' "$(basename "$(dirname "$r")")" "$(basename "$r")" "${PWD#"$r"}"; else case "$PWD" in "$HOME") printf '~';; "$HOME"/*) printf '~%s' "${PWD#"$HOME"}";; *) printf '%s' "$PWD";; esac; fi'''
+when = "true"
+shell = ["sh"]
+style = "fg:color_dir_fg bg:color_dir_bg"
+format = "[  $output ]($style)"
+
+[git_branch]
+symbol = ""
+style = "bg:color_git_bg"
+format = '[[ $symbol $branch ](fg:color_git_fg bg:color_git_bg)]($style)'
+
+[git_status]
+style = "bg:color_git_bg"
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕${ahead_count}/${behind_count} "
+conflicted = "=${count} "
+stashed = "*${count} "
+deleted = "✘${count} "
+renamed = "»${count} "
+modified = "!${count} "
+staged = "+${count} "
+untracked = "?${count} "
+format = '[[ ($all_status$ahead_behind)](fg:color_git_fg bg:color_git_bg)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:color_ctx_bg"
+format = '[[ $symbol ($version) ](fg:color_ctx_fg bg:color_ctx_bg)]($style)'
+
+[zig]
+symbol = ""
+style = "bg:color_ctx_bg"
+format = '[[ $symbol ($version) ](fg:color_ctx_fg bg:color_ctx_bg)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:color_ctx_bg"
+format = '[[ $symbol ($version) ](fg:color_ctx_fg bg:color_ctx_bg)]($style)'
+
+[rust]
+symbol = "󱘗"
+style = "bg:color_ctx_bg"
+format = '[[ $symbol ($version) ](fg:color_ctx_fg bg:color_ctx_bg)]($style)'
+
+[docker_context]
+symbol = ""
+style = "bg:color_ctx_bg"
+format = '[[ $symbol ($context) ](fg:color_ctx_fg bg:color_ctx_bg)]($style)'
+
+[terraform]
+symbol = ""
+style = "bg:color_ctx_bg"
+format = '[[ $symbol ($workspace) ](fg:color_ctx_fg bg:color_ctx_bg)]($style)'
+
+[pulumi]
+symbol = ""
+style = "bg:color_ctx_bg"
+format = '[[ $symbol ($stack) ](fg:color_ctx_fg bg:color_ctx_bg)]($style)'
+
+[mise]
+disabled = true
+healthy_symbol = ""
+unhealthy_symbol = "unhealthy"
+style = "bg:color_ctx_bg"
+format = '[[(  $health )](fg:color_ctx_fg bg:color_ctx_bg)]($style)'
+
+
+[status]
+disabled = false
+symbol = " "
+style = "bg:color_tail_bg"
+format = '[[ $symbol$status ](fg:color_status_fg bg:color_tail_bg)]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:color_tail_bg"
+format = '[[  $time ](fg:color_tail_fg bg:color_tail_bg)]($style)'
+
+[palettes.mocha_storm]
+color_cap = '#89b4fa'
+color_cap_fg = '#11111b'
+color_dir_bg = '#3e4d7a'
+color_dir_fg = '#cdd6f4'
+color_git_bg = '#2c4a52'
+color_git_fg = '#94e2d5'
+color_ctx_bg = '#292c3c'
+color_ctx_fg = '#89dceb'
+color_tail_bg = '#1e2030'
+color_tail_fg = '#a6adc8'
+color_status_fg = '#f38ba8'
+
+[palettes.mocha_ember]
+color_cap = '#fab387'
+color_cap_fg = '#11111b'
+color_dir_bg = '#6d3b2e'
+color_dir_fg = '#f2cdcd'
+color_git_bg = '#5c3a4a'
+color_git_fg = '#eba0ac'
+color_ctx_bg = '#36302c'
+color_ctx_fg = '#f9e2af'
+color_tail_bg = '#211c1a'
+color_tail_fg = '#f2cdcd'
+color_status_fg = '#f38ba8'
+
+[palettes.mocha_forest]
+color_cap = '#a6e3a1'
+color_cap_fg = '#11111b'
+color_dir_bg = '#2f5d50'
+color_dir_fg = '#cdd6f4'
+color_git_bg = '#3f4d2c'
+color_git_fg = '#a6e3a1'
+color_ctx_bg = '#262f2a'
+color_ctx_fg = '#94e2d5'
+color_tail_bg = '#1a201c'
+color_tail_fg = '#a6adc8'
+color_status_fg = '#eba0ac'
+
+[palettes.mocha_mauve]
+color_cap = '#cba6f7'
+color_cap_fg = '#11111b'
+color_dir_bg = '#4a3b6b'
+color_dir_fg = '#cdd6f4'
+color_git_bg = '#3e2c52'
+color_git_fg = '#cba6f7'
+color_ctx_bg = '#2a2438'
+color_ctx_fg = '#b4befe'
+color_tail_bg = '#1c1826'
+color_tail_fg = '#a6adc8'
+color_status_fg = '#f38ba8'
+
+[palettes.mocha_abyss]
+color_cap = '#7186b8'
+color_cap_fg = '#0a0a10'
+color_dir_bg = '#21263a'
+color_dir_fg = '#aeb6d6'
+color_git_bg = '#1a2e33'
+color_git_fg = '#74c7b8'
+color_ctx_bg = '#181b26'
+color_ctx_fg = '#6f97cc'
+color_tail_bg = '#101019'
+color_tail_fg = '#828aa0'
+color_status_fg = '#dd6a88'
+
+[palettes.mocha_ember_dark]
+color_cap = '#c98a5e'
+color_cap_fg = '#140d09'
+color_dir_bg = '#3a221b'
+color_dir_fg = '#e7c3bf'
+color_git_bg = '#33232b'
+color_git_fg = '#d79aa4'
+color_ctx_bg = '#201b18'
+color_ctx_fg = '#e6cf95'
+color_tail_bg = '#141110'
+color_tail_fg = '#9a8d8a'
+color_status_fg = '#dd6a88'
+
+[palettes.mocha_forest_dark]
+color_cap = '#79a374'
+color_cap_fg = '#0a0f0a'
+color_dir_bg = '#1a3329'
+color_dir_fg = '#bcd6c4'
+color_git_bg = '#222b18'
+color_git_fg = '#9fd49a'
+color_ctx_bg = '#161c18'
+color_ctx_fg = '#86c0a8'
+color_tail_bg = '#0f140f'
+color_tail_fg = '#8a988e'
+color_status_fg = '#cf7f86'
+
+[palettes.mocha_mauve_dark]
+color_cap = '#9b7fc4'
+color_cap_fg = '#0d0a14'
+color_dir_bg = '#2a2140'
+color_dir_fg = '#c9c0e0'
+color_git_bg = '#241830'
+color_git_fg = '#b89ad6'
+color_ctx_bg = '#181421'
+color_ctx_fg = '#9388c8'
+color_tail_bg = '#100d17'
+color_tail_fg = '#8a8398'
+color_status_fg = '#dd6a88'

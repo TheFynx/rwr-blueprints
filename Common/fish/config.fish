@@ -1,0 +1,76 @@
+if status is-interactive
+
+    # ---- environment ----
+    set -gx EDITOR nvim
+    set -gx TODOTXT_DEFAULT_ACTION ls
+    set -gx DOCKER_CONTENT_TRUST 0
+    set -gx AWS_SDK_LOAD_CONFIG 1
+    set -gx PULUMI_SKIP_UPDATE_CHECK 1
+
+    # ---- navigation ----
+    alias .. 'cd ..'
+    alias ... 'cd ../..'
+    alias .... 'cd ../../..'
+
+    # ---- git (abbr expands inline before running) ----
+    abbr -a gc 'git commit -v'
+    abbr -a gsc 'git commit -v -S -a -m'
+    abbr -a gsa 'git commit -v -S -a --amend -m'
+
+    # ---- grep colors ----
+    alias grep 'grep --color=auto'
+    alias fgrep 'fgrep --color=auto'
+    alias egrep 'egrep --color=auto'
+
+    # ---- nvim ----
+    alias v nvim
+    alias vi nvim
+    alias vim nvim
+    alias ni nvim
+    alias neo nvim
+    alias vcb 'nvim +BundleClean! +BundleInstall! +qall!'
+
+    # ---- eza (ls function lives in functions/ls.fish) ----
+    alias ll 'ls -lh --git'
+    alias la 'ls -lbah --git'
+    alias t 'ls -Ta'
+    alias t1 'ls -Ta -L 1'
+    alias t2 'ls -Ta -L 2'
+    alias t3 'ls -Ta -L 3'
+    alias t4 'ls -Ta -L 4'
+
+    # ---- misc ----
+    alias reload 'exec fish -l'
+    alias week 'date +%V'
+    alias hosts 'sudo nvim /etc/hosts'
+    alias untar 'tar -xvf'
+    alias cleanup 'topgrade -c'
+    alias wget 'wget -c'
+    alias pubip 'dig +short myip.opendns.com @resolver1.opendns.com'
+
+    # ---- network (Linux rewrites; verify iface before using sniff/httpdump) ----
+    alias flush 'sudo resolvectl flush-caches'
+    alias localip 'ip -4 addr show | grep -oP "(?<=inet\s)\d+(\.\d+){3}" | grep -v 127.0.0.1'
+
+    # ---- tools ----
+    mcfly init fish | source
+    mise activate fish | source
+    source (/usr/bin/starship init fish --print-full-init | psub)
+
+    # vscode shell integration
+    test "$TERM_PROGRAM" = vscode; and . (code --locate-shell-integration-path fish)
+
+    # ---- prompt: pick ONE ----
+    # starship init fish | source
+    #
+    # or keep powerline-go:
+    # function fish_prompt
+    #     powerline-go -error $status -shell bare -git-mode fancy \
+    #         -modules "venv,ssh,cwd,perms,git,jobs,exit,root,aws,docker,node,time" \
+    #         -newline -cwd-max-depth 3 -theme gruvbox
+    # end
+
+end
+
+# Created by `pipx` on 2026-07-06 01:14:03
+set PATH $PATH {{ .User.home }}/.local/bin

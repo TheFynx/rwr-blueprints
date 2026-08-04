@@ -19,11 +19,10 @@
 				"r8126-dkms",
 				"nsis",
 				"uno-calculator-bin",
-				"transmission-remote-gtk",
 				"ntfs-3g",
 				"gosec"
 			],
-			"package_manager": "paru"
+			"package_manager": "yay"
 		}
 	]
 }
