@@ -6,7 +6,7 @@
 			"name": "arch",
 			"init": "Arch/init.cue",
 			"os": "linux",
-			"distro": "arch"
+			"family": "arch"
 		},
 		{
 			"name": "archcraft",
