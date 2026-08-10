@@ -58,6 +58,43 @@
 			"name": "config",
 			"source": "./src/ssh/",
 			"target": "{{ .User.home }}/.ssh/"
+		},
+		// Same shared fish setup Arch gets (Common/fish). config.fish is rendered,
+		// not copied: it branches on .System.os for the homebrew prefix and the
+		// macOS network aliases.
+		{
+			"action": "create",
+			"name": "config.fish",
+			"source": "../../Common/fish/",
+			"target": "{{ .User.home }}/.config/fish/"
+		},
+		{
+			"action": "copy",
+			"name": "starship.toml",
+			"source": "../../Common/fish/",
+			"target": "{{ .User.home }}/.config/"
+		},
+		{
+			"action": "copy",
+			"name": "fish_variables",
+			"source": "../../Common/fish/",
+			"target": "{{ .User.home }}/.config/fish/"
+		},
+		// The wine/proton/steam helpers Arch ships (dmm, _steamapps, steamid,
+		// winedpi, winerun) are deliberately absent - protontricks is Linux-only.
+		{
+			"action": "copy",
+			"names": [
+				"dclean.fish",
+				"digga.fish",
+				"fs.fish",
+				"git-check.fish",
+				"isup.fish",
+				"ls.fish",
+				"man.fish"
+			],
+			"source": "../../Common/fish/functions/",
+			"target": "{{ .User.home }}/.config/fish/functions/"
 		}
 	]
 }

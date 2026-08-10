@@ -98,6 +98,21 @@
 			],
 			"package_manager": "brew"
 		},
+		// The shell itself, plus everything Common/fish/config.fish invokes:
+		// starship prompt, eza (the ls function), mcfly history, mise, and the
+		// topgrade the `cleanup` alias calls.
+		{
+			"action": "install",
+			"names": [
+				"fish",
+				"starship",
+				"eza",
+				"mcfly",
+				"mise",
+				"topgrade"
+			],
+			"package_manager": "brew"
+		},
 		{
 			"action": "install",
 			"names": [

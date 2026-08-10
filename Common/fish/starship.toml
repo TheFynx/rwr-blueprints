@@ -93,7 +93,11 @@ Windows = "󰍲 "
 Zorin = " "
 
 [custom.directory]
-command = '''r=$(git rev-parse --show-toplevel 2>/dev/null); if [ -n "$r" ]; then printf '%s/%s%s' "$(basename "$(dirname "$r")")" "$(basename "$r")" "${PWD#"$r"}"; else case "$PWD" in "$HOME") printf '~';; "$HOME"/*) printf '~%s' "${PWD#"$HOME"}";; *) printf '%s' "$PWD";; esac; fi'''
+# git rev-parse returns a physical path, so the prefix strip must compare against
+# `pwd -P` - $PWD carries the shell's logical path, and through a symlinked repo
+# parent the two never matched, appending the whole path to the formatted output.
+# The ~ branch still uses logical $PWD so a symlinked home collapses to ~.
+command = '''p=$(pwd -P); r=$(git rev-parse --show-toplevel 2>/dev/null); if [ -n "$r" ]; then printf '%s/%s%s' "$(basename "$(dirname "$r")")" "$(basename "$r")" "${p#"$r"}"; else l=${PWD:-$p}; case "$l" in "$HOME") printf '~';; "$HOME"/*) printf '~%s' "${l#"$HOME"}";; *) printf '%s' "$p";; esac; fi'''
 when = "true"
 shell = ["sh"]
 style = "fg:color_dir_fg bg:color_dir_bg"
