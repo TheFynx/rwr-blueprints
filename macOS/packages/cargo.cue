@@ -18,7 +18,10 @@
 				"xh",
 				"procs",
 				"just",
-				"dua-cli"
+				"dua-cli",
+				"cargo-cache",
+				"cargo-update",
+				"codebook-lsp"
 			],
 			"package_manager": "cargo"
 		}

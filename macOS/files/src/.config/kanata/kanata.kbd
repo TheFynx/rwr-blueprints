@@ -1,0 +1,23 @@
+;; ============================================================
+;; kanata config — Linux feel on mac
+;; Strategy: physical swap left Ctrl <-> left Cmd (lmet)
+;;   - Pinky press (was Ctrl) -> sends Cmd -> mac shortcuts native
+;;     (Cmd+C copy, Cmd+T newtab, Cmd+W closetab, etc)
+;;   - Thumb press (was Cmd) -> sends Ctrl -> terminal SIGINT
+;;     (real Ctrl+C in Ghostty / VSCode terminal)
+;; Plus: caps -> esc, Home/End -> line start/end
+;; ============================================================
+
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes no
+  ;; macos-dev-names-include ()  ;; uncomment to filter specific keyboards
+)
+
+(defsrc
+  caps  lctl  lmet  home  end
+)
+
+(deflayer base
+  esc   lmet  lctl  (multi lmet left)  (multi lmet right)
+)

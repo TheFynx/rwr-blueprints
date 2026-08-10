@@ -1,33 +1,30 @@
 {
 	"packages": [
+		// Core libs and build/system tools
 		{
 			"action": "install",
 			"names": [
-				"gnupg",
-				"openssl",
-				"graphviz",
-				"unzip",
-				"zip",
-				"rsync",
-				"p7zip",
-				"shfmt",
 				"cmake",
-				"pkg-config",
-				"freetype",
-				"fontconfig",
-				"powerline-go",
+				"curl",
+				"ghostscript",
+				"gnupg",
 				"go",
-				"libressl"
+				"graphviz",
+				"imagemagick",
+				"libressl",
+				"p7zip",
+				"parallel",
+				"powerline-go",
+				"rename",
+				"rsync",
+				"shfmt",
+				"telnet",
+				"unzip",
+				"zip"
 			],
 			"package_manager": "brew"
 		},
-		{
-			"action": "install",
-			"names": [
-				"utm"
-			],
-			"package_manager": "brew"
-		},
+		// macOS is dumb - install the GNU/Linux superior tools
 		{
 			"action": "install",
 			"names": [
@@ -47,31 +44,43 @@
 				"gnu-which",
 				"grep",
 				"gzip",
-				"less",
-				"rsync"
+				"less"
 			],
 			"package_manager": "brew"
 		},
+		// Work: cloud, infra, data
 		{
 			"action": "install",
 			"names": [
-				"age",
-				"argocd",
+				"cloudflared",
 				"gh",
-				"helm",
-				"helmfile",
+				"gosec",
+				"hcl2json",
 				"ipcalc",
-				"shellcheck",
-				"sops",
-				"yq",
+				"libpq",
+				"opentofu",
+				"postgresql@17",
 				"pre-commit",
-				"commitizen",
-				"krew",
-				"k9s",
-				"kubectl-argo-rollouts",
-				"ktail",
-				"clamav",
-				"tailscale"
+				"pulumi",
+				"rclone",
+				"redis",
+				"shellcheck",
+				"slackdump",
+				"temporal",
+				"tfsec",
+				"yamllint",
+				"yq"
+			],
+			"package_manager": "brew"
+		},
+		// Containers: docker CLI + compose; the daemon comes from the orbstack cask
+		{
+			"action": "install",
+			"names": [
+				"docker",
+				"docker-buildx",
+				"docker-compose",
+				"lazydocker"
 			],
 			"package_manager": "brew"
 		},
@@ -84,48 +93,83 @@
 				"1password",
 				"slack",
 				"git-credential-manager",
-				"google-cloud-sdk"
+				"gcloud-cli"
 			],
 			"package_manager": "brew"
 		},
+		// CLI quality of life + editors
 		{
 			"action": "install",
 			"names": [
+				"act",
+				"actionlint",
+				"bats-core",
+				"cue",
+				"cuetools",
+				"dasel",
+				"difftastic",
+				"fd",
 				"gdu",
-				"ripgrep",
+				"git",
+				"git-delta",
+				"jp2a",
+				"jq",
+				"jwt-cli",
 				"lazygit",
-				"neovim"
+				"msitools",
+				"neovim",
+				"ripgrep",
+				"vhs",
+				"wego",
+				"wrkflw",
+				"wtfutil"
 			],
 			"package_manager": "brew"
 		},
-		// The shell itself, plus everything Common/fish/config.fish invokes:
-		// starship prompt, eza (the ls function), mcfly history, mise, and the
-		// topgrade the `cleanup` alias calls.
+		// The shell itself. eza, mcfly, and topgrade that Common/fish/config.fish
+		// invokes come from cargo.cue, not brew.
 		{
 			"action": "install",
 			"names": [
 				"fish",
 				"starship",
-				"eza",
-				"mcfly",
-				"mise",
-				"topgrade"
+				"mise"
 			],
 			"package_manager": "brew"
 		},
+		// Keyboard remapping - kanata replaced karabiner-elements. Run kanata-tray
+		// itself with sudo (kanata needs root for the virtual HID keyboard); the
+		// tray then execs kanata directly. Requires the Karabiner-DriverKit-
+		// VirtualHIDDevice driver + daemon.
 		{
 			"action": "install",
 			"names": [
-				"nodenv",
-				"pyenv",
-				"tenv",
+				"kanata",
+				"kanata-tray"
+			],
+			"package_manager": "brew"
+		},
+		// Language toolchains and version managers
+		{
+			"action": "install",
+			"names": [
 				"goreleaser",
-				"jq",
-				"dasel",
-				"difftastic",
-				"git-delta",
-				"git",
-				"tfsec"
+				"nodenv",
+				"pipx",
+				"pyenv",
+				"python@3.12",
+				"python@3.13",
+				"rust",
+				"yarn"
+			],
+			"package_manager": "brew"
+		},
+		// AI tooling
+		{
+			"action": "install",
+			"names": [
+				"gemini-cli",
+				"ollama"
 			],
 			"package_manager": "brew"
 		},
@@ -136,20 +180,16 @@
 			],
 			"names": [
 				"visual-studio-code",
-				"zed",
 				"dbeaver-community",
-				"bruno"
+				"bruno",
+				"orbstack",
+				"claude",
+				"claude-code"
 			],
 			"package_manager": "brew"
 		},
-		{
-			"action": "install",
-			"names": [
-				"vlc",
-				"gimp"
-			],
-			"package_manager": "brew"
-		},
+		// Apps. ghostty replaced alacritty as the terminal. reeve comes from
+		// the reeveops/tap repository.
 		{
 			"action": "install",
 			"args": [
@@ -158,12 +198,20 @@
 			"names": [
 				"google-chrome",
 				"brave-browser",
-				"alacritty",
+				"firefox",
+				"ghostty",
 				"alfred",
 				"rectangle",
-				"alt-tab",
 				"keybase",
-				"karabiner-elements"
+				"deskpad",
+				"dangerzone",
+				"libreoffice",
+				"nimbalyst",
+				"reeve",
+				"zoom",
+				"vlc",
+				"gimp",
+				"font-fira-code-nerd-font"
 			],
 			"package_manager": "brew"
 		}

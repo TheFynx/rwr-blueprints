@@ -1,0 +1,1 @@
+{{ .User.username }} ALL=(root) NOPASSWD: /opt/homebrew/bin/kanata
