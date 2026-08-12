@@ -15,12 +15,6 @@
 		},
 		{
 			"action": "add",
-			"name": "credova_tap",
-			"package_manager": "brew",
-			"url": "credova/tap"
-		},
-		{
-			"action": "add",
 			"name": "redpanda_tap",
 			"package_manager": "brew",
 			"url": "redpanda-data/tap"

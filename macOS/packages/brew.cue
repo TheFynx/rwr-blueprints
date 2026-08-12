@@ -10,7 +10,6 @@
 				"gnupg",
 				"go",
 				"graphviz",
-				"imagemagick",
 				"libressl",
 				"p7zip",
 				"parallel",
@@ -52,24 +51,15 @@
 		{
 			"action": "install",
 			"names": [
-				"cloudflared",
 				"gh",
 				"gosec",
-				"hcl2json",
-				"ipcalc",
 				"libpq",
 				"opentofu",
 				"postgresql@17",
-				"pre-commit",
 				"pulumi",
-				"rclone",
-				"redis",
 				"shellcheck",
 				"slackdump",
-				"temporal",
-				"tfsec",
-				"yamllint",
-				"yq"
+				"yamllint"
 			],
 			"package_manager": "brew"
 		},
@@ -90,8 +80,6 @@
 				"--cask"
 			],
 			"names": [
-				"1password",
-				"slack",
 				"git-credential-manager",
 				"gcloud-cli"
 			],
