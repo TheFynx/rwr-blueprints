@@ -461,6 +461,17 @@
 			"tool": "macos_defaults",
 			"value": true
 		},
+		// Scroll direction is one of the few defaults nothing can apply live: the
+		// window server reads it at login and there is no process to restart, so
+		// a fresh machine keeps scrolling Apple's way until the next logout no
+		// matter how many times rwr runs. Check it with
+		// `defaults read -g com.apple.swipescrolldirection` - 0 is the value this
+		// sets, and it means "natural" scrolling is off. If the value reads 0 and
+		// scrolling still feels inverted, the setting is applied and pending a
+		// logout; it is not drift.
+		//
+		// This one key covers trackpad and mouse both. macOS shows a separate
+		// checkbox per device but writes them to the same global key.
 		{
 			"action": "set",
 			"domain": "NSGlobalDomain",
