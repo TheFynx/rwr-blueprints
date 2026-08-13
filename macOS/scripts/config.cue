@@ -62,6 +62,27 @@
 			"action": "run",
 			"content": "#!/bin/bash\nlaunchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist\n",
 			"name": "disable_itunes_media_keys"
+		},
+		// WindowManager caches the desktop-widget, desktop-icon and Stage Manager
+		// keys in memory and rewrites its plist on exit, so the defaults set in
+		// configuration/defaults.cue do not take hold until it restarts. It comes
+		// straight back up under launchd.
+		{
+			"action": "run",
+			"content": "#!/bin/bash\nkillall WindowManager || true\n",
+			"name": "restart_window_manager"
+		},
+		// Same story for Finder and the desktop-icon / view-style keys.
+		{
+			"action": "run",
+			"content": "#!/bin/bash\nkillall Finder || true\n",
+			"name": "restart_finder"
+		},
+		// SystemUIServer owns the menu bar clock keys.
+		{
+			"action": "run",
+			"content": "#!/bin/bash\nkillall SystemUIServer || true\n",
+			"name": "restart_system_ui_server"
 		}
 	]
 }
