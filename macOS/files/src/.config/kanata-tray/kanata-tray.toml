@@ -8,7 +8,10 @@ control_server_port = 8100
 
 [defaults]
 tcp_port = 5829
-autorestart_on_crash = false
+# Retry kanata if it dies (e.g. VHID daemon not ready yet at login). Note:
+# kanata-tray disables this after >2 restarts/min, so the wait loop in
+# kanata-sudo.sh is the primary boot-race fix; this is the backstop.
+autorestart_on_crash = true
 
 [defaults.hooks]
 # Hooks allow running custom commands on specific events (e.g. when starting preset).

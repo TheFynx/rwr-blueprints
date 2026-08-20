@@ -20,6 +20,4 @@ done
 if [ "$i" -gt 0 ]; then
     sleep 1
 fi
-# kanata output goes to /tmp/kanata.log - the tray only logs its own side, so
-# without this redirect kanata dies silently (exit 1, no reason captured).
-exec /usr/bin/sudo -n /opt/homebrew/bin/kanata "$@" >> /tmp/kanata.log 2>&1
+exec /usr/bin/sudo -n /opt/homebrew/bin/kanata "$@"
