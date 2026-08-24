@@ -30,6 +30,51 @@
 			"source": "./src/.config/kanata-tray/",
 			"target": "{{ .User.home }}/Library/LaunchAgents/"
 		},
+		// Rectangle window-manager keybinds and the macOS system hotkey map are
+		// whole plists - nested dicts of keyCode/modifierFlags per binding - so
+		// they cannot be macos_defaults scalar writes. They land in a staging
+		// directory here and scripts/preferences.cue imports them, because a
+		// plist dropped straight into ~/Library/Preferences is ignored: cfprefsd
+		// caches the old contents in memory and overwrites the file on exit.
+		{
+			"action": "copy",
+			"names": [
+				"com.knollsoft.Rectangle.plist",
+				"com.apple.symbolichotkeys.plist"
+			],
+			"source": "./src/Library/Preferences/",
+			"target": "{{ .User.home }}/.local/share/rwr/preferences/"
+		},
+		// VSCode settings, keybindings and MCP server list. These are the real
+		// VSCode config - its plist holds only window geometry and Sparkle state,
+		// so it is deliberately not captured. mcp.json references its API key
+		// through an ${input:} prompt, so no secret is committed here.
+		{
+			"action": "copy",
+			"names": [
+				"settings.json",
+				"keybindings.json",
+				"mcp.json"
+			],
+			"source": "./src/Library/Application Support/Code/User/",
+			"target": "{{ .User.home }}/Library/Application Support/Code/User/"
+		},
+		// Alfred's real preferences live in the .alfredpreferences bundle, not the
+		// app's plist. Only preferences/ and workflows/ are tracked: Databases/
+		// (157M search index), Assistant/ and Automation/ are machine-local caches
+		// that rebuild themselves. Alfred owns Cmd+Space here - the Spotlight
+		// binding it replaces is disabled in the symbolichotkeys plist.
+		//
+		// The preferences/local/<hash>/ directory is keyed by this machine's
+		// localhash from prefs.json, so on a different machine Alfred ignores it
+		// and writes its own; the non-local prefs still apply.
+		{
+			"action": "copy",
+			"elevated": false,
+			"name": "Alfred.alfredpreferences",
+			"source": "./src/Library/Application Support/Alfred/",
+			"target": "{{ .User.home }}/Library/Application Support/Alfred/"
+		},
 		// The blanket .config copy above delivers the shim without its exec bit
 		// guaranteed - enforce it.
 		{

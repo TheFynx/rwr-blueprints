@@ -634,6 +634,38 @@
 			"tool": "macos_defaults",
 			"value": false
 		},
+		// Function keys act as F1-F12 only with fn held (fnState 0), and the fn
+		// key itself does nothing special (AppleFnUsageType 0) - kanata owns the
+		// layer switching, so macOS must not intercept fn first.
+		{
+			"action": "set",
+			"domain": "NSGlobalDomain",
+			"key": "com.apple.keyboard.fnState",
+			"kind": "bool",
+			"name": "Use F1-F12 as media keys unless fn is held",
+			"tool": "macos_defaults",
+			"value": false
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.HIToolbox",
+			"key": "AppleFnUsageType",
+			"kind": "int",
+			"name": "fn key does nothing (no emoji picker, no dictation)",
+			"tool": "macos_defaults",
+			"value": 0
+		},
+		// Press-and-hold shows the accent menu; disabling it restores key repeat,
+		// which matters for held-key navigation.
+		{
+			"action": "set",
+			"domain": "NSGlobalDomain",
+			"key": "ApplePressAndHoldEnabled",
+			"kind": "bool",
+			"name": "Disable press-and-hold accent menu, enable key repeat",
+			"tool": "macos_defaults",
+			"value": false
+		},
 		{
 			"action": "set",
 			"domain": "NSGlobalDomain",
