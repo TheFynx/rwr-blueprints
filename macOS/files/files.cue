@@ -8,7 +8,17 @@
 			"owner":    "{{ .User.username }}"
 			"source":   "./src/"
 			"target":   "{{ .User.home }}/"
-		}
+		},
+		// Alfred stores its preferences in a directory bundle. Treating this as
+		// a file makes the files processor try to open the target directory as a
+		// regular file.
+		{
+			"action":   "copy"
+			"elevated": false
+			"name":     "Alfred.alfredpreferences"
+			"source":   "./src/Library/Application Support/Alfred/"
+			"target":   "{{ .User.home }}/Library/Application Support/Alfred/"
+		},
 	]
 	"files": [
 		{
@@ -37,12 +47,12 @@
 		// plist dropped straight into ~/Library/Preferences is ignored: cfprefsd
 		// caches the old contents in memory and overwrites the file on exit.
 		{
-			"action": "copy",
+			"action": "copy"
 			"names": [
 				"com.knollsoft.Rectangle.plist",
-				"com.apple.symbolichotkeys.plist"
-			],
-			"source": "./src/Library/Preferences/",
+				"com.apple.symbolichotkeys.plist",
+			]
+			"source": "./src/Library/Preferences/"
 			"target": "{{ .User.home }}/.local/share/rwr/preferences/"
 		},
 		// VSCode settings, keybindings and MCP server list. These are the real
@@ -50,13 +60,13 @@
 		// so it is deliberately not captured. mcp.json references its API key
 		// through an ${input:} prompt, so no secret is committed here.
 		{
-			"action": "copy",
+			"action": "copy"
 			"names": [
 				"settings.json",
 				"keybindings.json",
-				"mcp.json"
-			],
-			"source": "./src/Library/Application Support/Code/User/",
+				"mcp.json",
+			]
+			"source": "./src/Library/Application Support/Code/User/"
 			"target": "{{ .User.home }}/Library/Application Support/Code/User/"
 		},
 		// Alfred's real preferences live in the .alfredpreferences bundle, not the
@@ -68,13 +78,6 @@
 		// The preferences/local/<hash>/ directory is keyed by this machine's
 		// localhash from prefs.json, so on a different machine Alfred ignores it
 		// and writes its own; the non-local prefs still apply.
-		{
-			"action": "copy",
-			"elevated": false,
-			"name": "Alfred.alfredpreferences",
-			"source": "./src/Library/Application Support/Alfred/",
-			"target": "{{ .User.home }}/Library/Application Support/Alfred/"
-		},
 		// The blanket .config copy above delivers the shim without its exec bit
 		// guaranteed - enforce it.
 		{

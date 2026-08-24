@@ -54,11 +54,17 @@
 					echo "FAIL: LaunchAgent plist is missing: $plist" >&2
 					exit 1
 				fi
+				if nc -z 127.0.0.1 5829 2>/dev/null; then
+					echo "OK: kanata is already healthy (TCP 5829 up); leaving it running"
+					exit 0
+				fi
 				if ! launchctl print "$domain/$label" >/dev/null 2>&1; then
 					if ! launchctl bootstrap "$domain" "$plist"; then
 						echo "FAIL: could not load LaunchAgent $plist" >&2
 						exit 1
 					fi
+				else
+					echo "kanata LaunchAgent is loaded but unhealthy; restarting it"
 				fi
 				if ! launchctl kickstart -k "$domain/$label"; then
 					echo "FAIL: LaunchAgent is loaded but could not be started: $domain/$label" >&2

@@ -10,14 +10,22 @@
 ;; ============================================================
 
 (defcfg
-  process-unmapped-keys yes
+  ;; Only intercept keys listed in defsrc; pass function/media keys through.
+  process-unmapped-keys no
   log-layer-changes no
 )
 
 (defsrc
   caps  lctl  lmet  lalt  home  end
+  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   fn
 )
 
 (deflayer base
   esc   lmet  lalt  lctl  (multi lmet left)  (multi lmet right)
+  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   (layer-while-held media)
+)
+
+(deflayer media
+  _     _     _     _     _                  _
+  brdown brup  mctl  sls   dtn   dnd   prev  pp    next  mute  voldwn volu  _
 )
