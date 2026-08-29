@@ -16,6 +16,7 @@
 				"freetype",
 				"fontconfig",
 				"powerline-go",
+				"ollama",
 				"go",
 				"libressl"
 			],
