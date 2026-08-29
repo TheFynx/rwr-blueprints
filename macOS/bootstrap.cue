@@ -17,11 +17,6 @@
 		},
 		{
 			"action": "create",
-			"name": "{{ .User.home }}/git/phc",
-			"owner": "{{ .User.username }}"
-		},
-		{
-			"action": "create",
 			"name": "{{ .User.home }}/.ssh",
 			"owner": "{{ .User.username }}"
 		}
