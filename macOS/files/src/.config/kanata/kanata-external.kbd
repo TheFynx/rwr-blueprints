@@ -1,0 +1,31 @@
+;; ============================================================
+;; kanata config — external PC-layout keyboard on mac
+;; PC bottom row: Ctrl | Win | Alt | Space
+;; Mac expects:   Ctrl | Opt | Cmd | Space
+;; Strategy (same Linux feel as internal-keyboard config):
+;;   - Pinky Ctrl -> Cmd  -> native mac shortcuts (copy/tab/etc)
+;;   - Win        -> Opt  (sits where Mac Option lives)
+;;   - Thumb Alt  -> Ctrl -> terminal SIGINT next to space
+;; Plus: caps -> esc, Home/End -> line start/end
+;; ============================================================
+
+(defcfg
+  ;; Only intercept keys listed in defsrc; pass function/media keys through.
+  process-unmapped-keys no
+  log-layer-changes no
+)
+
+(defsrc
+  caps  lctl  lmet  lalt  home  end
+  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   fn
+)
+
+(deflayer base
+  esc   lmet  lalt  lctl  (multi lmet left)  (multi lmet right)
+  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   (layer-while-held media)
+)
+
+(deflayer media
+  _     _     _     _     _                  _
+  brdown brup  mctl  sls   dtn   dnd   prev  pp    next  mute  voldwn volu  _
+)

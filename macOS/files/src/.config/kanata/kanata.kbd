@@ -1,0 +1,36 @@
+;; ============================================================
+;; kanata config — Linux feel on mac
+;; Strategy: physical swap left Ctrl <-> left Cmd (lmet)
+;;   - Pinky press (was Ctrl) -> sends Cmd -> mac shortcuts native
+;;     (Cmd+C copy, Cmd+T newtab, Cmd+W closetab, etc)
+;;   - Thumb press (was Cmd) -> sends Ctrl -> terminal SIGINT
+;;     (real Ctrl+C in Ghostty / VSCode terminal)
+;; Plus: caps -> esc, Home/End -> line start/end
+;; ============================================================
+
+(defcfg
+  ;; Let macOS receive untouched keys directly. This preserves the Apple
+  ;; internal keyboard's Fn/top-row media events, which a generic virtual HID
+  ;; keyboard cannot faithfully re-emit.
+  process-unmapped-keys no
+  log-layer-changes no
+  ;; macos-dev-names-include ()  ;; uncomment to filter specific keyboards
+)
+
+(defsrc
+  caps  lctl  lmet  home  end
+  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   fn
+)
+
+(deflayer base
+  esc   lmet  lctl  (multi lmet left)  (multi lmet right)
+  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12   (layer-while-held media)
+)
+
+;; Kanata's macOS keyboard grab receives the Apple top row as F1-F12 and
+;; suppresses the hardware Fn/media translation. Recreate it explicitly:
+;; bare keys remain literal function keys; holding Fn exposes media controls.
+(deflayer media
+  _     _     _     _                  _
+  brdown brup  mctl  sls   dtn   dnd   prev  pp    next  mute  voldwn volu  _
+)

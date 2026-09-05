@@ -1,0 +1,36 @@
+{
+  "workbench.colorCustomizations": null,
+  "rubyLsp.customRubyCommand": "mise x -- ruby-lsp",
+  "workbench.startupEditor": "none",
+  "redhat.telemetry.enabled": false,
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "zig.zls.enabled": "on",
+  "claudeCode.preferredLocation": "panel",
+  "workbench.sideBar.location": "right",
+  "roo-cline.debug": false,
+  "roo-cline.allowedCommands": [
+    "git log",
+    "git diff",
+    "git show",
+    "git *",
+    "cd *",
+    "*",
+    "npm test",
+    "npm install",
+    "tsc"
+  ],
+  "roo-cline.deniedCommands": [
+    "rm",
+    "rm environments/platform/operations/artifact_registry_iam.tf",
+    "mv",
+    "mkdir",
+    "mv LOGGING_ALERTS_TRANSITION_PLAN.md .local/",
+    "mkdir -p .local"
+  ],
+  "security.workspace.trust.untrustedFiles": "open",
+"chat.agent.enabled": false,
+"terminal.integrated.mouseWheelScrollSensitivity": 3,
+"terminal.integrated.gpuAcceleration": "off"
+}

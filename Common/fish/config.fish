@@ -11,6 +11,14 @@ for brew_prefix in /opt/homebrew /usr/local
 end
 
 {{ end -}}
+# ---- cargo ----
+# Cargo-installed binaries (eza, bat, topgrade, ...) land in ~/.cargo/bin on
+# every OS, which is on no default PATH. Outside the interactive guard for the
+# same reason as brew: scripts and `fish -c` need them too.
+if test -d $HOME/.cargo/bin
+    fish_add_path --global $HOME/.cargo/bin
+end
+
 if status is-interactive
 
     # ---- environment ----

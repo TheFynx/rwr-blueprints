@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.ghostty</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>89C5454E-7725-415C-BF29-A62AD49CD3EC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>13E638EA-127D-48F5-86AC-1FD56FE1E415</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Me</string>
+	<key>description</key>
+	<string>Open Ghostty!</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Ghostty</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>-- Alfred Ghostty Super+T Workflow
+property open_new : "n"  -- Force new window
+property reuse_tab : false
+property timeout_seconds : 3
+property shell_load_delay : 1.0
+property switch_delay : 0.35
+
+on isRunning()
+	application "Ghostty" is running
+end isRunning
+
+on summon()
+	tell application "Ghostty" to activate
+end summon
+
+on hasWindows()
+	if not isRunning() then return false
+	tell application "System Events"
+		return exists window 1 of process "Ghostty"
+	end tell
+end hasWindows
+
+on waitForWindow(timeout_s)
+	set end_time to (current date) + timeout_s
+	repeat until hasWindows() or ((current date) &gt; end_time)
+		delay 0.05
+	end repeat
+	return hasWindows()
+end waitForWindow
+
+on handleWindow(just_activated)
+	if just_activated then
+		return
+	end if
+	set has_windows to hasWindows()
+	set needs_window to not has_windows
+	tell application "System Events"
+		if needs_window then
+			keystroke "n" using command down -- New window
+			return
+		end if
+		keystroke "n" using command down -- New window
+	end tell
+end handleWindow
+
+on run argv
+	set just_activated to not isRunning()
+	summon()
+	if just_activated then
+		if not waitForWindow(timeout_seconds) then
+			display dialog "Failed to create initial window"
+			return
+		end if
+	end if
+	handleWindow(just_activated)
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>13E638EA-127D-48F5-86AC-1FD56FE1E415</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>17</integer>
+				<key>hotmod</key>
+				<integer>524288</integer>
+				<key>hotstring</key>
+				<string>T</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>89C5454E-7725-415C-BF29-A62AD49CD3EC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>13E638EA-127D-48F5-86AC-1FD56FE1E415</key>
+		<dict>
+			<key>xpos</key>
+			<real>220</real>
+			<key>ypos</key>
+			<real>120</real>
+		</dict>
+		<key>89C5454E-7725-415C-BF29-A62AD49CD3EC</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>120</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>

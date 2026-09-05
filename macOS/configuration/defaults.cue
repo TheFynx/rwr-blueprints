@@ -18,7 +18,7 @@
 			"kind": "int",
 			"name": "Show all processes in Activity Monitor",
 			"tool": "macos_defaults",
-			"value": 0
+			"value": 100
 		},
 		{
 			"action": "set",
@@ -190,6 +190,159 @@
 			"name": "Don't show recent applications in Dock",
 			"tool": "macos_defaults",
 			"value": false
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.dock",
+			"key": "orientation",
+			"kind": "string",
+			"name": "Put the Dock on the right edge",
+			"tool": "macos_defaults",
+			"value": "right"
+		},
+		// Bottom-right hot corner. 1 is the "disabled" slot macOS writes when a
+		// corner is explicitly turned off, which is not the same as the key being
+		// unset - Apple's default for this corner is Quick Note, so setting it is
+		// what keeps a stray cursor from spawning notes.
+		{
+			"action": "set",
+			"domain": "com.apple.dock",
+			"key": "wvous-br-corner",
+			"kind": "int",
+			"name": "Disable the bottom-right hot corner (no Quick Note)",
+			"tool": "macos_defaults",
+			"value": 1
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.dock",
+			"key": "wvous-br-modifier",
+			"kind": "int",
+			"name": "Clear the bottom-right hot corner modifier",
+			"tool": "macos_defaults",
+			"value": 0
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.dock",
+			"key": "no-bouncing",
+			"kind": "bool",
+			"name": "Allow Dock icons to bounce for attention",
+			"tool": "macos_defaults",
+			"value": false
+		},
+		// Desktop stays empty: no widgets, no icons, and no click-to-reveal. These
+		// live in com.apple.WindowManager and need a WindowManager restart, which
+		// the restart_window_manager script handles.
+		{
+			"action": "set",
+			"domain": "com.apple.WindowManager",
+			"key": "StandardHideWidgets",
+			"kind": "bool",
+			"name": "Hide desktop widgets",
+			"tool": "macos_defaults",
+			"value": true
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.WindowManager",
+			"key": "StandardHideDesktopIcons",
+			"kind": "bool",
+			"name": "Hide all desktop icons",
+			"tool": "macos_defaults",
+			"value": true
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.WindowManager",
+			"key": "EnableStandardClickToShowDesktop",
+			"kind": "bool",
+			"name": "Don't reveal the desktop when clicking the wallpaper",
+			"tool": "macos_defaults",
+			"value": false
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.WindowManager",
+			"key": "GloballyEnabled",
+			"kind": "bool",
+			"name": "Disable Stage Manager",
+			"tool": "macos_defaults",
+			"value": false
+		},
+		{
+			"action": "set",
+			"domain": "NSGlobalDomain",
+			"key": "AppleInterfaceStyle",
+			"kind": "string",
+			"name": "Use Dark mode",
+			"tool": "macos_defaults",
+			"value": "Dark"
+		},
+		{
+			"action": "set",
+			"domain": "NSGlobalDomain",
+			"key": "AppleMiniaturizeOnDoubleClick",
+			"kind": "bool",
+			"name": "Don't minimize windows on title bar double-click",
+			"tool": "macos_defaults",
+			"value": false
+		},
+		{
+			"action": "set",
+			"domain": "NSGlobalDomain",
+			"key": "com.apple.mouse.scaling",
+			"kind": "float",
+			"name": "Set mouse tracking speed",
+			"tool": "macos_defaults",
+			"value": 3.0
+		},
+		// Screenshots land in Documents rather than piling up on a Desktop that is
+		// hidden anyway.
+		{
+			"action": "set",
+			"domain": "com.apple.screencapture",
+			"key": "location",
+			"kind": "string",
+			"name": "Save screenshots to ~/Documents",
+			"tool": "macos_defaults",
+			"value": "~/Documents/"
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.screencapture",
+			"key": "target",
+			"kind": "string",
+			"name": "Save screenshots as files, not to the clipboard",
+			"tool": "macos_defaults",
+			"value": "file"
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.menuextra.clock",
+			"key": "ShowDayOfWeek",
+			"kind": "bool",
+			"name": "Show the day of week in the menu bar clock",
+			"tool": "macos_defaults",
+			"value": true
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.menuextra.clock",
+			"key": "ShowDate",
+			"kind": "int",
+			"name": "Don't show the date in the menu bar clock",
+			"tool": "macos_defaults",
+			"value": 0
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.menuextra.clock",
+			"key": "ShowAMPM",
+			"kind": "bool",
+			"name": "Show AM/PM in the menu bar clock",
+			"tool": "macos_defaults",
+			"value": true
 		},
 		{
 			"action": "set",
@@ -461,12 +614,55 @@
 			"tool": "macos_defaults",
 			"value": true
 		},
+		// Scroll direction is one of the few defaults nothing can apply live: the
+		// window server reads it at login and there is no process to restart, so
+		// a fresh machine keeps scrolling Apple's way until the next logout no
+		// matter how many times rwr runs. Check it with
+		// `defaults read -g com.apple.swipescrolldirection` - 0 is the value this
+		// sets, and it means "natural" scrolling is off. If the value reads 0 and
+		// scrolling still feels inverted, the setting is applied and pending a
+		// logout; it is not drift.
+		//
+		// This one key covers trackpad and mouse both. macOS shows a separate
+		// checkbox per device but writes them to the same global key.
 		{
 			"action": "set",
 			"domain": "NSGlobalDomain",
 			"key": "com.apple.swipescrolldirection",
 			"kind": "bool",
 			"name": "Disable \"natural\" scrolling",
+			"tool": "macos_defaults",
+			"value": false
+		},
+		// Function keys act as F1-F12 only with fn held (fnState 0), and the fn
+		// key itself does nothing special (AppleFnUsageType 0) - kanata owns the
+		// layer switching, so macOS must not intercept fn first.
+		{
+			"action": "set",
+			"domain": "NSGlobalDomain",
+			"key": "com.apple.keyboard.fnState",
+			"kind": "bool",
+			"name": "Use F1-F12 as media keys unless fn is held",
+			"tool": "macos_defaults",
+			"value": false
+		},
+		{
+			"action": "set",
+			"domain": "com.apple.HIToolbox",
+			"key": "AppleFnUsageType",
+			"kind": "int",
+			"name": "fn key does nothing (no emoji picker, no dictation)",
+			"tool": "macos_defaults",
+			"value": 0
+		},
+		// Press-and-hold shows the accent menu; disabling it restores key repeat,
+		// which matters for held-key navigation.
+		{
+			"action": "set",
+			"domain": "NSGlobalDomain",
+			"key": "ApplePressAndHoldEnabled",
+			"kind": "bool",
+			"name": "Disable press-and-hold accent menu, enable key repeat",
 			"tool": "macos_defaults",
 			"value": false
 		},

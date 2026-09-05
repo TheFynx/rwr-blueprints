@@ -11,6 +11,7 @@ alias gsc='git commit -v -S -a -m'
 alias gsa='git commit -v -S -a --amend -m'
 
 # Standard Commitizen commit - Signed
+#alias gcz="git cz commit -s"
 alias gcz="git cz commit -- -s"
 
 # Signed Commitizen commit (all changes, staged and unstaged)
@@ -71,6 +72,8 @@ if [ -n "$(command -v eza)" ]; then
 
   # Tree view three levels deep
   alias t3="ls -Ta -L 3"
+
+  alias t4="ls -Ta -L 4"
 else
   # Detect which `ls` flavor is in use
   if ls --color >/dev/null 2>&1; then # GNU `ls`
