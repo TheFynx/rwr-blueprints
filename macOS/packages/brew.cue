@@ -14,6 +14,16 @@
 				"p7zip",
 				"parallel",
 				"powerline-go",
+				"ollama",
+				"go",
+				"libressl"
+			],
+			"package_manager": "brew"
+		},
+		{
+			"action": "install",
+			"names": [
+				"utm"
 				"rename",
 				"rsync",
 				"shfmt",
