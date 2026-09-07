@@ -1,4 +1,7 @@
-// Arch-specific AUR packages not in Archcraft; base AUR set imported from Common.
+// Arch workstation AUR packages; base AUR set imported from Common.
+// Keybase removed on purpose: GPG keys move to a non-Keybase flow (see README).
+// protonup-qt, tealdeer and amdgpu_top come from pacman repos / gpu.cue now -
+// the *-bin AUR builds failed on every run.
 {
 	"packages": [
 		{
@@ -10,17 +13,12 @@
 				"nvm",
 				"gosec",
 				"protontricks",
-				"protonup-qt-bin",
-				"opencl-amd",
 				"r8126-dkms",
 				"nsis",
 				"uno-calculator-bin",
-				"amdgpu_top",
 				"bambustudio-appimage",
 				"openaudible-bin",
 				"pince",
-				"handbrake-full",
-				"keybase-bin",
 				"claude-code",
 				"claude-desktop-bin",
 				"opencode",

@@ -6,9 +6,11 @@
 			"url": "https://github.com/thefynx/rwr-blueprints.git"
 		},
 		"location": ".",
-		// Listed files run first, in this order; the rest follow in walk
-		// order. Repo packages install via pacman before any AUR builds.
-		"order": ["packages/pacman.cue", "packages/aur.cue"]
+		// Exhaustive list of processors to run, in this order: rwr runs only
+		// the processors named here and skips the rest silently. Package files
+		// carry numeric prefixes (1-pacman.cue, 2-aur.cue) so walk order keeps
+		// repo packages ahead of AUR builds.
+		"order": ["packages", "users", "scripts", "files", "services", "git"]
 	},
 	"packageManagers": [
 		{

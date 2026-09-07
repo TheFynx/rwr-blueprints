@@ -9,12 +9,6 @@
 			"family": "arch"
 		},
 		{
-			"name": "archcraft",
-			"init": "Archcraft/init.cue",
-			"os": "linux",
-			"distro": "archcraft"
-		},
-		{
 			"name": "popos",
 			"init": "PopOS/init.cue",
 			"os": "linux",

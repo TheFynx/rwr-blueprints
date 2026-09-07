@@ -8,19 +8,12 @@
 				"goreleaser-bin",
 				"dasel-bin",
 				"visual-studio-code-bin",
-				"brave-bin",
-				"keybase-bin",
-				"nodenv",
-				"ttf-unifont",
-				"funzzy",
-				"topgrade",
-				"protontricks",
-				"protonup-qt-bin",
-				"r8126-dkms",
-				"nsis",
-				"uno-calculator-bin",
-				"ntfs-3g",
-				"gosec"
+			"brave-bin",
+			"nodenv",
+			"ttf-unifont",
+			"funzzy",
+			"topgrade",
+			"ntfs-3g"
 			],
 			"package_manager": "yay"
 		}

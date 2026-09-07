@@ -5,6 +5,12 @@
 			"name": ".config",
 			"source": "./src/",
 			"target": "{{ .User.home }}/"
+		},
+		{
+			"action": "copy",
+			"name": ".local",
+			"source": "./src/",
+			"target": "{{ .User.home }}/"
 		}
 	],
 	"files": [

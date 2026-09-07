@@ -1,22 +1,25 @@
-// Arch-specific pacman packages not in Archcraft; base + desktop come in
-// via Common imports (profiles: desktop gates the workstation extras).
+// Workstation pacman packages; base + desktop + gpu come in via Common
+// imports (profiles: desktop gates the workstation extras, radeon/nvidia pick
+// the GPU vendor, all selected via --profile).
 {
 	"packages": [
-		{
-			"action": "remove",
-			"names": [
-				"firefox",
-				"alacritty",
-				"node-lts-jod"
-			],
-			"package_manager": "pacman"
-		},
+		// Stale defaults (PrismLinux ships firefox/alacritty; nodejs fights
+		// bitwarden-cli) are purged by scripts/purge-defaults.sh instead of a
+		// packages "remove" entry: rwr's remove errors on absent targets, so
+		// those entries turned into permanent per-run failures once converged.
 		{
 			"import": "../../Common/packages/arch/base-pacman.cue"
 		},
 		{
 			"import": "../../Common/packages/arch/desktop-laptop.cue",
-			"profiles": ["desktop"]
+			// Declared here, not just inside the imported file: rwr's profile
+			// discovery walks only this tree, so profiles that live solely in
+			// Common/ are invisible to --profile validation.
+			"profiles": ["desktop", "laptop"]
+		},
+		{
+			"import": "../../Common/packages/arch/gpu.cue",
+			"profiles": ["radeon", "nvidia"]
 		},
 		{
 			"action": "install",
@@ -24,7 +27,9 @@
 				"github-cli",
 				"git-delta",
 				"7zip",
-				"tldr",
+				"tealdeer",
+				"protonup-qt",
+				"bitwarden-cli",
 				"gnome-disk-utility",
 				"tailscale",
 				"dagger",
@@ -57,7 +62,10 @@
 				"noto-fonts-cjk",
 				"noto-fonts-extra",
 				"rustup",
-				"nodejs",
+				// LTS, not current: bitwarden-cli depends on nodejs-lts-jod,
+				// which conflicts with nodejs. Provides: nodejs=22 keeps AUR
+				// makedepends happy; per-version dev nodes come from mise.
+				"nodejs-lts-jod",
 				"gnome-keyring",
 				"seahorse",
 				"fwupd",

@@ -126,7 +126,7 @@
 			"variables": {
 				"gitEmail":   "levi@fynx.me"
 				"gitName":    "Levi Smith"
-				"signingKey": "8BF6E0074D7B228F9AF2BC76235C8EE4DF4F8767"
+				"signingKey": "4B01A781536D3A8A05D65E63E5A290E73B0C6040"
 			}
 		},
 		{
