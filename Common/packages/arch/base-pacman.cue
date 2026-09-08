@@ -28,7 +28,6 @@
 				"difftastic",
 				"xh",
 				"procs",
-				"mise",
 				"jwt-cli",
 				"mcfly",
 				"bandwhich",

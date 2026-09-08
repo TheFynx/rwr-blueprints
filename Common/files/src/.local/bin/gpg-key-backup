@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+# Back up every GnuPG secret key into the Bitwarden vault as one encrypted
+# attachment. Replaces the Keybase dependency before it goes away.
+#
+# Vault layout (created on first run):
+#   item  "GPG Key Backup"       secure note; holds the dated .gpg attachments
+#   item  "GPG Backup Passphrase" secure note; notes = passphrase for the backup
+#
+# The export is symmetrically encrypted with that passphrase before upload, so
+# the attachment is not plaintext even inside the vault. Same-vault caveat:
+# anyone with your unlocked vault has both halves - keep the offline copy too.
+#
+# Usage:  gpg-key-backup
+set -euo pipefail
+
+ITEM_NAME="GPG Key Backup"
+PASS_ITEM="GPG Backup Passphrase"
+
+WORK="$(mktemp -d)"
+trap 'shred -u "$WORK"/* 2>/dev/null; rm -rf "$WORK"' EXIT
+
+need() { command -v "$1" >/dev/null 2>&1 || { echo "missing dependency: $1" >&2; exit 1; }; }
+need bw
+need gpg
+need jq
+need tar
+need openssl
+
+# ---- vault session ---------------------------------------------------------
+status="$(bw status --json 2>/dev/null | jq -r .status)"
+case "$status" in
+unauthenticated)
+	echo "bitwarden: not logged in. Run 'bw login' once, then rerun." >&2
+	exit 1
+	;;
+locked)
+	BW_SESSION="$(bw unlock --raw)" || exit 1
+	export BW_SESSION
+	echo "bitwarden: vault unlocked for this run"
+	;;
+esac
+
+# ---- vault items -----------------------------------------------------------
+if ! bw get item "$ITEM_NAME" >/dev/null 2>&1; then
+	echo "bitwarden: creating item '$ITEM_NAME'"
+	bw create "$(jq -n --arg name "$ITEM_NAME" \
+		--arg notes "GnuPG key backups. Attachments are AES-256 encrypted tarballs; see '$PASS_ITEM' for the passphrase." \
+		'{type: 2, secureNote: {type: 0}, name: $name, notes: $notes}')" >/dev/null
+fi
+
+PASS="$(bw get notes "$PASS_ITEM" 2>/dev/null || true)"
+if [ -z "${PASS:-}" ]; then
+	if bw get item "$PASS_ITEM" >/dev/null 2>&1; then
+		echo "bitwarden: item '$PASS_ITEM' exists but its notes are empty; fill in a passphrase and rerun" >&2
+		exit 1
+	fi
+	PASS="$(openssl rand -base64 32)"
+	bw create "$(jq -n --arg name "$PASS_ITEM" --arg notes "$PASS" \
+		'{type: 2, secureNote: {type: 0}, name: $name, notes: $notes}')" >/dev/null
+	echo "bitwarden: generated and stored a fresh backup passphrase in '$PASS_ITEM'"
+fi
+
+# ---- export + encrypt ------------------------------------------------------
+STAMP="$(date +%Y%m%d-%H%M%S)"
+ARCHIVE="gpg-backup-${STAMP}.tar.gz.gpg"
+
+mkdir -p "$WORK/revocs"
+gpg --batch --armor --export-secret-keys --export-options export-backup -o "$WORK/private.asc"
+gpg --batch --armor --export -o "$WORK/public.asc"
+gpg --batch --export-ownertrust -o "$WORK/ownertrust.txt"
+cp -a "${GNUPGHOME:-$HOME/.gnupg}"/openpgp-revocs.d/*.rev "$WORK/revocs/" 2>/dev/null || true
+
+if [ ! -s "$WORK/private.asc" ]; then
+	echo "gpg: no secret keys to back up" >&2
+	exit 1
+fi
+
+tar -C "$WORK" -czf "$WORK/payload.tar.gz" private.asc public.asc ownertrust.txt revocs
+gpg --batch --yes --pinentry-mode loopback --passphrase "$PASS" \
+	--symmetric --cipher-algo AES256 -o "$WORK/$ARCHIVE" "$WORK/payload.tar.gz"
+
+# ---- upload + verify -------------------------------------------------------
+ITEM_ID="$(bw get item "$ITEM_NAME" | jq -r .id)"
+bw create attachment --file "$WORK/$ARCHIVE" --itemid "$ITEM_ID" >/dev/null
+
+bw get attachment "$ARCHIVE" --itemid "$ITEM_ID" --output "$WORK/verify.gpg" >/dev/null
+if [ "$(sha256sum < "$WORK/$ARCHIVE" | cut -d" " -f1)" != "$(sha256sum < "$WORK/verify.gpg" | cut -d" " -f1)" ]; then
+	echo "verify FAILED: uploaded attachment does not match local archive" >&2
+	exit 1
+fi
+
+echo "backed up:"
+gpg --list-secret-keys --keyid-format long | grep -A1 "^sec" | sed "s/^/  /"
+echo "vault: '$ITEM_NAME' attachment $ARCHIVE (round-trip verified)"

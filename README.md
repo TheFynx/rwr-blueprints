@@ -9,13 +9,19 @@ machine shape; `rwr` picks the right one from the detected OS/distro.
 
 ```bash
 rwr-blueprints/
-├── manifest.cue       # configuration per machine, matched on OS/distro
-├── Common/            # shared across machines: git checkouts, users, Arch package bases
-├── Arch/              # Arch-family workstation (PrismLinux Desktop; also matches pure Arch)
-├── macOS/             # macOS
-├── OpenMandriva/      # OpenMandriva
-├── PopOS/             # Pop!_OS
-└── Windows/           # Windows
+├── manifest.cue           # one configuration per distro/OS, matched on detection
+├── Common/                # shared everywhere: dotfiles, fish, ssh, git, users,
+│   │                      # per-family package bases (packages/arch, packages/debian),
+│   │                      # shared files (files/dot-config, dot-local) + scripts
+├── Linux/
+│   ├── Arch/              # general Arch family (PrismLinux Desktop matches here)
+│   ├── Omarchy/           # opinionated distro: thin overlay, imports Arch bases
+│   ├── Debian/            # apt: Common/packages/debian + vendor repos + cargo/go/npm/pipx
+│   ├── Ubuntu/            # same tree shape as Debian, distro: ubuntu
+│   ├── PopOS/             # Pop!_OS
+│   └── OpenMandriva/      # OpenMandriva
+├── macOS/                 # macOS
+└── Windows/               # Windows
 ```
 
 Shared things live once in `Common/` and are pulled in per machine with
@@ -53,7 +59,6 @@ rwr all --profile desktop,radeon,data-drives --init-file <repo>
 | `nvidia`     | NVIDIA GPU stack: nvidia-dkms, nvidia-utils                |
 | `data-drives`| /drives/{home,games,storage} fstab mounts + home symlinks  |
 | `cosmic`     | COSMIC desktop config deployment (Cinnamon machine: skip)  |
-| `omarchy`    | Omarchy/Hyprland keybind overlay + sshd/ufw unlock         |
 | `laptop`     | power management (tlp, powertop)                           |
 
 `data-drives` hardcodes this machine's drive UUIDs — never enable it on a
@@ -66,7 +71,7 @@ different machine. It mounts the three data disks and symlinks
 [Omarchy](https://github.com/omacom-io/omarchy) is DHH's Arch + Hyprland distro.
 This repo deploys **one overlay file** onto it — `~/.config/hypr/bindings.lua`
 — and nothing else, so Omarchy keeps owning its configs and stays upgrade-safe.
-Install Omarchy first, then apply this blueprint with the `omarchy` profile.
+Install Omarchy first - the `omarchy` configuration then matches it automatically by distro ID (or force with `--config-name omarchy`).
 
 Personal keybinds (identical across the COSMIC/Hyprland configs here):
 
@@ -88,17 +93,10 @@ Notes learned on real hardware/VM:
 
 - **VirtualBox**: Omarchy needs the graphics controller set to **VBoxVGA**,
   **3D acceleration off**, and **128 MB VRAM**, or Hyprland black-screens after
-  login (VMSVGA + 3D is the broken default). See omarchy discussion #176.
-- **Firewall**: Omarchy ships ufw with default-deny incoming — even SSH. The
-  `omarchy` profile opens 22 and enables sshd headlessly (equivalent of its
-  Setup → Security → SSHD toggle).
+  login (VMSVGA + 3D is the broken default).
 - **Tray**: Omarchy's bar puts tray icons in a hover-to-reveal drawer by
-  default and there is no "always expanded" setting. Per-item pinning is the
-  supported fix: right-click the tray chevron → Manage → pin; it persists
-  `pinned`/`hidden` arrays into the `omarchy.tray` entry of
-  `~/.config/omarchy/shell.json`. Note that owning a `shell.json` freezes the
-  bar layout (no merge with future Omarchy defaults; `omarchy bar defaults`
-  restores).
+  default. Per-item pinning is the supported fix: right-click the tray
+  chevron → Manage → pin.
 
 ### nvim / AstroNvim
 

@@ -20,7 +20,10 @@
 				"yad",
 				"xorg-xwininfo",
 				"webkit2gtk-4.1",
-				"handbrake"
+				"handbrake",
+				"mise",
+				"tealdeer",
+				"virtualbox-guest-utils"
 			],
 			"package_manager": "pacman"
 		},

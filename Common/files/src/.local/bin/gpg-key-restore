@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Restore GnuPG keys from the Bitwarden vault backup made by gpg-key-backup.
+# Downloads the newest (or named) attachment, decrypts it with the passphrase
+# stored in the 'GPG Backup Passphrase' item, and imports keys + ownertrust.
+#
+# Usage:  gpg-key-restore [attachment-name]
+set -euo pipefail
+
+ITEM_NAME="GPG Key Backup"
+PASS_ITEM="GPG Backup Passphrase"
+
+WORK="$(mktemp -d)"
+trap 'shred -u "$WORK"/* 2>/dev/null; rm -rf "$WORK"' EXIT
+
+need() { command -v "$1" >/dev/null 2>&1 || { echo "missing dependency: $1" >&2; exit 1; }; }
+need bw
+need gpg
+need jq
+need tar
+
+status="$(bw status --json 2>/dev/null | jq -r .status)"
+case "$status" in
+unauthenticated)
+	echo "bitwarden: not logged in. Run 'bw login' first." >&2
+	exit 1
+	;;
+locked)
+	BW_SESSION="$(bw unlock --raw)" || exit 1
+	export BW_SESSION
+	echo "bitwarden: vault unlocked for this run"
+	;;
+esac
+
+PASS="$(bw get notes "$PASS_ITEM" 2>/dev/null || true)"
+[ -n "$PASS" ] || { echo "bitwarden: no passphrase found in '$PASS_ITEM'" >&2; exit 1; }
+
+ITEM_ID="$(bw get item "$ITEM_NAME" | jq -r .id)"
+[ "$ITEM_ID" != "null" ] || { echo "bitwarden: no '$ITEM_NAME' item in this vault" >&2; exit 1; }
+
+if [ $# -ge 1 ]; then
+	ARCHIVE="$1"
+else
+	ARCHIVE="$(bw get item "$ITEM_NAME" | jq -r '.attachments[]?.fileName' | sort | tail -1)"
+fi
+[ -n "$ARCHIVE" ] || { echo "bitwarden: '$ITEM_NAME' has no attachments" >&2; exit 1; }
+echo "restoring from: $ARCHIVE"
+
+bw get attachment "$ARCHIVE" --itemid "$ITEM_ID" --output "$WORK/payload.gpg" >/dev/null
+mkdir -p "$WORK/payload"
+gpg --batch --quiet --pinentry-mode loopback --passphrase "$PASS" \
+	-d "$WORK/payload.gpg" | tar -xzf - -C "$WORK/payload"
+
+[ -s "$WORK/payload/private.asc" ] || { echo "backup archive has no secret keys; refusing" >&2; exit 1; }
+
+gpg --import "$WORK/payload/private.asc"
+gpg --batch --import-ownertrust "$WORK/payload/ownertrust.txt" 2>/dev/null || true
+
+echo
+echo "restored keys:"
+gpg --list-secret-keys --keyid-format long
+echo
+echo "if git does not sign yet: git config --global user.signingkey <fingerprint>"
