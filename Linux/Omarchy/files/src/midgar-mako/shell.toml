@@ -1,0 +1,129 @@
+# Midgar Mako: steel panels, silver type, Mako focus and linked materia.
+
+[bar]
+background = "#080f16"
+background-alpha = 1.0
+text = "#d9e5e7"
+active = "#e5cf8f"
+scale-with-font = true
+size-horizontal = 30
+size-vertical = 28
+
+[hyprland]
+active-border = "rgba(63e6beee) rgba(79d8deee) rgba(bc9be7cc) 45deg"
+active-border-foreground = "rgba(63e6becc) rgba(79d8decc) 45deg"
+
+[controls]
+normal-color = "#d9e5e7"
+normal-fill-alpha = 0.04
+normal-border = "#82979e"
+normal-border-width = 1
+normal-border-alpha = 0.3
+hover-cursor-color = "#79d8de"
+hover-cursor-fill-alpha = 0.08
+hover-cursor-border = "#79d8de"
+hover-cursor-border-width = 1
+hover-cursor-border-alpha = 0.7
+focus-color = "#63e6be"
+focus-fill-alpha = 0.08
+focus-border = "#63e6be"
+focus-border-width = 1
+focus-border-alpha = 1.0
+selected-color = "#63e6be"
+selected-fill-alpha = 0.16
+selected-border = "#63e6be"
+selected-border-width = 1
+selected-border-alpha = 1.0
+pressed-fill-alpha = 0.22
+selection-fill-alpha = 0.35
+
+[spacing]
+scale = 1.0
+scale-with-font = true
+
+[font]
+base-size = 12
+
+[popups]
+background = "#101d28"
+background-alpha = 1.0
+text = "#d9e5e7"
+border = "hyprland.active-border"
+border-alpha = 1.0
+
+[tooltip]
+background = "#101d28"
+background-alpha = 0.97
+text = "#d9e5e7"
+border = "#e5cf8f"
+border-alpha = 0.55
+
+[notifications]
+background = "#101d28"
+background-alpha = 1.0
+text = "#d9e5e7"
+border = "hyprland.active-border"
+border-alpha = 1.0
+countdown = "#63e6be"
+
+[launcher]
+background = "#101d28"
+background-alpha = 0.98
+text = "#d9e5e7"
+border = "hyprland.active-border-foreground"
+border-alpha = 1.0
+scrim = "#0b1116"
+scrim-alpha = 0.6
+selected-background = "#63e6be"
+selected-background-alpha = 0.14
+selected-text = "#f0faf7"
+selected-border = "#63e6be"
+selected-border-alpha = 0.7
+
+[menu]
+background = "#101d28"
+background-alpha = 0.98
+text = "#d9e5e7"
+border = "hyprland.active-border-foreground"
+border-alpha = 1.0
+scrim = "#0b1116"
+scrim-alpha = 0.6
+selected-background = "#63e6be"
+selected-background-alpha = 0.14
+selected-text = "#f0faf7"
+selected-border = "#63e6be"
+selected-border-alpha = 0.7
+
+[polkit]
+background = "#101d28"
+background-alpha = 1.0
+text = "#d9e5e7"
+text-error = "#ef8291"
+border = "hyprland.active-border"
+border-error = "#ef8291"
+border-alpha = 1.0
+scrim = "#0b1116"
+scrim-alpha = 0.5
+accent = "#63e6be"
+
+[lock]
+background = "#101d28"
+background-alpha = 0.94
+text = "#d9e5e7"
+placeholder = "#82979e"
+text-error = "#ef8291"
+border = "#82979e"
+border-active = "hyprland.active-border"
+border-error = "#ef8291"
+border-alpha = 1.0
+selection = "#63e6be"
+selection-alpha = 0.45
+
+[image-picker]
+scrim = "#0b1116"
+scrim-alpha = 0.5
+text = "#d9e5e7"
+selected-border = "#63e6be"
+selected-border-alpha = 1.0
+unselected-border = "#d9e5e7"
+unselected-border-alpha = 0.28

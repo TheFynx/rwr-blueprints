@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+branding="$HOME/.config/omarchy/branding/screensaver.txt"
+state="$HOME/.local/state/omarchy/midgar-mako"
+target="$HOME/.local/state/omarchy/current/theme/screensaver/screensaver.txt"
+mkdir -p "$state"
+if [[ ${1:-} == midgar-mako ]]; then
+  if [[ -f $branding && ! -L $branding ]]; then
+    cp "$branding" "$state/branding-before.txt"
+  fi
+  ln -sfn "$target" "$branding"
+elif [[ -L $branding && $(readlink "$branding") == "$target" ]]; then
+  if [[ -f $state/branding-before.txt ]]; then
+    cp --remove-destination "$state/branding-before.txt" "$branding"
+  fi
+fi

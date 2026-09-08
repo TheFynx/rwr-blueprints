@@ -10,7 +10,7 @@
 			"url": "https://github.com/thefynx/rwr-blueprints.git"
 		},
 		"location": ".",
-		"order": ["scripts", "packages", "users", "files", "services", "git"]
+		"order": ["ssh_keys", "scripts", "packages", "users", "files", "services", "git"]
 	},
 	// Bitwarden-backed GPG key sync: the key passphrase is read from the
 	// vault item's password field (a Login item named gpg-signing) through
@@ -25,5 +25,5 @@
 			"sources": ["bw:gpg-signing/password", "keyring", "prompt"]
 		}
 	],
-	"exposeCredentials": ["gpg_passphrase"]
+	"exposeCredentials": ["gpg_passphrase", "bw_session"]
 }

@@ -1,19 +1,10 @@
-// Omarchy (Hyprland) user overlay. This whole TREE is the omarchy selector
-// (manifest matches distro: omarchy), so no profile gate here. Deploys only
-// the personal keybind file into ~/.config/hypr/ - Omarchy owns the rest of
-// ~/.config and stays upgrade-safe (its bar/shell.json is deliberately NOT
-// managed here; see README for the tray-pinning note).
-//
-// On VirtualBox hosts, Omarchy needs VBoxVGA + 3D acceleration off + 128MB
-// VRAM or Hyprland black-screens; see README before first boot.
+// Apply the working personal bindings and screensaver integration on every
+// Omarchy run. The configuration selection already identifies Omarchy.
 {
-	"directories": [
-		{
-			"action": "copy",
-			"name": ".config",
-			"profiles": ["omarchy"],
-			"source": "./omarchy-src/",
-			"target": "{{ .User.home }}/"
-		}
-	]
+ directories: [{
+  action: "copy"
+  name: ".config"
+  source: "./omarchy-src/"
+  target: "{{ .User.home }}/"
+ }]
 }
