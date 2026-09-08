@@ -108,6 +108,62 @@ bump `PINNED` in `nvim.sh`, regenerate the lock from a sandboxed
 
 ## GPG Key Setup
 
+Keybase is out of the blueprints (it will eventually go offline); key custody
+is [Bitwarden](https://bitwarden.com), wired into rwr natively: the trees
+declare a `gpg_passphrase` credential with a `bw:gpg-signing/password` source,
+and the hardened scripts in `Common/scripts/gpg/` run through rwr profiles.
+
+One-time setup:
+
+1. `bw login` (once, with 2FA). Before a run, `bw unlock` and export
+   `BW_SESSION` in that shell — or answer rwr's prompt and let it save the
+   value to the OS keyring.
+2. In the vault, create a **Login item named `gpg-signing`** and put the key's
+   passphrase in its **password** field (a Secure Note has no password field,
+   so the `bw:` source could never read from it).
+3. Run the backup:
+
+```bash
+rwr all --profile gpg-backup        # exports + uploads, round-trip verified
+```
+
+The scripts upload `public.asc`, `private.asc`, and the revocation cert as
+attachments of the `gpg-signing` item, **replacing previous copies** (one
+current backup, not a pile of dated ones). The private-key export keeps its
+passphrase protection, the exposed passphrase is proven to unlock the key
+*before* anything uploads, and the vault copy is downloaded back and
+byte-compared before success is reported.
+
+Restore on a fresh machine (after this blueprint applied):
+
+```bash
+rwr all --profile gpg-restore       # downloads, verifies fingerprint + passphrase, imports
+```
+
+Restore is a no-op on machines that already hold the key, so leaving both
+profiles in a run is safe. Overrides when needed: `GPG_FINGERPRINT=...` and
+`BW_GPG_ITEM=...` environment variables. Note: attachment **upload** needs a
+paid Bitwarden plan (Premium or org); the `bw:` passphrase source does not.
+
+> Migration: the earlier `~/.local/bin/gpg-key-*` scripts and their vault
+> items ("GPG Key Backup", "GPG Backup Passphrase") are superseded — the next
+> apply deletes the local copies; delete the two old vault items whenever the
+> `gpg-signing` item has its first successful backup.
+
+Git signing uses the key with fingerprint `4B01A781536D3A8A05D65E63E5A290E73B0C6040`,
+set in `.gitconfig` by the blueprint. If the old `8BF6E007…` fingerprint
+appears anywhere, it is dead — that key existed only in Keybase.
+
+### nvim / AstroNvim
+
+AstroNvim is pinned, not rolling: `Arch/scripts/nvim.sh` checks
+`~/.config/nvim` out at a fixed template commit, and
+`Arch/files/src/.config/nvim/lazy-lock.json` pins every plugin. To update:
+bump `PINNED` in `nvim.sh`, regenerate the lock from a sandboxed
+`HOME`/`XDG_*` tree (headless `nvim +Lazy! sync +qa`), and commit both.
+
+## GPG Key Setup
+
 Keybase is out of the blueprints (it will eventually go offline); the vault is
 [Bitwarden](https://bitwarden.com) via its CLI. `rwr` deploys
 `~/.local/bin/gpg-key-backup` and `~/.local/bin/gpg-key-restore` — key custody
@@ -140,12 +196,16 @@ Git signing uses the key with fingerprint `4B01A781536D3A8A05D65E63E5A290E73B0C6
 set in `.gitconfig` by the blueprint. If the old `8BF6E007…` fingerprint
 appears anywhere, it is dead — that key existed only in Keybase.
 
-### Future: rwr-native secrets
+### rwr-native secrets
 
-rwr's credential system (`credentials:` in the init file, sources
-`env:`/`keyring`/`prompt`) has no Bitwarden source yet. Adding
-`sources: [bw:item/field]` to rwr would let blueprints pull vault secrets —
-this backup flow and the API tokens currently in `~/.extra` — at apply time.
+rwr ships a `bw:<item>[/<key>]` credential source (rwr 0.6.2+): init files
+declare credentials whose value comes from the Bitwarden vault through the
+`bw` CLI, falling back to the OS keyring, then a prompt — logs redact the
+value, and a locked vault is a fall-through, not a crash. This repo uses it
+for the GPG key passphrase (`gpg_passphrase`, above). The API tokens in
+`~/.extra` are candidates for the same treatment: declare them as
+`credentials` with `bw:<item>/field:<name>` sources and replace the raw
+exports with `RWR_CRED_<NAME>` references.
 
 ## Features
 
