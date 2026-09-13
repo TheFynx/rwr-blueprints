@@ -24,7 +24,7 @@ mount_drive() {
 	# Match on source+target via findmnt: formatting in fstab varies (tabs vs
 	# spaces), so a text match would append a duplicate on every style change.
 	if ! findmnt --fstab -n -S "UUID=${uuid}" -T "$dir" >/dev/null; then
-		echo "/dev/disk/by-uuid/${uuid} ${dir} auto nosuid,nodev,nofail,x-gvfs-show 0 0" >> /etc/fstab
+		echo "/dev/disk/by-uuid/${uuid} ${dir} rw,nosuid,nodev,nofail,x-gvfs-show 0 0" >> /etc/fstab
 		echo "fstab: added ${name}"
 	fi
 }

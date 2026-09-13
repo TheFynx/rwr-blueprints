@@ -1,8 +1,8 @@
 {
   "version": 1,
   "idle": {
-    "screensaver": 150,
-    "lock": 300
+    "screensaver": 300,
+    "lock": 360
   },
   "bar": {
     "position": "top",
@@ -65,12 +65,21 @@
   "plugins": [
     {
       "id": "levi.idle"
+    },
+    {
+      "id": "io.github.sirjul1337.lock-explorer",
+      "design": "weather",
+      "blankMs": 300000,
+      "unlock": "fade",
+      "boot": "theme"
     }
   ],
   "disabledPlugins": [
-    "omarchy.idle"
+    "omarchy.idle",
+    "omarchy.lock"
   ],
   "cloneSourceRestores": [
-    "levi.idle"
+    "levi.idle",
+    "io.github.sirjul1337.lock-explorer"
   ]
 }

@@ -1,0 +1,3 @@
+[misc]
+# Neovim updates are included in the vim step.
+disable = ["hyprpm", "vim", "containers", "git_repos"]
