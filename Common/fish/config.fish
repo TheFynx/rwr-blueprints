@@ -81,7 +81,20 @@ if status is-interactive
     # ---- tools ----
     # Resolved from PATH, not hardcoded: these live in /usr/bin on Arch and under
     # the brew prefix on macOS. Guarded so a machine missing one still gets a shell.
-    command -q mcfly; and mcfly init fish | source
+    if command -q mcfly
+        # McFly reads Fish's history directly, but Fish only creates this file
+        # after the first command is saved. Ensure a fresh machine can start it.
+        if not set -q MCFLY_HISTFILE
+            if set -q XDG_DATA_HOME
+                set -l mcfly_histfile "$XDG_DATA_HOME/fish/fish_history"
+            else
+                set -l mcfly_histfile "$HOME/.local/share/fish/fish_history"
+            end
+            mkdir -p (path dirname $mcfly_histfile)
+            touch $mcfly_histfile
+        end
+        mcfly init fish | source
+    end
     command -q mise; and mise activate fish | source
     command -q starship; and source (starship init fish --print-full-init | psub)
 
