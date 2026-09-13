@@ -5,6 +5,7 @@
 {
 	"blueprints": {
 		"format": "cue",
+        except: ["credentials"],
 		"git": {
 			"target": "{{ .User.home }}/git/thefynx/rwr-blueprints",
 			"url": "https://github.com/thefynx/rwr-blueprints.git"
@@ -12,18 +13,24 @@
 		"location": ".",
 		"order": ["ssh_keys", "scripts", "packages", "users", "files", "services", "git"]
 	},
-	// Bitwarden-backed GPG key sync: the key passphrase is read from the
-	// vault item's password field (a Login item named gpg-signing) through
-	// the bw CLI, falling back to the OS keyring, then a prompt. The value
-	// stays out of scripts until exposeCredentials names it, and the logs
-	// redact it.
-	"credentials": [
-		{
-			"name": "gpg_passphrase",
-			"description": "Passphrase of the GPG key synced via Bitwarden",
-			"scope": ["scripts"],
-			"sources": ["bw:gpg-signing/password", "keyring", "prompt"]
-		}
-	],
-	"exposeCredentials": ["gpg_passphrase", "bw_session"]
+    // Credential configuration is explicit and rerunnable after machine setup.
+    credentialPolicy: {setup: "explicit", onUnavailable: "skip"}
+    credentialProviders: [{
+        name: "personal-vault"
+        provider: "bitwarden"
+        server: "https://vault.bitwarden.com"
+    }]
+    credentials: [{
+        name: "gpg_passphrase"
+        description: "Passphrase for the personal signing key"
+        scope: ["credentials"]
+        sources: ["env:RWR_CRED_GPG_PASSPHRASE", "keyring"]
+        references: [{connection: "personal-vault", item: "gpg-signing", field: "password"}]
+    }]
+    credentialAttachments: [
+        {name: "signing-private-key", connection: "personal-vault", item: "gpg-signing", filename: "private.asc", write: true},
+        {name: "signing-public-key", connection: "personal-vault", item: "gpg-signing", filename: "public.asc", write: true},
+        {name: "signing-revocation", connection: "personal-vault", item: "gpg-signing", filename: "revocation.rev", write: true},
+    ]
+    variables: {userDefined: {gpg_fingerprint: "4B01A781536D3A8A05D65E63E5A290E73B0C6040"}}
 }
