@@ -143,9 +143,10 @@ avoids vault access during restore. Ownertrust and Git signing are explicit
 settings in the restore task.
 
 The expected fingerprint is
-`4B01A781536D3A8A05D65E63E5A290E73B0C6040`, configured through
-`variables.userDefined.gpg_fingerprint` in each Linux init file. Update that
-trusted value and the signing configuration together when rotating keys.
+`4B01A781536D3A8A05D65E63E5A290E73B0C6040`. The provider, attachment
+bindings, passphrase declaration, fingerprint, and native tasks are kept
+together in the shared credential blueprint. Update that file when rotating
+keys.
 
 See [credential setup details](Common/credentials/README.md). Existing vault
 items are retained; migration does not delete vault data or imported keys.
