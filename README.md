@@ -120,51 +120,39 @@ bump `PINNED` in `nvim.sh`, regenerate the lock from a sandboxed
 
 ## GPG Key Setup
 
-Keybase is out of the blueprints (it will eventually go offline); key custody
-is [Bitwarden](https://bitwarden.com), wired into rwr natively: the trees
-declare a `gpg_passphrase` credential with a `bw:gpg-signing/password` source,
-and the hardened scripts in `Common/scripts/gpg/` run through rwr profiles.
-
-One-time setup:
-
-1. `bw login` (once, with 2FA). Before a run, `bw unlock` and export
-   `BW_SESSION` in that shell — or answer rwr's prompt and let it save the
-   value to the OS keyring.
-2. In the vault, create a **Login item named `gpg-signing`** and put the key's
-   passphrase in its **password** field (a Secure Note has no password field,
-   so the `bw:` source could never read from it).
-3. Run the backup:
+Credential setup runs through RWR's native credentials processor. These
+blueprints require that feature and exclude credentials from ordinary
+`rwr run all` runs, so machine setup can finish before vault login.
 
 ```bash
-rwr all --profile gpg-backup        # exports + uploads, round-trip verified
+rwr run all --except credentials
+rwr run credentials --profile bitwarden        # restore/configure signing identity
+rwr run credentials --profile bitwarden-setup  # optional provider-only setup
+rwr run credentials --profile gpg-backup       # explicitly selected backup
 ```
 
-The scripts upload `public.asc`, `private.asc`, and the revocation cert as
-attachments of the `gpg-signing` item, **replacing previous copies** (one
-current backup, not a pile of dated ones). The private-key export keeps its
-passphrase protection, the exposed passphrase is proven to unlock the key
-*before* anything uploads, and the vault copy is downloaded back and
-byte-compared before success is reported.
+The trusted `personal-vault` connection uses Bitwarden. Create a Login item
+named `gpg-signing` with the signing key's passphrase in its password field.
+Restore expects its `private.asc` attachment; backup exports the existing
+local key and uploads the declared private/public attachments, plus a
+revocation certificate when present. RWR verifies each replacement by
+downloading it before deleting the previous attachment.
 
-Restore on a fresh machine (after this blueprint applied):
+The shared [native tasks](Common/credentials/gpg.cue) replace the old GPG
+shell scripts. RWR handles installation, login/MFA, and unlock when explicitly
+requested. Sessions remain private to the run; no `BW_SESSION` export or
+passphrase exposure to scripts is required. An existing local signing key
+avoids vault access during restore. Ownertrust and Git signing are explicit
+settings in the restore task.
 
-```bash
-rwr all --profile gpg-restore       # downloads, verifies fingerprint + passphrase, imports
-```
+The expected fingerprint is
+`4B01A781536D3A8A05D65E63E5A290E73B0C6040`. The provider, attachment
+bindings, passphrase declaration, fingerprint, and native tasks are kept
+together in the shared credential blueprint. Update that file when rotating
+keys.
 
-Restore is a no-op on machines that already hold the key, so leaving both
-profiles in a run is safe. Overrides when needed: `GPG_FINGERPRINT=...` and
-`BW_GPG_ITEM=...` environment variables. Note: attachment **upload** needs a
-paid Bitwarden plan (Premium or org); the `bw:` passphrase source does not.
-
-> Migration: the earlier `~/.local/bin/gpg-key-*` scripts and their vault
-> items ("GPG Key Backup", "GPG Backup Passphrase") are superseded — the next
-> apply deletes the local copies; delete the two old vault items whenever the
-> `gpg-signing` item has its first successful backup.
-
-Git signing uses the key with fingerprint `4B01A781536D3A8A05D65E63E5A290E73B0C6040`,
-set in `.gitconfig` by the blueprint. If the old `8BF6E007…` fingerprint
-appears anywhere, it is dead — that key existed only in Keybase.
+See [credential setup details](Common/credentials/README.md). Existing vault
+items are retained; migration does not delete vault data or imported keys.
 
 ### nvim / AstroNvim
 
@@ -173,51 +161,6 @@ AstroNvim is pinned, not rolling: `Arch/scripts/nvim.sh` checks
 `Arch/files/src/.config/nvim/lazy-lock.json` pins every plugin. To update:
 bump `PINNED` in `nvim.sh`, regenerate the lock from a sandboxed
 `HOME`/`XDG_*` tree (headless `nvim +Lazy! sync +qa`), and commit both.
-
-## GPG Key Setup
-
-Keybase is out of the blueprints (it will eventually go offline); the vault is
-[Bitwarden](https://bitwarden.com) via its CLI. `rwr` deploys
-`~/.local/bin/gpg-key-backup` and `~/.local/bin/gpg-key-restore` — key custody
-runs on demand, never during apply.
-
-One-time setup:
-
-```bash
-bw login                      # once, with 2FA
-gpg-key-backup                # creates both vault items, exports + uploads
-```
-
-That produces two secure notes: **GPG Key Backup** (a dated, AES-256-encrypted
-tarball attachment containing secret keys, public keys, ownertrust, and
-revocation certs) and **GPG Backup Passphrase** (the passphrase for that
-tarball — generated for you on first run). Every backup is downloaded back and
-checksum-verified before the script reports success.
-
-Restore on a fresh machine (after `rwr` applied this blueprint):
-
-```bash
-gpg-key-restore               # newest backup; or name a specific attachment
-```
-
-> The attachment is encrypted, but its passphrase lives in the same vault —
-> keep one offline copy (USB) of the encrypted tarball so the two halves are
-> never only together.
-
-Git signing uses the key with fingerprint `4B01A781536D3A8A05D65E63E5A290E73B0C6040`,
-set in `.gitconfig` by the blueprint. If the old `8BF6E007…` fingerprint
-appears anywhere, it is dead — that key existed only in Keybase.
-
-### rwr-native secrets
-
-rwr ships a `bw:<item>[/<key>]` credential source (rwr 0.6.2+): init files
-declare credentials whose value comes from the Bitwarden vault through the
-`bw` CLI, falling back to the OS keyring, then a prompt — logs redact the
-value, and a locked vault is a fall-through, not a crash. This repo uses it
-for the GPG key passphrase (`gpg_passphrase`, above). The API tokens in
-`~/.extra` are candidates for the same treatment: declare them as
-`credentials` with `bw:<item>/field:<name>` sources and replace the raw
-exports with `RWR_CRED_<NAME>` references.
 
 ## Features
 
