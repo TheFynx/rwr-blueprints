@@ -69,34 +69,37 @@ different machine. It mounts the three data disks and symlinks
 ### Omarchy (Hyprland)
 
 [Omarchy](https://github.com/omacom-io/omarchy) is DHH's Arch + Hyprland distro.
-The Omarchy tree captures the working user configuration from this machine:
-`bindings.lua`, its `corner-placement.lua` helper, and the shell/menu/idle-plugin
-integration for the Midgar Mako screensaver. It does not replace the main
-Hyprland configuration or machine-specific monitor settings.
+The Omarchy tree uses RWR's configuration processor for targeted desktop state:
+plugins and their settings, shell idle timers, the active theme, default apps,
+and a theme hook. Ordinary file blueprints keep the user-owned Hyprland bindings,
+workspace and corner-placement helpers, menu extension, and Topgrade config.
+Machine-specific monitor settings remain outside this tree.
 
 The overlay has no profile gate: selecting Omarchy already chooses it, so
 `--profile desktop,laptop,nvidia` also installs the repaired keybindings.
 
 | Keys | Action |
 |------|--------|
-| `Ctrl+Alt+Left/Right` | Previous/next numbered workspace |
+| `Ctrl+Alt+Left/Right` | Cycle through the Workspace Switcher range |
+| `Ctrl+Alt+Up/Down` | Open Exposé / Workspace Switcher |
 | `Ctrl+Alt+Shift+Left/Right` | Move window to adjacent workspace and follow |
 | `Super+Ctrl+arrows` | Directional tile swap |
 | `Super+Ctrl+numpad 4/6/8/2` | Directional tile swap, either Num Lock state |
 | `Super+Ctrl+numpad 7/9/1/3` | Tile window in a corner, either Num Lock state |
 
 `files/src/midgar-mako` contains the complete theme and all 14 wallpapers.
-The theme script installs and activates it with its screensaver launcher and
-branding hook. Bootstrap installs the required tools before that script runs.
-The captured shell configuration enables the included `levi.idle` plugin and
-uses the same 150-second screensaver and 300-second lock timers.
+The Omarchy configuration installs and activates it, installs its branding hook,
+and selects Brave, Ghostty, and VS Code as the default browser, terminal, and
+editor. It installs and configures Exposé, Workspace Switcher, and Lock Screen
+Explorer while retaining Omarchy's stock workspace and idle plugins. Idle uses
+a 300-second screensaver timer and a 360-second lock timer; no custom idle clone
+or complete `shell.json` copy is maintained.
 
 The `ssh_keys` processor runs first on every provisioning pass, creates
 `~/.ssh/git` if missing, and uploads its public key through RWR's GitHub
 authentication prompt. An existing private key is reused; an old bootstrap
 marker cannot skip GitHub enrollment.
-No SSH key or secret is stored in this repository. These blueprints require the
-RWR changes in FynxLabs/rwr#298 for bootstrap-before-vault setup and session export.
+No SSH key or secret is stored in this repository.
 
 Notes learned on real hardware/VM:
 

@@ -31,33 +31,32 @@ omarchy theme bg next
 
 ## Screensaver
 
-The original 159×105 shade-character drawing is preserved in `screensaver/cloud-original.txt`. The menu and idle service use the user launcher at `~/.config/omarchy/screensaver/launch`. For this theme it selects Foot with its own font settings, waits for the real fullscreen terminal size to settle, and fits the complete drawing with margins. A size change triggers a fresh fit. A slow 30fps mint/cyan/violet gradient keeps the artwork visible throughout the animation.
+The original 159×105 shade-character drawing is preserved in `screensaver/cloud-original.txt`. Omarchy's stock idle service and screensaver launcher run the theme's `screensaver/run`. It waits for stable terminal geometry, fits the complete drawing with margins, and refits after a size change. A slow 30fps mint/cyan/violet gradient keeps the artwork visible throughout the animation.
 
 ```sh
-~/.config/omarchy/screensaver/launch force
+omarchy launch screensaver force
 ```
 
-The stock `omarchy launch screensaver` command still uses Omarchy's packaged renderer and terminal font. It receives a compact 30-row fallback drawing while Midgar Mako is active. Use the menu or command above for the full-detail adaptive rendering. Other themes delegate to the stock launcher. A theme-set hook saves/restores the prior branding; it does not modify packaged Omarchy files.
+The theme also supplies a compact 30-row fallback drawing for Omarchy branding. A theme-set hook saves and restores the prior branding without modifying packaged Omarchy files.
 
-Idle remains 150 seconds; lock remains 300 seconds. This machine's existing `levi.idle` clone and menu action already call the user launcher.
+The desktop blueprint keeps Omarchy's stock idle service and configures the screensaver at 300 seconds and lock at 360 seconds.
 
 ## Apply and maintain
 
-The working source is `/home/levi/Work/midgar-mako`; the installed theme is `~/.config/omarchy/themes/midgar-mako`.
+RWR installs this source as `~/.config/omarchy/themes/midgar-mako`, installs the branding hook, and activates the theme through the Omarchy configuration provider.
 
 ```sh
-# Reinstall this machine's companion launcher/hook, back up, and apply:
-./integration/install.sh
-# Reapply the installed theme only:
+rwr run configuration
+# Reapply the installed theme directly when working on it:
 omarchy theme set midgar-mako
 ```
 
-A plain copy of this theme directory provides native visual styling on another Omarchy system. The companion launcher additionally requires Foot, Python 3, ttfx, jq, socat, and an idle/menu integration that invokes it. These dependencies are already installed here. No theme-specific package installs were required.
+A plain copy of this theme directory provides native visual styling on another Omarchy system. The adaptive renderer requires Python 3 and ttfx. No theme-specific package installs are required by this blueprint.
 
 ## Validation and backup
 
 Verified TOML/JSON parsing, Lua and shell syntax, native Hyprland reload with no config errors, theme-hook activate/reapply/restore, and artwork fitting at six terminal sizes. A live full-screen capture confirms the complete centered figure, sword, and boots. The full original text is retained at native display dimensions.
 
-Before-change installed files are backed up at `~/.local/state/omarchy/backups/midgar-mako-20260908-094345`. The original working source and verification screenshots are under `/home/levi/Work/midgar-mako-backups`.
+RWR records the theme and hook resources it manages and preserves protected prior files in its Omarchy state directory.
 
-To select a different theme, use `omarchy theme set <name>`; custom styling follows the selected theme and the branding hook restores the saved prior branding. To undo this expansion while keeping the earlier Midgar version, restore `themes/midgar-mako` and `screensaver` from the backup, remove only `hooks/theme-set.d/40-midgar-branding`, restore `branding/screensaver.txt` from the backup, and reapply Midgar Mako.
+To select a different theme, use `omarchy theme set <name>`; custom styling follows the selected theme and the branding hook restores the saved prior branding. Change the blueprint's active theme to make that selection repeatable.

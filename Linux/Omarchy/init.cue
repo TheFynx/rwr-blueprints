@@ -12,6 +12,6 @@
 		},
 		"location": ".",
 		"includes": ["../../Common/credentials/gpg.cue"],
-		"order": ["ssh_keys", "scripts", "packages", "users", "files", "services", "git"]
+		"order": ["ssh_keys", "scripts", "packages", "users", "files", "services", "git", "configuration"]
 	},
 }
