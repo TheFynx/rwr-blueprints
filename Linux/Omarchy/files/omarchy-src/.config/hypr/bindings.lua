@@ -28,9 +28,18 @@
 -- o.bind("SUPER + H", nil, "voxtype record toggle")
 -- o.bind("SUPER + PERIOD", nil, "omarchy-shell shell toggle omarchy.emojis")
 
--- Navigate adjacent numbered workspaces, including empty ones.
-o.bind("CTRL + ALT + LEFT", "Previous workspace", hl.dsp.focus({ workspace = "-1" }))
-o.bind("CTRL + ALT + RIGHT", "Next workspace", hl.dsp.focus({ workspace = "+1" }))
+-- Replace the stock Ctrl+Alt arrow actions with the selected desktop tools.
+for _, key in ipairs({ "LEFT", "RIGHT", "UP", "DOWN" }) do
+  hl.unbind("CTRL + ALT + " .. key)
+end
+local workspace_cycle = os.getenv("HOME") .. "/.config/hypr/workspace-cycle"
+local function shell_quote(value)
+  return "'" .. value:gsub("'", "'\"'\"'") .. "'"
+end
+o.bind("CTRL + ALT + LEFT", "Previous workspace", shell_quote(workspace_cycle) .. " previous")
+o.bind("CTRL + ALT + RIGHT", "Next workspace", shell_quote(workspace_cycle) .. " next")
+o.bind("CTRL + ALT + UP", "Exposé", hl.dsp.event("expose.window-overview:toggle"))
+o.bind("CTRL + ALT + DOWN", "Workspace switcher", "omarchy-shell shell toggle io.github.woogy7.workspaces")
 
 -- Move the active window to the adjacent workspace and follow it.
 o.bind("CTRL + SHIFT + ALT + LEFT", "Move window to previous workspace", hl.dsp.window.move({ workspace = "-1", follow = true }))
