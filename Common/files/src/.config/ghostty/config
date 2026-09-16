@@ -9,9 +9,9 @@ window-padding-x = 12
 window-padding-y = 12
 
 # --- Scrolling ---
-# Scrollback history (scrollback-limit, in bytes. Need to estimate based on character size)
-# Assuming a character is roughly 2 bytes, 10000 lines * 80 cols * 2 bytes/char = ~1.6MB
-scrollback-limit = 1600000
+# Scrollback: 512 MiB per terminal, allocated as needed.
+# Targets 100,000+ lines at typical widths; exact capacity depends on width/content.
+scrollback-limit = 536870912
 
 # Mouse Scroll Multiplier
 mouse-scroll-multiplier = 3
