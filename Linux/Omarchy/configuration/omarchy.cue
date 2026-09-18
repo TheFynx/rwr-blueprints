@@ -35,6 +35,31 @@ configurations: [{
                 boot: "theme"
             }
         },
+        {
+            id: "io.github.twiking.omasettings"
+            source: {git: "https://github.com/twiking/omasettings.git"}
+            enabled: true
+        },
+        {
+            id: "better.displays"
+            source: {git: "https://github.com/nightdevil00/better.displays.git"}
+            enabled: true
+        },
+        {
+            id: "jankeesvw.notification-center"
+            source: {git: "https://github.com/jankeesvw/omarchy-notification-center.git"}
+            enabled: true
+        },
+        {
+            id: "eduardodallecort.weather-radar"
+            source: {git: "https://github.com/eduardodallecort/omarchy-weather-radar.git"}
+            enabled: true
+        },
+        {
+            id: "omaplug"
+            source: {git: "https://github.com/fross100/omaplug.git"}
+            enabled: true
+        },
         {id: "omarchy.lock", enabled: false},
         // Idle durations are shell settings. Keep the stock idle service instead
         // of maintaining a user-namespaced clone for them.
