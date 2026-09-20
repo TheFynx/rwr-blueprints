@@ -13,11 +13,13 @@ configurations: [{
             settings: {hotCornerEnabled: false}
         },
         {
+            // Overlay alt-tab switcher: loads via keepLoaded, widget kept off
+            // the bar. enabled stays undeclared on purpose - the shell reports
+            // a bar-widget's enabled state from bar placement, so declaring
+            // enabled with a hidden widget can never converge.
             id: "io.github.woogy7.workspaces"
             source: {git: "https://github.com/Woogy7/omarchy-workspace-switcher.git"}
-            enabled: true
             settings: {minWorkspaces: 5, maxWorkspaces: 5}
-            widget: {visible: false}
         },
         {
             id: "omarchy.workspaces"
