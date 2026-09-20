@@ -31,5 +31,6 @@ require("default.hypr.toggles")
 -- Keep fullscreen games (and other fullscreen apps) from triggering idle.
 o.window(".*", { idle_inhibit = "fullscreen" })
 
--- Load settings written by OmaSettings (omasettings:managed).
-require("hypr.omasettings")
+-- OmaSettings appends its own managed load line pointing at its generated
+-- omasettings.lua, and generates that file on first use. Do not commit the
+-- load line here: it points at a file that only exists after the plugin runs.

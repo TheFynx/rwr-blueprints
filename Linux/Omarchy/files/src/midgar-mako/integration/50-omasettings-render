@@ -1,0 +1,16 @@
+#!/bin/bash
+# Generate OmaSettings' managed Hyprland config after a deploy.
+#
+# OmaSettings (io.github.twiking.omasettings) appends its load line to
+# ~/.config/hypr/hyprland.lua and generates ~/.config/hypr/omasettings.lua
+# only when it runs. The blueprint ships hyprland.lua without that line, so
+# nothing on a fresh deploy requires it — but on the NEXT deploy the plugin
+# has appended the line by then, and if the managed file was never
+# generated, Hyprland fails to load its config with "module not found".
+# Reading state once renders the file and settles the load line either way.
+set -euo pipefail
+
+omasettings="$HOME/.config/omarchy/plugins/io.github.twiking.omasettings/bin/omasettings"
+[[ -x $omasettings ]] || exit 0
+
+"$omasettings" state >/dev/null
