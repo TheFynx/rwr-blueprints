@@ -82,10 +82,6 @@ configurations: [{
     defaults: {browser: "brave", terminal: "ghostty", editor: "code"}
 
     hooks: [{
-        event: "theme-set"
-        name: "40-midgar-branding"
-        source: "../files/src/midgar-mako/integration/40-midgar-branding"
-    }, {
         // Render OmaSettings' managed omasettings.lua on every deploy so a
         // hyprland.lua that loads it never points at a missing file.
         event: "theme-set"

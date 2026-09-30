@@ -88,12 +88,16 @@ The overlay has no profile gate: selecting Omarchy already chooses it, so
 | `Super+Ctrl+numpad 7/9/1/3` | Tile window in a corner, either Num Lock state |
 
 `files/src/midgar-mako` contains the complete theme and all 14 wallpapers.
-The Omarchy configuration installs and activates it, installs its branding hook,
-and selects Brave, Ghostty, and VS Code as the default browser, terminal, and
-editor. It installs and configures Exposé, Workspace Switcher, and Lock Screen
+It does not include a screensaver. Every apply runs
+`retire-midgar-screensaver.sh`, which removes a leftover launcher, `levi.idle`
+clone, branding hook, or theme copy and otherwise changes nothing. The Omarchy
+configuration installs and activates the theme, and selects Brave, Ghostty, and
+VS Code as the default browser, terminal, and editor. It installs and configures Exposé, Workspace Switcher, and Lock Screen
 Explorer while retaining Omarchy's stock workspace and idle plugins. Idle uses
 a 300-second screensaver timer and a 360-second lock timer; no custom idle clone
-or complete `shell.json` copy is maintained.
+or complete `shell.json` copy is maintained. Hyprland uses a software cursor and
+puts the pointer back when the screensaver window closes or the machine resumes,
+because Omarchy's screensaver hides it and suspend drops the hardware cursor.
 
 The `ssh_keys` processor runs first on every provisioning pass, creates
 `~/.ssh/git` if missing, and uploads its public key through RWR's GitHub

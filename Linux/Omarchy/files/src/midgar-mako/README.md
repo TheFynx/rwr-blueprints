@@ -31,33 +31,16 @@ omarchy theme bg next
 
 ## Screensaver
 
-The original 159×105 shade-character drawing is preserved in `screensaver/cloud-original.txt`. The menu and idle service use the user launcher at `~/.config/omarchy/screensaver/launch`. For this theme it selects Foot with its own font settings, waits for the real fullscreen terminal size to settle, and fits the complete drawing with margins. A size change triggers a fresh fit. A slow 30fps mint/cyan/violet gradient keeps the artwork visible throughout the animation.
-
-```sh
-~/.config/omarchy/screensaver/launch force
-```
-
-The stock `omarchy launch screensaver` command still uses Omarchy's packaged renderer and terminal font. It receives a compact 30-row fallback drawing while Midgar Mako is active. Use the menu or command above for the full-detail adaptive rendering. Other themes delegate to the stock launcher. A theme-set hook saves/restores the prior branding; it does not modify packaged Omarchy files.
-
-Idle remains 150 seconds; lock remains 300 seconds. This machine's existing `levi.idle` clone and menu action already call the user launcher.
+This theme does not ship a screensaver. Idle uses Omarchy's packaged screensaver.
 
 ## Apply and maintain
 
-The working source is `/home/levi/Work/midgar-mako`; the installed theme is `~/.config/omarchy/themes/midgar-mako`.
+The installed theme is `~/.config/omarchy/themes/midgar-mako`.
 
 ```sh
-# Reinstall this machine's companion launcher/hook, back up, and apply:
-./integration/install.sh
-# Reapply the installed theme only:
 omarchy theme set midgar-mako
 ```
 
-A plain copy of this theme directory provides native visual styling on another Omarchy system. The companion launcher additionally requires Foot, Python 3, ttfx, jq, socat, and an idle/menu integration that invokes it. These dependencies are already installed here. No theme-specific package installs were required.
+A plain copy of this theme directory provides native visual styling on another Omarchy system. No theme-specific package installs are required.
 
-## Validation and backup
-
-Verified TOML/JSON parsing, Lua and shell syntax, native Hyprland reload with no config errors, theme-hook activate/reapply/restore, and artwork fitting at six terminal sizes. A live full-screen capture confirms the complete centered figure, sword, and boots. The full original text is retained at native display dimensions.
-
-Before-change installed files are backed up at `~/.local/state/omarchy/backups/midgar-mako-20260908-094345`. The original working source and verification screenshots are under `/home/levi/Work/midgar-mako-backups`.
-
-To select a different theme, use `omarchy theme set <name>`; custom styling follows the selected theme and the branding hook restores the saved prior branding. To undo this expansion while keeping the earlier Midgar version, restore `themes/midgar-mako` and `screensaver` from the backup, remove only `hooks/theme-set.d/40-midgar-branding`, restore `branding/screensaver.txt` from the backup, and reapply Midgar Mako.
+To select a different theme, use `omarchy theme set <name>`. Custom styling follows the selected theme.
