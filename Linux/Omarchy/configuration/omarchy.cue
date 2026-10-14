@@ -24,14 +24,13 @@ configurations: [{
         {
             id: "omarchy.workspaces"
             enabled: true
-            widget: {visible: true, section: "left", after: "omarchy.menu"}
+            widget: {visible: true, section: "left", after: "levi.menu"}
         },
         {
             id: "io.github.sirjul1337.lock-explorer"
             source: {git: "https://github.com/SirJul1337/omarchy-lock-explorer.git"}
             enabled: true
             settings: {
-                design: "weather"
                 blankMs: 300000
                 unlock: "fade"
                 boot: "theme"
@@ -73,19 +72,8 @@ configurations: [{
         bar: {position: "top", transparent: false, centerAnchor: "omarchy.clock"}
     }
 
-    theme: {
-        name: "midgar-mako"
-        source: {path: "../files/src/midgar-mako"}
-        active: true
-    }
-
     defaults: {browser: "brave", terminal: "ghostty", editor: "code"}
-
-    hooks: [{
-        // Render OmaSettings' managed omasettings.lua on every deploy so a
-        // hyprland.lua that loads it never points at a missing file.
-        event: "theme-set"
-        name: "50-omasettings-render"
-        source: "../files/src/midgar-mako/integration/50-omasettings-render"
-    }]
+}, {
+    tool: "omarchy"
+    import: "../../../Common/omarchy/themes/configuration.cue"
 }]

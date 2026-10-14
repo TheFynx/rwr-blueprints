@@ -1,0 +1,1 @@
+packages: [{action: "install", package_manager: "pacman", names: ["python", "qt5ct", "qt6ct", "qt5-svg", "qt6-svg", "yaru-icon-theme", "go", "imagemagick", "python-pillow", "libxcursor", "curl", "unzip", "vulkan-icd-loader"]}]

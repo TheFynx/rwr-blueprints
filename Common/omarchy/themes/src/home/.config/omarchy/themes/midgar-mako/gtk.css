@@ -1,0 +1,38 @@
+@define-color accent_color #63e6be;
+@define-color accent_bg_color #63e6be;
+@define-color accent_fg_color #0b1116;
+@define-color window_bg_color #0b1116;
+@define-color window_fg_color #d9e5e7;
+@define-color view_bg_color #080d11;
+@define-color view_fg_color #d9e5e7;
+@define-color headerbar_bg_color #19272e;
+@define-color headerbar_fg_color #d9e5e7;
+@define-color card_bg_color #19272e;
+@define-color card_fg_color #d9e5e7;
+@define-color dialog_bg_color #0b1116;
+@define-color dialog_fg_color #d9e5e7;
+@define-color popover_bg_color #19272e;
+@define-color popover_fg_color #d9e5e7;
+@define-color sidebar_bg_color #080d11;
+@define-color sidebar_fg_color #d9e5e7;
+@define-color theme_bg_color #0b1116;
+@define-color theme_fg_color #d9e5e7;
+@define-color theme_base_color #080d11;
+@define-color theme_text_color #d9e5e7;
+@define-color theme_selected_bg_color #264b4c;
+@define-color theme_selected_fg_color #d9e5e7;
+@define-color warning_color #e5cf8f;
+@define-color error_color #ef8291;
+@define-color success_color #63e6be;
+window, dialog, .background { background-color: #0b1116; color: #d9e5e7; }
+headerbar, .titlebar { background: #19272e; color: #d9e5e7; border-bottom: 1px solid #63e6be; }
+button { border-radius: 4px; background-image: none; background-color: #19272e; color: #d9e5e7; border: 1px solid #71858e; }
+button:hover { border-color: #79d8de; background-color: #264b4c; }
+button:checked, button.suggested-action { background: #264b4c; color: #d9e5e7; border-color: #63e6be; }
+entry, textview, .view { background: #080d11; color: #d9e5e7; border-radius: 4px; }
+entry:focus { border-color: #63e6be; box-shadow: 0 0 0 1px #63e6be; }
+selection, row:selected { background-color: #264b4c; color: #f0faf7; }
+progressbar progress, scale highlight { background: #63e6be; border-radius: 4px; }
+scale slider { background: #79d8de; }
+scrollbar slider { background: #71858e; min-width: 8px; min-height: 8px; }
+popover, menu { background: #19272e; color: #d9e5e7; border: 1px solid #63e6be; border-radius: 4px; }

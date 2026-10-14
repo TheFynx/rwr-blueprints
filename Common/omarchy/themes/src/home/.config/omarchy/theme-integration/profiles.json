@@ -1,0 +1,18 @@
+{
+  "minecraft-deepstone": {
+    "icons": "Minecraft-Deepstone",
+    "lock_design": "my-minecraft"
+  },
+  "minecraft-nether": {
+    "icons": "Minecraft-Nether",
+    "lock_design": "my-minecraft"
+  },
+  "minecraft-end": {
+    "icons": "Minecraft-End",
+    "lock_design": "my-minecraft"
+  },
+  "midgar-mako": {
+    "icons": "Midgar-Mako",
+    "lock_design": "my-midgar"
+  }
+}

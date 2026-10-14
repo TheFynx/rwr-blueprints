@@ -13,8 +13,10 @@ rwr-blueprints/
 ├── Common/                # shared everywhere: dotfiles, fish, ssh, git, users,
 │   │                      # per-family package bases (packages/arch, packages/debian),
 │   │                      # shared files (files/dot-config, dot-local) + scripts
+│   └── omarchy/themes/    # shared desktop themes, wallpapers, fonts and hooks
 ├── Linux/
 │   ├── Arch/              # general Arch family (PrismLinux Desktop matches here)
+│   ├── Animation/         # explicit Omarchy NVIDIA animation workstation
 │   ├── Omarchy/           # opinionated distro: thin overlay, imports Arch bases
 │   ├── Debian/            # apt: Common/packages/debian + vendor repos + cargo/go/npm/pipx
 │   ├── Ubuntu/            # same tree shape as Debian, distro: ubuntu
@@ -87,11 +89,15 @@ The overlay has no profile gate: selecting Omarchy already chooses it, so
 | `Super+Ctrl+numpad 4/6/8/2` | Directional tile swap, either Num Lock state |
 | `Super+Ctrl+numpad 7/9/1/3` | Tile window in a corner, either Num Lock state |
 
-`files/src/midgar-mako` contains the complete theme and all 14 wallpapers.
-It does not include a screensaver. Every apply runs
+[Common/omarchy/themes](Common/omarchy/themes/README.md) owns all desktop themes
+and their shared integration for both Omarchy and Animation. Midgar Mako retains
+its complete theme and 14 Real-ESRGAN-upscaled wallpapers; Minecraft adds Deepstone (the default),
+Nether and End with four shared 4K wallpapers, GTK/Qt palettes, pixel icons, inventory lock design, menu logo and centered Creeper branding.
+The Minecraft wallpapers, font and hooks are stored once rather than repeated
+in each build or palette. Midgar does not include a screensaver. Every apply runs
 `retire-midgar-screensaver.sh`, which removes a leftover launcher, `levi.idle`
-clone, branding hook, or theme copy and otherwise changes nothing. The Omarchy
-configuration installs and activates the theme, and selects Brave, Ghostty, and
+clone, branding hook, or theme copy and otherwise changes nothing. The shared
+appearance configuration activates Minecraft Deepstone, and the desktop selects Brave, Ghostty, and
 VS Code as the default browser, terminal, and editor. It installs and configures Exposé, Workspace Switcher, and Lock Screen
 Explorer while retaining Omarchy's stock workspace and idle plugins. Idle uses
 a 300-second screensaver timer and a 360-second lock timer; no custom idle clone
@@ -113,6 +119,21 @@ Notes learned on real hardware/VM:
 - **Tray**: Omarchy's bar puts tray icons in a hover-to-reveal drawer by
   default. Per-item pinning is the supported fix: right-click the tray
   chevron → Manage → pin.
+
+### Animation workstation
+
+`Linux/Animation` is an explicitly selected Omarchy build with Blender,
+OpenToonz, DaVinci Resolve, Unreal Engine, FFmpeg, CUDA, and NVIDIA OpenCL,
+plus drawing, audio, image-sequence, color-management, and asset/build support.
+It reuses Common and the Omarchy desktop configuration. Select it directly:
+
+```bash
+rwr run all --init-file ./Linux/Animation/init.cue
+```
+
+Read [its setup guide](Linux/Animation/README.md) first for the NVIDIA/kernel
+assumptions, Resolve installer staging, and Unreal repository access. It is not
+added to the auto-detection manifest, so ordinary Omarchy selection stays unique.
 
 ### nvim / AstroNvim
 
@@ -173,3 +194,12 @@ bump `PINNED` in `nvim.sh`, regenerate the lock from a sandboxed
 - SSH configs
 - Git configuration with GPG signing
 - Wallpaper collection
+
+### Personal CLI
+
+`~/git/thefynx/cli` is the independent Go project for the `fynx` executable.
+Both Omarchy builds install dependencies and invoke its build script through
+`Common/tools/fynx.cue`. The local checkout is required until its remote repository
+exists; no repository URL is assumed. It supplies reusable asset upscaling and
+persistent native theme builders. Existing dotfile functions remain until their
+behaviors are explicitly migrated and reviewed.

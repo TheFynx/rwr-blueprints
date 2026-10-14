@@ -1,0 +1,8 @@
+QPushButton, QToolButton { border: 1px solid #71858e; border-radius: 4px; padding: 5px; background: #19272e; color: #d9e5e7; }
+QPushButton:hover, QToolButton:hover { border-color: #79d8de; }
+QLineEdit, QComboBox { border: 1px solid #71858e; border-radius: 4px; background: #080d11; padding: 4px; }
+QLineEdit:focus { border-color: #63e6be; }
+QProgressBar::chunk { background: #63e6be; }
+QMenu { background: #19272e; color: #d9e5e7; border: 1px solid #63e6be; }
+QMenu::item:selected { background: #264b4c; }
+QHeaderView::section { background: #19272e; color: #d9e5e7; border: 1px solid #71858e; padding: 5px; }

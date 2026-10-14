@@ -1,0 +1,38 @@
+@define-color accent_color #bd9ae6;
+@define-color accent_bg_color #bd9ae6;
+@define-color accent_fg_color #1b1823;
+@define-color window_bg_color #1b1823;
+@define-color window_fg_color #e7def0;
+@define-color view_bg_color #121019;
+@define-color view_fg_color #e7def0;
+@define-color headerbar_bg_color #30283e;
+@define-color headerbar_fg_color #e7def0;
+@define-color card_bg_color #30283e;
+@define-color card_fg_color #e7def0;
+@define-color dialog_bg_color #1b1823;
+@define-color dialog_fg_color #e7def0;
+@define-color popover_bg_color #1b1823;
+@define-color popover_fg_color #e7def0;
+@define-color sidebar_bg_color #121019;
+@define-color sidebar_fg_color #e7def0;
+@define-color theme_bg_color #1b1823;
+@define-color theme_fg_color #e7def0;
+@define-color theme_base_color #121019;
+@define-color theme_text_color #e7def0;
+@define-color theme_selected_bg_color #bd9ae6;
+@define-color theme_selected_fg_color #1b1823;
+@define-color warning_color #e1d39b;
+@define-color error_color #e87b6b;
+@define-color success_color #c0c78b;
+window, dialog, .background { background-color: #1b1823; color: #e7def0; }
+headerbar, .titlebar { background: #30283e; color: #e7def0; border-bottom: 2px solid #bd9ae6; border-radius: 0; }
+button { border-radius: 0; background-image: none; background-color: #30283e; color: #e7def0; border: 2px solid #7b6c90; box-shadow: inset 2px 2px alpha(#e7def0,0.12), inset -2px -2px alpha(#000000,0.35); }
+button:hover { border-color: #bd9ae6; background-color: #3d3155; }
+button:checked, button.suggested-action { background: #bd9ae6; color: #1b1823; border-color: #9bd5d2; }
+entry, textview, .view { background: #121019; color: #e7def0; border-radius: 0; }
+entry:focus { border-color: #bd9ae6; box-shadow: 0 0 0 1px #bd9ae6; }
+selection, row:selected { background-color: #3d3155; color: #f6efff; }
+progressbar progress, scale highlight { background: #bd9ae6; border-radius: 0; }
+scale slider { background: #9bd5d2; border-radius: 0; }
+scrollbar slider { background: #7b6c90; border-radius: 0; min-width: 8px; min-height: 8px; }
+popover, menu { background: #1b1823; color: #e7def0; border: 2px solid #bd9ae6; border-radius: 0; }
