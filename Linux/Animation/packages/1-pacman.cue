@@ -8,8 +8,9 @@ packages: [
   names: [
    // Core production applications and conversion pipeline.
    "blender", "opentoonz", "ffmpeg",
-   // Drawing/texture preparation, vector assets, and audio cleanup.
-   "krita", "inkscape", "audacity", "imagemagick",
+   // Drawing/texture preparation, vector assets, and audio production.
+   // GIMP comes from the shared Arch base.
+   "krita", "inkscape", "audacity", "ardour", "imagemagick",
    // Image sequences, EXR inspection, and color management.
    "openimageio", "opencolorio", "openexr", "mediainfo",
    // Large production assets and Unreal C++ build support.

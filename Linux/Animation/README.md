@@ -17,7 +17,8 @@ directly; ordinary Omarchy runs continue to select the existing tree.
 | Production | Blender, OpenToonz, DaVinci Resolve (free), Unreal Engine (source build) |
 | Media conversion and inspection | FFmpeg, MediaInfo, mpv (shared base) |
 | Drawing and asset preparation | Krita, Inkscape, GIMP (shared base), ImageMagick |
-| Audio cleanup | Audacity |
+| Audio cleanup, recording and mixing | Audacity, Ardour |
+| Local character and story planning | Manuskript, bibisco Community Edition (`bibisco-ce`, AUR) |
 | Image sequences and color | OpenImageIO tools, OpenColorIO, OpenEXR |
 | GPU compute | CUDA, NVIDIA OpenCL, OpenCL ICD loader |
 | GPU checks | NVIDIA Settings / nvidia-smi, clinfo, Vulkan tools |
@@ -101,3 +102,16 @@ ffmpeg -encoders | rg nvenc
 Validation checks blueprint structure and imports, not successful vendor builds,
 GPU hardware compatibility, or live rendering. This tree was validated and its
 package processor checked in dry-run mode; application installs have not been run.
+
+Manuskript and bibisco Community Edition store projects locally and work offline.
+No cloud account or hosted story service is configured by this build.
+
+### bibisco Community Edition installer
+
+The AUR `bibisco-ce` package is the local Community Edition. Its current recipe
+expects a vendor ZIP supplied manually, rather than downloading it automatically.
+Get the free Community Edition Linux x64 ZIP from https://bibisco.com and stage
+`bibisco-linux-x64-4.0.1-CE.zip` in `${XDG_CACHE_HOME:-$HOME/.cache}/yay/bibisco-ce/`
+before running the AUR package pass. The filename/version must match the recipe
+if it updates. Do not substitute the `bibisco` package: that recipe expects the
+paid Supporters Edition ZIP. Manuskript requires no vendor-installer staging.
