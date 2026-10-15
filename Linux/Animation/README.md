@@ -6,9 +6,16 @@ base, dotfiles, app configs, users, Git checkouts, and credential declarations,
 plus Omarchy's desktop payload, plugins, shared Minecraft/Midgar themes, defaults, and hooks.
 It does not install Omarchy itself.
 
-This tree is intentionally outside the root manifest: adding another matching
-Omarchy entry would make automatic selection ambiguous. Select its init file
-directly; ordinary Omarchy runs continue to select the existing tree.
+Choose **animation** in the root manifest's interactive configuration picker,
+or select it explicitly:
+
+```bash
+rwr run all --init-file ./manifest.cue --config-name animation
+```
+
+Both Omarchy builds appear as matching options. The ordinary `omarchy` entry
+is the default for headless runs without `--config-name`. Direct selection of
+`./Linux/Animation/init.cue` also remains supported.
 
 ## Software
 

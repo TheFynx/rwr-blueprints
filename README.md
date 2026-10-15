@@ -128,12 +128,12 @@ plus drawing, audio, image-sequence, color-management, and asset/build support.
 It reuses Common and the Omarchy desktop configuration. Select it directly:
 
 ```bash
-rwr run all --init-file ./Linux/Animation/init.cue
+rwr run all --init-file ./manifest.cue --config-name animation
 ```
 
 Read [its setup guide](Linux/Animation/README.md) first for the NVIDIA/kernel
-assumptions, Resolve installer staging, and Unreal repository access. It is not
-added to the auto-detection manifest, so ordinary Omarchy selection stays unique.
+assumptions, Resolve installer staging, and Unreal repository access. It appears as `animation` in the manifest picker alongside `omarchy`.
+Headless runs keep `omarchy` as the default unless `--config-name animation` is supplied.
 
 ### nvim / AstroNvim
 

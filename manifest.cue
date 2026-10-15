@@ -1,15 +1,9 @@
 // One repo, every machine: rwr picks the configuration whose matchers fit the
 // detected OS; force one explicitly with --config-name.
 //
-// Matcher notes (rwr matches distro against /etc/os-release ID, family against
-// a hardcoded distro-family map, and MULTIPLE matches are a headless error -
-// every distro must match exactly one entry, so prefer distro: over family:
-// whenever the ID is known):
-//   arch      family: arch   → PrismLinux, Arch, EndeavourOS, CachyOS, ...
-//   omarchy   distro: omarchy→ ID=omarchy is NOT in the arch family map, so
-//                            it only matches this entry
-//   debian    distro: debian → not family: debian, or ubuntu machines would
-//                            double-match
+// Omarchy and Animation are both selectable on Omarchy. The ordinary Omarchy
+// entry is the headless default; --config-name animation explicitly selects
+// the NVIDIA animation workstation. Interactive runs show both options.
 {
 	"configurations": [
 		{
@@ -20,7 +14,14 @@
 		},
 		{
 			"name": "omarchy",
+			"default": true,
 			"init": "Linux/Omarchy/init.cue",
+			"os": "linux",
+			"distro": "omarchy"
+		},
+		{
+			"name": "animation",
+			"init": "Linux/Animation/init.cue",
 			"os": "linux",
 			"distro": "omarchy"
 		},
