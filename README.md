@@ -123,16 +123,19 @@ Notes learned on real hardware/VM:
 ### Animation workstation
 
 `Linux/Animation` is an explicitly selected Omarchy build with Blender,
-OpenToonz, DaVinci Resolve, Unreal Engine, FFmpeg, CUDA, and NVIDIA OpenCL,
-plus drawing, audio, image-sequence, color-management, and asset/build support.
-It reuses Common and the Omarchy desktop configuration. Select it directly:
+OpenToonz, Unreal Engine, FFmpeg, CUDA, and NVIDIA OpenCL, plus drawing,
+audio, image-sequence, color-management, and asset/build support. DaVinci
+Resolve and bibisco CE are documented as manual installs rather than
+provisioned packages, because their AUR recipes need a vendor ZIP staged by
+hand. It reuses Common and the Omarchy desktop configuration. Select it directly:
 
 ```bash
 rwr run all --init-file ./manifest.cue --config-name animation
 ```
 
 Read [its setup guide](Linux/Animation/README.md) first for the NVIDIA/kernel
-assumptions, Resolve installer staging, and Unreal repository access. It appears as `animation` in the manifest picker alongside `omarchy`.
+assumptions, Unreal repository access, and the manual Resolve/bibisco how-to.
+It appears as `animation` in the manifest picker alongside `omarchy`.
 Headless runs keep `omarchy` as the default unless `--config-name animation` is supplied.
 
 ### nvim / AstroNvim

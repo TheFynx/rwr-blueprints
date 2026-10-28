@@ -1,17 +1,19 @@
 packages: [
  {import: "../../../Common/packages/arch/base-aur.cue"},
  {
-  // See README: Resolve requires a staged vendor ZIP; Unreal needs
-  // authorized EpicGames/UnrealEngine GitHub access before this pass.
+  // See README: Unreal needs authorized EpicGames/UnrealEngine GitHub access
+  // before this pass.
   action: "install"
   package_manager: "yay"
-  names: ["davinci-resolve", "unreal-engine"]
+  names: ["unreal-engine"]
  }
  {
   // Local character, backstory, world and story planning.
-  // bibisco-ce needs the free vendor CE ZIP staged; see README.
+  // DaVinci Resolve and bibisco CE are deliberately NOT installed here:
+  // their AUR recipes expect a vendor ZIP staged by hand, which halts an
+  // unattended run. Follow the README's "Manual installs" section instead.
   action: "install"
   package_manager: "yay"
-  names: ["manuskript", "bibisco-ce"]
+  names: ["manuskript"]
  }
 ]
