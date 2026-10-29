@@ -11,9 +11,9 @@ scripts: [{
 			# An existing checkout belongs to its user: never mutate it,
 			# just surface staleness before building the local state.
 			git -C "$project" fetch --quiet origin 2>/dev/null || true
-			behind=$(git -C "$project" rev-list --count main..origin/main 2>/dev/null || echo 0)
+			behind=$(git -C "$project" rev-list --count master..origin/master 2>/dev/null || echo 0)
 			if [[ "$behind" != "0" ]]; then
-				echo "fynx: checkout is $behind commits behind origin/main - building local state" >&2
+				echo "fynx: checkout is $behind commits behind origin/master - building local state" >&2
 			fi
 		else
 			echo "fynx: $project exists but is not a git checkout - building in place" >&2

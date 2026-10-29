@@ -221,7 +221,7 @@ Every Linux tree installs it through `Common/tools/fynx.cue`: a missing
 checkout is cloned from git@github.com:thefynx/cli (the ssh_keys stage
 deploys `~/.ssh/git` before scripts run, so the SSH URL works unattended),
 an existing checkout is left untouched with a staleness notice when it is
-behind `origin/main`, then `build.sh` runs. Arch builds get the Go toolchain
+behind `origin/master`, then `build.sh` runs. Arch builds get the Go toolchain
 from their package bases. Engine setup for wallpaper upscaling stays
 on-demand (`fynx assets setup` downloads pinned Real-ESRGAN binaries and
 needs a Vulkan loader), not part of ordinary provisioning.
