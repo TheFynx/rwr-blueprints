@@ -217,12 +217,14 @@ bump `PINNED` in `nvim.sh`, regenerate the lock from a sandboxed
 ### Personal CLI
 
 `~/git/thefynx/cli` is the independent Go project for the `fynx` executable.
-Every Linux tree installs it through `Common/tools/fynx.cue` (which runs the
-checkout's `build.sh`; a missing checkout is skipped with a warning rather
-than failing provisioning). Arch builds get the Go toolchain from their
-package bases. Engine setup for wallpaper upscaling stays on-demand
-(`fynx assets setup` downloads pinned Real-ESRGAN binaries and needs a
-Vulkan loader), not part of ordinary provisioning.
+Every Linux tree installs it through `Common/tools/fynx.cue`: a missing
+checkout is cloned from git@github.com:thefynx/cli (the ssh_keys stage
+deploys `~/.ssh/git` before scripts run, so the SSH URL works unattended),
+an existing checkout is left untouched with a staleness notice when it is
+behind `origin/main`, then `build.sh` runs. Arch builds get the Go toolchain
+from their package bases. Engine setup for wallpaper upscaling stays
+on-demand (`fynx assets setup` downloads pinned Real-ESRGAN binaries and
+needs a Vulkan loader), not part of ordinary provisioning.
 
 The retired `~/.functions` behaviors are wired to it:
 
