@@ -11,7 +11,8 @@
 	"users": [
 		{
 			"action": "modify",
-			"name": "{{ .User.username }}",
+			// USERNAME defaults to levi in init.cue; RWR_USERNAME overrides it.
+			"name": "{{ .UserDefined.USERNAME }}",
 			// Backquotes, not \" - the Go template action is parsed before CUE
 			// sees the file, and \" is not valid template syntax.
 			"new_shell": "{{ if eq .System.osArch `arm64` }}/opt/homebrew/bin/fish{{ else }}/usr/local/bin/fish{{ end }}"

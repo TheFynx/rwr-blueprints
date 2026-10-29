@@ -13,4 +13,11 @@
 		"includes": ["../../Common/credentials/gpg.cue"],
 		"order": ["packages", "users", "scripts", "files", "services", "git"]
 	},
+	// The account the users blueprints shape, defaulting to levi.
+	// Override per machine with RWR_USERNAME=bob (env beats this default).
+	"variables": {
+		"userDefined": {
+			"USERNAME": "levi"
+		}
+	}
 }

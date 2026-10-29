@@ -6,7 +6,7 @@
 		},
 		{
 			"action": "modify",
-			"name": "levi",
+			"name": "{{ .UserDefined.USERNAME }}",
 			"new_shell": "/usr/bin/fish"
 		}
 	]

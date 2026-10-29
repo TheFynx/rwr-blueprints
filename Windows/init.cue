@@ -7,6 +7,13 @@
 		},
 		"location": "."
 	},
+	// The account the users and bootstrap blueprints shape, defaulting to
+	// levi. Override per machine with RWR_USERNAME=bob (env beats default).
+	"variables": {
+		"userDefined": {
+			"USERNAME": "levi"
+		}
+	},
 	"packageManagers": [
 		{
 			"action": "install",

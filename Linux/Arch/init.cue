@@ -15,6 +15,14 @@
 		// walk order keeps repo packages ahead of AUR builds.
 		"order": ["scripts", "packages", "users", "files", "services", "git"]
 	},
+	// The account the users blueprints shape, defaulting to levi. Override it
+	// per machine with RWR_USERNAME=bob: an env var RWR_USERNAME lands in
+	// .UserDefined.USERNAME and beats this default.
+	"variables": {
+		"userDefined": {
+			"USERNAME": "levi"
+		}
+	},
 	"packageManagers": [
 		{
 			"action": "install",

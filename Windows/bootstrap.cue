@@ -2,27 +2,27 @@
 	"directories": [
 		{
 			"action": "create",
-			"group": "levi",
+			"group": "{{ .UserDefined.USERNAME }}",
 			"name": "{{ .User.home }}/git/thefynx",
-			"owner": "levi"
+			"owner": "{{ .UserDefined.USERNAME }}"
 		},
 		{
 			"action": "create",
-			"group": "levi",
+			"group": "{{ .UserDefined.USERNAME }}",
 			"name": "{{ .User.home }}/git/public",
-			"owner": "levi"
+			"owner": "{{ .UserDefined.USERNAME }}"
 		},
 		{
 			"action": "create",
-			"group": "levi",
+			"group": "{{ .UserDefined.USERNAME }}",
 			"name": "{{ .User.home }}/git/fynxlabs",
-			"owner": "levi"
+			"owner": "{{ .UserDefined.USERNAME }}"
 		},
 		{
 			"action": "create",
-			"group": "levi",
+			"group": "{{ .UserDefined.USERNAME }}",
 			"name": "{{ .User.home }}/.ssh",
-			"owner": "levi"
+			"owner": "{{ .UserDefined.USERNAME }}"
 		}
 	],
 	"packages": [

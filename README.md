@@ -40,6 +40,22 @@ rwr all --init-file https://github.com/TheFynx/rwr-blueprints
 rwr validate --blueprints Arch
 ```
 
+### Username
+
+The account the users blueprints shape defaults to `levi`, declared as
+`variables.userDefined.USERNAME` in every tree's init file. On a machine with
+a different username, run as that user and override the default:
+
+```bash
+RWR_USERNAME=bob rwr all --init-file <repo>
+```
+
+The environment variable lands in `{{ .UserDefined.USERNAME }}` and beats the
+init-file default. Templates referencing `{{ .User.home }}`, `{{ .User.username }}`
+(owner/group in the bootstraps) already follow the invoking user. Machine-specific
+extras (Cosmic wallpaper paths, PopOS gsettings entries) still carry literal
+`/home/levi/` paths and are not overridden.
+
 ### Profiles (Arch workstation)
 
 Profiles gate machine-specific bits. **rwr applies every profile-gated entry
