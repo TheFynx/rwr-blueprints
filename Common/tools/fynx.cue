@@ -6,7 +6,7 @@ scripts: [{
 		set -euo pipefail
 		project="$HOME/git/thefynx/cli"
 		if [[ ! -d "$project" ]]; then
-			git clone --quiet git@github.com:thefynx/cli.git "$project"
+			git clone --quiet git@github.com:TheFynx/cli.git "$project"
 		elif [[ -d "$project/.git" ]]; then
 			# An existing checkout belongs to its user: never mutate it,
 			# just surface staleness before building the local state.
