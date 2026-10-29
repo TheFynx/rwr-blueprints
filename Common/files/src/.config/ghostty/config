@@ -9,6 +9,8 @@ window-padding-x = 12
 window-padding-y = 12
 
 # --- Scrolling ---
+# Hide terminal chrome in fullscreen screensavers; scrollback still works.
+scrollbar = never
 # Scrollback: 512 MiB per terminal, allocated as needed.
 # Targets 100,000+ lines at typical widths; exact capacity depends on width/content.
 scrollback-limit = 536870912
