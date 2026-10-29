@@ -1,4 +1,11 @@
-function git-check
+function git-check --description 'Repo unpushed/uncommitted scan; prefers fynx'
+    if command -q fynx
+        fynx repo check $argv
+        return
+    end
+
+    # Fallback when fynx is not provisioned. Retire once fynx ships
+    # everywhere (~/.functions behaviors live in ~/git/thefynx/cli).
     test (count $argv) -eq 1; or begin
         echo "Usage: git-check <base_folder>"
         return 1

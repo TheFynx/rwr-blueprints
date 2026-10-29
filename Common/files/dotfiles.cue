@@ -87,6 +87,7 @@
 		{
 			"action": "copy",
 			"names": [
+				"copy_repo_contents.fish",
 				"dclean.fish",
 				"digga.fish",
 				"dmm.fish",

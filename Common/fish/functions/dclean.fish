@@ -1,4 +1,11 @@
-function dclean
+function dclean --description 'Docker cleanup; prefers fynx when installed'
+    if command -q fynx
+        fynx docker clean $argv
+        return
+    end
+
+    # Fallback when fynx is not provisioned. Retire once fynx ships
+    # everywhere (~/.functions behaviors live in ~/git/thefynx/cli).
     if not command -v docker >/dev/null
         echo "Docker is not installed or not in PATH"
         return 1

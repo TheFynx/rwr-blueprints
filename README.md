@@ -217,8 +217,26 @@ bump `PINNED` in `nvim.sh`, regenerate the lock from a sandboxed
 ### Personal CLI
 
 `~/git/thefynx/cli` is the independent Go project for the `fynx` executable.
-Both Omarchy builds install dependencies and invoke its build script through
-`Common/tools/fynx.cue`. The local checkout is required until its remote repository
-exists; no repository URL is assumed. It supplies reusable asset upscaling and
-persistent native theme builders. Existing dotfile functions remain until their
-behaviors are explicitly migrated and reviewed.
+Every Linux tree installs it through `Common/tools/fynx.cue` (which runs the
+checkout's `build.sh`; a missing checkout is skipped with a warning rather
+than failing provisioning). Arch builds get the Go toolchain from their
+package bases. Engine setup for wallpaper upscaling stays on-demand
+(`fynx assets setup` downloads pinned Real-ESRGAN binaries and needs a
+Vulkan loader), not part of ordinary provisioning.
+
+The retired `~/.functions` behaviors are wired to it:
+
+- **bash**: `Common/linux-dotfiles/.functions` is now a thin guarded alias
+  block (`dclean`, `fs`, `digga`, `man`, `isup`, `git-check`,
+  `copy_repo_contents` -> `fynx ...`). Machines without the binary simply
+  get no aliases.
+- **fish**: the same seven names are wrapper functions in
+  `Common/fish/functions/` that delegate to `fynx` when it exists, and fall
+  back to the previous inline implementations otherwise - macOS, where fynx
+  is not provisioned, keeps working unchanged. `copy_repo_contents.fish` is
+  new; the wine/steam helpers remain Linux-only.
+
+Two shell bugs died with the old implementations: `isup` reported the
+opposite verdict for HTTP 200 (the fish fallback was already fixed), and
+`copy_repo_contents`' `tar` step silently re-extracted `cmd/` and
+`internal/` under `/` while appending nothing.

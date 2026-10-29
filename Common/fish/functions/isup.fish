@@ -1,4 +1,12 @@
-function isup
+function isup --description 'Reachability probe; prefers fynx when installed'
+    if command -q fynx
+        # fynx exits non-zero when the site is down; tolerate that here.
+        fynx net isup $argv
+        return
+    end
+
+    # Fallback when fynx is not provisioned. Retire once fynx ships
+    # everywhere (~/.functions behaviors live in ~/git/thefynx/cli).
     set -l uri $argv[1]
     set -l msg
     set -l urgency
