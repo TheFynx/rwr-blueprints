@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import qs.Commons
+import qs.Commons as Commons
 import "../plugins/io.github.sirjul1337.lock-explorer/designs"
 
 DesignBase {
@@ -15,12 +16,12 @@ DesignBase {
   anchors.centerIn: parent
   width: Math.min(lock.width - 48, 550)
   spacing: 18
-  Text { anchors.horizontalCenter: parent.horizontalCenter; text: lock.clock("HH:mm"); color: Color.lock.text; font.family: Style.font.family; font.pixelSize: 56; font.weight: Font.Light }
-  Text { anchors.horizontalCenter: parent.horizontalCenter; text: Qt.formatDate(lock.now,"dddd · d MMMM").toUpperCase(); color: Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 13; font.letterSpacing: 2 }
+  Text { anchors.horizontalCenter: parent.horizontalCenter; text: lock.clock("HH:mm"); color: Commons.Color.lock.text; font.family: Style.font.family; font.pixelSize: 56; font.weight: Font.Light }
+  Text { anchors.horizontalCenter: parent.horizontalCenter; text: Qt.formatDate(lock.now,"dddd · d MMMM").toUpperCase(); color: Commons.Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 13; font.letterSpacing: 2 }
   Rectangle {
    width: parent.width; height: 290; radius: 4
-   color: Color.lock.background; border.width: 1; border.color: Color.accent
-   Rectangle { x: 1; y: 1; width: parent.width-2; height: 3; radius: 2; color: Color.accent; opacity: 0.6 }
+   color: Commons.Color.lock.background; border.width: 1; border.color: Commons.Color.accent
+   Rectangle { x: 1; y: 1; width: parent.width-2; height: 3; radius: 2; color: Commons.Color.accent; opacity: 0.6 }
    Column {
     anchors.centerIn: parent; width: parent.width-48; spacing: 20
     Row {
@@ -28,8 +29,8 @@ DesignBase {
      Image { width: 46; height: 46; source: lock.assetRoot+"menu.svg"; cache: false }
      Column {
       spacing: 5
-      Text { text: "MIDGAR / MAKO NETWORK"; color: Color.lock.text; font.family: Style.font.family; font.pixelSize: 16; font.letterSpacing: 1 }
-      Text { text: lock.userName+"  ·  "+lock.hostName; color: Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 13 }
+      Text { text: "MIDGAR / MAKO NETWORK"; color: Commons.Color.lock.text; font.family: Style.font.family; font.pixelSize: 16; font.letterSpacing: 1 }
+      Text { text: lock.userName+"  ·  "+lock.hostName; color: Commons.Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 13 }
      }
     }
     Row {
@@ -37,16 +38,16 @@ DesignBase {
      Repeater { model: ["magic","support","command","summon","independent"]
       Image { required property string modelData; width: 28; height: 28; source: lock.assetRoot+modelData+".svg"; cache: false }
      }
-     Text { text: "SESSION LOCKED"; anchors.verticalCenter: parent.verticalCenter; color: Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 11; font.letterSpacing: 1 }
+     Text { text: "SESSION LOCKED"; anchors.verticalCenter: parent.verticalCenter; color: Commons.Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 11; font.letterSpacing: 1 }
     }
     PasswordField { id: field; lock: lock; width: parent.width; height: 52; radius: 4 }
     Text {
      width: parent.width; horizontalAlignment: Text.AlignHCenter; textFormat: Text.PlainText
      text: lock.authenticatingPassword ? "Resuming session…" : (lock.errorState ? lock.failureMessage : (lock.fingerprintConfigured ? "Password or fingerprint to resume" : "Password to resume"))
-     color: lock.errorState ? Color.lock.textError : Color.lock.text; font.family: Style.font.family; font.pixelSize: 13
+     color: lock.errorState ? Commons.Color.lock.textError : Commons.Color.lock.text; font.family: Style.font.family; font.pixelSize: 13
     }
    }
   }
-  Text { anchors.horizontalCenter: parent.horizontalCenter; text: "THE LIFESTREAM CONTINUES"; color: Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 11; font.letterSpacing: 3 }
+  Text { anchors.horizontalCenter: parent.horizontalCenter; text: "THE LIFESTREAM CONTINUES"; color: Commons.Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 11; font.letterSpacing: 3 }
  }
 }

@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import qs.Commons
+import qs.Commons as Commons
 import "../plugins/io.github.sirjul1337.lock-explorer/designs"
 
 DesignBase {
@@ -23,7 +24,7 @@ DesignBase {
     Text {
       anchors.horizontalCenter: parent.horizontalCenter
       text: lock.clock("HH:mm")
-      color: Color.lock.text
+      color: Commons.Color.lock.text
       font.family: pixelFont.name
       font.pixelSize: 46
       style: Text.Outline
@@ -32,7 +33,7 @@ DesignBase {
     Text {
       anchors.horizontalCenter: parent.horizontalCenter
       text: Qt.formatDate(lock.now, "dddd · d MMMM").toUpperCase()
-      color: Color.lock.text
+      color: Commons.Color.lock.text
       font.family: Style.font.family
       font.pixelSize: 14
       font.letterSpacing: 2
@@ -40,9 +41,9 @@ DesignBase {
     Rectangle {
       width: parent.width
       height: 278
-      color: Color.lock.background
+      color: Commons.Color.lock.background
       border.width: 3
-      border.color: Color.lock.placeholder
+      border.color: Commons.Color.lock.placeholder
       Rectangle { x: 3; y: 3; width: parent.width - 6; height: 3; color: "#ffffff"; opacity: 0.15 }
       Rectangle { x: 3; y: parent.height - 6; width: parent.width - 6; height: 3; color: "#000000"; opacity: 0.6 }
       Column {
@@ -54,8 +55,8 @@ DesignBase {
           Image { width: 35; height: 35; source: lock.assetRoot + "grass.svg"; smooth: false; cache: false }
           Column {
             spacing: 6
-            Text { text: "WORLD LOCKED"; color: Color.lock.text; font.family: pixelFont.name; font.pixelSize: 13 }
-            Text { text: lock.userName + "  /  " + lock.hostName; color: Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 13 }
+            Text { text: "WORLD LOCKED"; color: Commons.Color.lock.text; font.family: pixelFont.name; font.pixelSize: 13 }
+            Text { text: lock.userName + "  /  " + lock.hostName; color: Commons.Color.lock.placeholder; font.family: Style.font.family; font.pixelSize: 13 }
           }
         }
         Row {
@@ -74,7 +75,7 @@ DesignBase {
           horizontalAlignment: Text.AlignHCenter
           text: lock.authenticatingPassword ? "Unlocking your world…" : (lock.errorState ? lock.failureMessage : (lock.fingerprintConfigured ? "Password or fingerprint to resume" : "Password to resume"))
           textFormat: Text.PlainText
-          color: lock.errorState ? Color.lock.textError : Color.lock.text
+          color: lock.errorState ? Commons.Color.lock.textError : Commons.Color.lock.text
           font.family: Style.font.family
           font.pixelSize: 13
         }
@@ -89,15 +90,15 @@ DesignBase {
           required property string modelData
           required property int index
           width: 48; height: 48
-          color: Color.lock.background
+          color: Commons.Color.lock.background
           border.width: index === 0 ? 3 : 2
-          border.color: index === 0 ? Color.lock.text : Color.lock.placeholder
+          border.color: index === 0 ? Commons.Color.lock.text : Commons.Color.lock.placeholder
           Image { anchors.centerIn: parent; width: 34; height: 34; source: lock.assetRoot + parent.modelData + ".svg"; smooth: false; cache: false }
         }
       }
     }
-    Rectangle { anchors.horizontalCenter: parent.horizontalCenter; width: 460; height: 5; color: Color.lock.placeholder
-      Rectangle { width: parent.width * 0.72; height: parent.height; color: Color.accent }
+    Rectangle { anchors.horizontalCenter: parent.horizontalCenter; width: 460; height: 5; color: Commons.Color.lock.placeholder
+      Rectangle { width: parent.width * 0.72; height: parent.height; color: Commons.Color.accent }
     }
   }
 }
