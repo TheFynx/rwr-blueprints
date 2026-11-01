@@ -85,3 +85,27 @@ Native assets can be rebuilt with `fynx theme build midgar`; persistent builder
 sources live in the CLI project. Rebuilding overwrites generated native assets,
 so review manual changes first. Reapply the theme afterward, and reopen existing
 GTK/Qt application windows if needed.
+
+## Boot splash
+
+The boot and LUKS passphrase screen is themed by the lock-explorer plugin as a
+snapshot of the active lock design. A snapshot is a live render at the display's
+own geometry, applied with one polkit confirmation, so it is machine-local:
+repeat the steps on each machine. Snapshots are private state under
+`~/.local/state/omarchy/lock-explorer-snapshots`; no boot-screen art is vendored.
+
+In the Boot tab (`omarchy-shell lock exploreTab boot`), press "+ Snapshot this
+lock screen" to apply the active design as the boot background; the passphrase
+bullets land inside the design's own box. Take it again when the tab marks the
+boot screen out of date, for example after a design edit.
+
+Boot resync is off in the plugin entry (`bootResync: false`). Resync would
+re-render the pinned snapshot under the current theme, which for theme-coupled
+designs like these paints wrong assets into the wrong card, so theme switches
+leave an installed boot screen untouched. `omarchy-shell lock setBootResync on`
+turns it back on.
+
+Design swaps repeat the theme-then-snapshot step: apply the profile theme
+(`midgar-mako` or a `minecraft-*`), which lets `apply.py` set the lock design,
+then take the snapshot in the Boot tab. `omarchy-shell lock setBoot stock`
+removes the boot theme again.
