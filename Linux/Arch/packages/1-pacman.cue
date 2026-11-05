@@ -71,11 +71,30 @@
 				"virtualbox-host-dkms",
 				"cups",
 				"cups-pdf",
+				// cups-filters is what CUPS's own IPP Everywhere driver
+				// needs to rasterise, and cups-browsed is what discovers
+				// network printers over mDNS. Both are only useful with a
+				// printer, so they ride the printer profile.
 				"samba",
 				"gvfs-smb",
 				"nss-mdns",
 				"openssh",
 				"fastfetch"
+			],
+			"package_manager": "pacman"
+		},
+		{
+			"action": "install",
+			"profiles": ["printer"],
+			"names": [
+				"cups-filters",
+				"cups-browsed",
+				// Brother's own CUPS filter (PJL/PCL for the raw port)
+				// plus the model PPD it installs. The vendor driver is the
+				// one that speaks the printer's native wire format; the
+				// generic CUPS drivers cannot drive this machine over the
+				// raw port.
+				"brother-mfc-l3780cdw"
 			],
 			"package_manager": "pacman"
 		}

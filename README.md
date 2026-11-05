@@ -78,11 +78,28 @@ rwr all --profile desktop,radeon,data-drives --init-file <repo>
 | `data-drives`| /drives/{home,games,storage} fstab mounts + home symlinks  |
 | `cosmic`     | COSMIC desktop config deployment (Cinnamon machine: skip)  |
 | `laptop`     | power management (tlp, powertop)                           |
+| `printer`    | CUPS queues for the office Brother MFC-L3780CDW            |
 
 `data-drives` hardcodes this machine's drive UUIDs — never enable it on a
 different machine. It mounts the three data disks and symlinks
 `Documents Downloads Pictures Videos adhoc backgrounds git` from
 `/drives/home/levi/` into `$HOME`.
+
+`printer` points CUPS at the office Brother MFC-L3780CDW. It installs the
+vendor driver (`brother-mfc-l3780cdw`) plus `cups-filters`/`cups-browsed`,
+then creates two queues: `Brother-MFC-L3780CDW` (Brother's own PJL/PCL filter
+over the raw port `socket://<ip>:9100`, the default) and
+`Brother-MFC-L3780CDW-IPP` (CUPS's IPP Everywhere driver over
+`ipp://<ip>:631/ipp/print`). The script is idempotent, removes queues left
+by the printer panel, and skips cleanly when the printer is unreachable —
+re-run it after power-cycling the printer to finish a setup that was
+interrupted.
+
+Do not add this printer through the GNOME printer panel: it picks a
+driver/transport pairing that cannot work (an IPP driver on the raw port
+sends raw PDF where the printer expects PJL/PCL, which prints garbage).
+Override the address with `PRINTER_IP=...` and the paper size with
+`PRINTER_MEDIA=...`.
 
 ### Omarchy (Hyprland)
 
