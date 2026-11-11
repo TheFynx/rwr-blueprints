@@ -44,10 +44,16 @@
 --   },
 -- })
 
--- Kill Omarchy's both-Shifts-capslock toggle; keep everything stock otherwise.
+-- Kill Omarchy's both-Shifts-capslock toggle and never focus windows on mouse movement.
 hl.config({
   input = {
     kb_options = "",
+    follow_mouse = 0,
+    float_switch_override_focus = 0,
+    mouse_refocus = false,
+  },
+  misc = {
+    mouse_move_focuses_monitor = false,
   },
 })
 
