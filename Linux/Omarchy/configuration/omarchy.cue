@@ -31,7 +31,12 @@ configurations: [{
             source: {git: "https://github.com/SirJul1337/omarchy-lock-explorer.git"}
             enabled: true
             settings: {
-                blankMs: 300000
+                // 60 s, not 300: a bright full-screen lock snapshot parked
+                // on the panel for five minutes is burn-in fuel, and the
+                // display dropping out is what re-triggers the logind
+                // suspend re-evaluation on a closed-lid machine (see
+                // scripts/laptop-logind.sh).
+                blankMs: 60000
                 unlock: "fade"
                 boot: "theme"
             }
@@ -68,7 +73,11 @@ configurations: [{
     ]
 
     shell: {
-        idle: {screensaver: 300, lock: 360}
+        // 10 minutes to the screensaver, 15 minutes to the lock: the lock
+        // fires five minutes after the screensaver is up, and only while the
+        // screensaver is still showing (input dismisses it and cancels the
+        // lock).
+        idle: {screensaver: 600, lock: 900}
         bar: {position: "top", transparent: false, centerAnchor: "omarchy.clock"}
     }
 

@@ -83,7 +83,7 @@ rwr all --profile desktop,radeon,data-drives,ai --init-file <repo>
 | `ai`         | local AI tools: brew ollama + gemini-cli, ollama service and the qwen3.8:27b-mlx pull (macOS), ollama-rocm (Arch) |
 | `data-drives`| /drives/{home,games,storage} fstab mounts + home symlinks  |
 | `cosmic`     | COSMIC desktop config deployment (Cinnamon machine: skip)  |
-| `laptop`     | power management (tlp, powertop)                           |
+| `laptop`     | power management (tlp, powertop); Omarchy Framework sleep fixes: logind sleep-key + clamshell-lid suspend ignores (`30-debug-and-lid.conf`), shell.json idle/blank convergence |
 | `printer`    | CUPS queues for the office Brother MFC-L3780CDW            |
 
 `data-drives` hardcodes this machine's drive UUIDs — never enable it on a
@@ -106,6 +106,33 @@ driver/transport pairing that cannot work (an IPP driver on the raw port
 sends raw PDF where the printer expects PJL/PCL, which prints garbage).
 Override the address with `PRINTER_IP=...` and the paper size with
 `PRINTER_MEDIA=...`.
+
+### Omarchy laptop (Framework) sleeps
+
+Three real causes surfaced on the Framework running clamshell on AC, and the
+fixes are now part of the Omarchy tree. logind's `HandleSuspendKey` default
+(suspend) fires on any sleep-key press, and the 2.4G keyboard/mouse receivers
+fire phantom presses mid-use — the machine slept with no idle event and no
+lid event in the log. `HandleLidSwitchExternalPower` suspends a closed lid as
+soon as the external display goes away, and the lock screen blanking its
+display after `blankMs` is exactly that trigger: lock, blank, suspend, every
+time. And omarchy's own idle timings were reconciled to values that blank
+within minutes no matter what the settings panel said.
+
+`scripts/laptop-power.cue` (`--profile laptop`) carries the machine-specific
+half: `laptop-logind.sh` writes
+`/etc/systemd/logind.conf.d/30-debug-and-lid.conf` (sleep-key ignore,
+lid-on-AC ignore, battery lid-close still suspends, logind debug left on while
+the intermittent suspender is watched for) and never restarts
+`systemd-logind` while a graphical session is live — restarting logind tears
+the seat down and the desktop dies with it, so a provisioned machine picks
+the file up at the next boot. `laptop-idle.sh` converges an already-used
+machine's `shell.json` (idle 600/900, lock-explorer `blankMs` 60000) without
+hand edits. The corrected timings themselves (screensaver 600, lock 900,
+blank 60 s — lock fires five minutes after the 10-minute screensaver, and
+only while the screensaver is still showing) are declared in
+`configuration/omarchy.cue`, which rwr reconciles every machine to, so the
+panel-set values and blueprint no longer fight.
 
 ### Omarchy (Hyprland)
 
