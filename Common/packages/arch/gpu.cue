@@ -11,7 +11,17 @@
 				"vulkan-radeon",
 				"lib32-vulkan-radeon",
 				"radeontop",
-				"amdgpu_top",
+				"amdgpu_top"
+			],
+			"package_manager": "pacman"
+		},
+		// Ollama is opt-in, not a default: the ROCm build suits the radeon
+		// machine; on an nvidia box swap this entry for ollama-cuda before
+		// naming the profile there.
+		{
+			"action": "install",
+			"profiles": ["ai"],
+			"names": [
 				"ollama-rocm"
 			],
 			"package_manager": "pacman"

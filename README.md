@@ -58,13 +58,18 @@ extras (Cosmic wallpaper paths, PopOS gsettings entries) still carry literal
 
 ### Profiles (Arch workstation)
 
-Profiles gate machine-specific bits. **rwr applies every profile-gated entry
-when no `--profile` is given** — the filter only narrows when you name at
-least one profile, so pass the full set you want on each run:
+Profiles gate machine-specific bits. Profiles are **opt-in** in current rwr:
+`rwr all` without `--profile` applies only base items (entries with no
+`profiles` field), naming a profile adds its entries on top, and
+`--profile all` applies everything. So `ai`-gated items (ollama and friends)
+stay off a machine until its run names the profile.
 
 ```bash
 # Desktop workstation (PrismLinux "Desktop"):
 rwr all --profile desktop,radeon,data-drives --init-file <repo>
+
+# Same box plus the local AI stack:
+rwr all --profile desktop,radeon,data-drives,ai --init-file <repo>
 
 # Another profile values: nvidia (vendor GPU stack), cosmic (deploy the COSMIC
 # desktop tuning), laptop (tlp/powertop).
@@ -73,8 +78,9 @@ rwr all --profile desktop,radeon,data-drives --init-file <repo>
 | Profile      | What it gates                                              |
 |--------------|------------------------------------------------------------|
 | `desktop`    | workstation packages (graphics base, desktop apps)         |
-| `radeon`     | AMD GPU stack: vulkan-radeon, radeontop, ollama-rocm       |
+| `radeon`     | AMD GPU stack: vulkan-radeon, radeontop, amdgpu_top        |
 | `nvidia`     | NVIDIA GPU stack: nvidia-dkms, nvidia-utils                |
+| `ai`         | local AI tools: brew ollama + gemini-cli, ollama service and the qwen3.8:27b-mlx pull (macOS), ollama-rocm (Arch) |
 | `data-drives`| /drives/{home,games,storage} fstab mounts + home symlinks  |
 | `cosmic`     | COSMIC desktop config deployment (Cinnamon machine: skip)  |
 | `laptop`     | power management (tlp, powertop)                           |

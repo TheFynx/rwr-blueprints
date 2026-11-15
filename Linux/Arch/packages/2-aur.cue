@@ -27,7 +27,6 @@
 				"needrestart",
 				"claude-code",
 				"opencode",
-				"zcode-bin",
 				"shelly-bin",
 				"appimagelauncher-beta-bin"
 			],

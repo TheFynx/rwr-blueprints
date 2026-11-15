@@ -13,10 +13,7 @@
 				"libressl",
 				"p7zip",
 				"parallel",
-				"powerline-go",
-				"ollama",
-				"go",
-				"libressl"
+				"powerline-go"
 			],
 			"package_manager": "brew"
 		},
@@ -162,9 +159,12 @@
 			],
 			"package_manager": "brew"
 		},
-		// AI tooling
+		// AI tooling - opt-in via the "ai" profile: rwr all without --profile
+		// applies only base items, so ollama and its service stay off machines
+		// that never name the profile.
 		{
 			"action": "install",
+			"profiles": ["ai"],
 			"names": [
 				"gemini-cli",
 				"ollama"
